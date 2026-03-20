@@ -1,0 +1,86 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+import { schemaSidebar } from '../../data/navigation';
+
+const worldSchemas = [
+  { name: 'World', href: '/schemas/world/', desc: 'World graph structure — the single source of truth' },
+  { name: 'Time System', href: '/schemas/time-system/', desc: 'Defines how time works in this world' },
+  { name: 'Node', href: '/schemas/node/', desc: 'Story world entities' },
+  { name: 'Edge', href: '/schemas/edge/', desc: 'Relationships between nodes' },
+  { name: 'Frame', href: '/schemas/frame/', desc: 'Alternative timelines and branches' },
+  { name: 'Constraint', href: '/schemas/constraint/', desc: 'World rules and validation with scope filters' },
+];
+
+const narrativeSchemas = [
+  { name: 'Lens', href: '/schemas/lens/', desc: 'Narrative perspective — filters and interprets world content' },
+  { name: 'Format', href: '/schemas/format/', desc: 'Output format — purely about presentation' },
+  { name: 'Beat', href: '/schemas/beat/', desc: 'Story beats — hierarchical narrative building blocks' },
+  { name: 'Device', href: '/schemas/device/', desc: 'Narrative devices — rhetorical connections between beats' },
+  { name: 'Thread', href: '/schemas/thread/', desc: 'Thematic threads and motifs' },
+  { name: 'Variant Meta', href: '/schemas/variant-meta/', desc: 'Parallel world version metadata' },
+];
+---
+
+<DocLayout title="Schemas" sidebarItems={schemaSidebar}>
+  <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-6">Schemas</h1>
+
+  <p class="text-slate-600 dark:text-slate-400 mb-8 text-lg leading-relaxed">
+    A story is structured into two layers: the <strong>World Layer</strong> (ground truth) and the <strong>Narrative Layer</strong> (storytelling perspective).
+  </p>
+
+  <h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-2 mt-10">Root Document</h2>
+  <div class="mb-8">
+    <a href="/schemas/story/" class="group block p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-600 transition-colors">
+      <span class="font-mono text-sm font-semibold text-violet-600 dark:text-violet-400 group-hover:underline">Story</span>
+      <span class="text-sm text-slate-500 dark:text-slate-400 ml-2">— Composable entry point with <code>world</code> and <code>narrative</code></span>
+    </a>
+  </div>
+
+  <h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10">
+    <span class="inline-block w-3 h-3 rounded-full bg-emerald-500 mr-2 align-middle"></span>
+    World Layer
+  </h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Ground truth of the story universe. Everything that exists — entities, relationships, timelines, rules.</p>
+  <div class="grid gap-2 mb-8">
+    {worldSchemas.map(s => (
+      <a href={s.href} class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors">
+        <span class="font-mono text-sm font-semibold text-emerald-600 dark:text-emerald-400 group-hover:underline whitespace-nowrap">{s.name}</span>
+        <span class="text-sm text-slate-500 dark:text-slate-400">{s.desc}</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10">
+    <span class="inline-block w-3 h-3 rounded-full bg-violet-500 mr-2 align-middle"></span>
+    Narrative Layer
+  </h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">Storytelling perspective. Defines how the world is told: perspective, selection, format, structure.</p>
+  <div class="grid gap-2 mb-8">
+    {narrativeSchemas.map(s => (
+      <a href={s.href} class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-700 transition-colors">
+        <span class="font-mono text-sm font-semibold text-violet-600 dark:text-violet-400 group-hover:underline whitespace-nowrap">{s.name}</span>
+        <span class="text-sm text-slate-500 dark:text-slate-400">{s.desc}</span>
+      </a>
+    ))}
+  </div>
+
+  <h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10">Supporting Schemas</h2>
+  <div class="grid gap-2 mb-8">
+    <a href="/schemas/definitions/" class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+      <span class="font-mono text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:underline">Definitions</span>
+      <span class="text-sm text-slate-500 dark:text-slate-400">Reusable tag and type definitions</span>
+    </a>
+    <a href="/schemas/derivation-meta/" class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors">
+      <span class="font-mono text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:underline">Derivation Meta</span>
+      <span class="text-sm text-slate-500 dark:text-slate-400">Validation contracts for compiled outputs</span>
+    </a>
+  </div>
+
+  <h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10">Composition Model</h2>
+  <p class="text-slate-600 dark:text-slate-400 mb-4">
+    A <code>story.yaml</code> is the root document. It contains a <code>world</code> object (the graph) and an optional <code>narrative</code> object (the storytelling configuration). All item schemas can be <strong>inline</strong> or <strong><code>$ref</code>-referenced</strong>.
+  </p>
+  <p class="text-slate-600 dark:text-slate-400">
+    The spec does <strong>not</strong> prescribe a directory layout. A single-file story and a multi-file project are equally valid.
+  </p>
+</DocLayout>

@@ -1,0 +1,16 @@
+---
+import { getEntry } from 'astro:content';
+import DocLayout from '../layouts/DocLayout.astro';
+
+const page = await getEntry('pages', 'license');
+let Content: any;
+if (page) {
+  const rendered = await page.render();
+  Content = rendered.Content;
+}
+---
+
+<DocLayout title="License">
+  <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-6">License</h1>
+  {Content && <Content />}
+</DocLayout>

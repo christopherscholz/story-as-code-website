@@ -1,0 +1,101 @@
+name: PR Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, closed]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+concurrency:
+  group: preview-${{ github.event.number }}
+  cancel-in-progress: true
+
+jobs:
+  deploy-preview:
+    if: github.event.action != 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Install Python dependencies
+        run: pip install -r spec/requirements.txt
+
+      - name: Generate spec docs
+        run: npm run generate
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build site
+        env:
+          SITE_BASE: "/pr-${{ github.event.number }}/"
+        run: |
+          npm run prepare-content
+          npx astro build
+          npx pagefind --site dist
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Deploy preview
+        run: |
+          if git fetch origin gh-pages:gh-pages 2>/dev/null; then
+            git worktree add /tmp/gh-pages gh-pages
+          else
+            git worktree add --orphan /tmp/gh-pages gh-pages
+          fi
+
+          rm -rf "/tmp/gh-pages/pr-${{ github.event.number }}"
+          cp -r dist "/tmp/gh-pages/pr-${{ github.event.number }}"
+
+          cd /tmp/gh-pages
+          git add "pr-${{ github.event.number }}"
+          git diff --cached --quiet && echo "No docs changes to preview" && exit 0
+          git commit -m "Deploy preview for PR #${{ github.event.number }}"
+          git push origin gh-pages
+
+      - name: Comment preview URL
+        uses: marocchino/sticky-pull-request-comment@v2
+        with:
+          message: |
+            Docs preview: https://story-as-code.dev/pr-${{ github.event.number }}/
+
+  cleanup-preview:
+    if: github.event.action == 'closed'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Remove preview
+        run: |
+          git fetch origin gh-pages:gh-pages
+          git worktree add /tmp/gh-pages gh-pages
+          cd /tmp/gh-pages
+
+          if [ -d "pr-${{ github.event.number }}" ]; then
+            git rm -rf "pr-${{ github.event.number }}"
+            git commit -m "Remove preview for PR #${{ github.event.number }}"
+            git push origin gh-pages
+          fi

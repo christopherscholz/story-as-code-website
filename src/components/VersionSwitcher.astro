@@ -1,0 +1,79 @@
+---
+---
+
+<div id="version-switcher" class="relative inline-block">
+  <button
+    id="version-btn"
+    class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-violet-300 dark:hover:border-violet-700 transition-colors"
+    aria-expanded="false"
+  >
+    <span id="version-label">dev</span>
+    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+    </svg>
+  </button>
+
+  <div
+    id="version-dropdown"
+    class="hidden absolute right-0 mt-1 w-40 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg z-50 py-1"
+  >
+    <!-- Populated dynamically -->
+  </div>
+</div>
+
+<script>
+  const btn = document.getElementById('version-btn');
+  const dropdown = document.getElementById('version-dropdown');
+  const label = document.getElementById('version-label');
+
+  // Determine current version from URL path
+  const pathParts = window.location.pathname.split('/').filter(Boolean);
+  const currentVersion = pathParts[0] || 'dev';
+  if (label) label.textContent = currentVersion;
+
+  // Load versions manifest
+  async function loadVersions() {
+    try {
+      const resp = await fetch('/versions.json');
+      if (!resp.ok) return;
+      const data = await resp.json();
+      if (!dropdown) return;
+
+      dropdown.innerHTML = '';
+      for (const v of data.versions) {
+        const a = document.createElement('a');
+        const isActive = v.version === currentVersion || (v.aliases || []).includes(currentVersion);
+        a.href = v.path + pathParts.slice(1).join('/');
+        a.className = `block px-3 py-1.5 text-xs font-mono transition-colors ${
+          isActive
+            ? 'text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20 font-semibold'
+            : 'text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800'
+        }`;
+        a.textContent = v.version;
+        if (v.aliases?.length) {
+          const badge = document.createElement('span');
+          badge.className = 'ml-1.5 text-[0.6rem] text-slate-400 dark:text-slate-500';
+          badge.textContent = `(${v.aliases.join(', ')})`;
+          a.appendChild(badge);
+        }
+        dropdown.appendChild(a);
+      }
+    } catch {
+      // No versions.json available — single-version deployment
+    }
+  }
+
+  btn?.addEventListener('click', () => {
+    const expanded = btn.getAttribute('aria-expanded') === 'true';
+    btn.setAttribute('aria-expanded', String(!expanded));
+    dropdown?.classList.toggle('hidden');
+    if (!expanded) loadVersions();
+  });
+
+  document.addEventListener('click', (e) => {
+    if (!document.getElementById('version-switcher')?.contains(e.target as Node)) {
+      dropdown?.classList.add('hidden');
+      btn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>

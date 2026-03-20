@@ -1,0 +1,34 @@
+# Astro
+dist/
+.astro/
+
+# Dependencies
+node_modules/
+
+# Generated content (produced by prepare-content.mjs)
+src/content/schemas/
+src/content/examples/
+src/content/pages/
+public/data/
+
+# Generated docs in spec submodule (produced by Python scripts)
+spec/docs/schemas/generated/
+spec/docs/examples/generated/
+spec/docs/examples/index.md
+spec/docs/assets/data/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Editor
+*.swp
+*.swo
+*~
+.idea/
+.vscode/

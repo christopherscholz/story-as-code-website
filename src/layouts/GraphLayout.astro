@@ -1,0 +1,65 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  dataSrc: string;
+}
+
+const { title, description, dataSrc } = Astro.props;
+---
+
+<BaseLayout title={title} description={description} fullWidth={true}>
+  <div class="px-4 sm:px-6 lg:px-8 py-6">
+    <div class="mb-4">
+      <a href="../" class="text-sm text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">
+        &larr; Back to overview
+      </a>
+    </div>
+
+    <h1 class="font-display text-2xl font-bold text-slate-900 dark:text-white mb-2">{title}</h1>
+    <p class="text-sm text-slate-500 dark:text-slate-400 mb-6">
+      Click any element to see its details and highlight related elements across all views.
+    </p>
+
+    <div id="story-graph" data-src={dataSrc}>
+      <div class="graph-row graph-row-2">
+        <div class="graph-section" data-view="world">
+          <h2>World Graph</h2>
+          <div class="section-content"></div>
+        </div>
+        <div class="graph-section" data-view="narrative">
+          <h2>Narrative Flow</h2>
+          <div class="section-content"></div>
+        </div>
+      </div>
+
+      <div class="graph-section graph-full" data-view="timeline">
+        <h2>Timeline & Frames</h2>
+        <div class="section-content"></div>
+      </div>
+
+      <div class="graph-row">
+        <div class="graph-section" data-view="lenses">
+          <h2>Lenses</h2>
+          <div class="section-content"></div>
+        </div>
+        <div class="graph-section" data-view="formats">
+          <h2>Formats</h2>
+          <div class="section-content"></div>
+        </div>
+        <div class="graph-section" data-view="constraints">
+          <h2>Constraints</h2>
+          <div class="section-content"></div>
+        </div>
+      </div>
+
+      <div id="detail-panel"></div>
+    </div>
+  </div>
+
+  <script src="https://unpkg.com/cytoscape@3.30.4/dist/cytoscape.min.js" is:inline></script>
+  <script src="https://unpkg.com/dagre@0.8.5/dist/dagre.min.js" is:inline></script>
+  <script src="https://unpkg.com/cytoscape-dagre@2.5.0/cytoscape-dagre.js" is:inline></script>
+</BaseLayout>

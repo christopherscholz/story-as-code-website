@@ -1,0 +1,178 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  repository_dispatch:
+    types: [spec-release]
+  workflow_dispatch:
+    inputs:
+      spec_version:
+        description: "Spec version to deploy (e.g. '1.0.0' or 'dev')"
+        required: false
+        default: "dev"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          submodules: true
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Determine version
+        id: version
+        run: |
+          if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
+            VERSION="${{ github.event.client_payload.version }}"
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "alias=latest" >> "$GITHUB_OUTPUT"
+          elif [[ -n "${{ github.event.inputs.spec_version }}" && "${{ github.event.inputs.spec_version }}" != "dev" ]]; then
+            VERSION="${{ github.event.inputs.spec_version }}"
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+            echo "alias=latest" >> "$GITHUB_OUTPUT"
+          else
+            echo "version=dev" >> "$GITHUB_OUTPUT"
+            echo "alias=" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Update spec submodule to version
+        run: |
+          VERSION="${{ steps.version.outputs.version }}"
+          cd spec
+          git fetch --tags origin
+          if [[ "$VERSION" != "dev" ]]; then
+            git checkout "v${VERSION}" 2>/dev/null || git checkout main
+          else
+            git checkout main
+            git pull origin main
+          fi
+
+      - name: Install Python dependencies
+        run: pip install -r spec/requirements.txt
+
+      - name: Generate spec docs
+        run: npm run generate
+
+      - name: Install Node dependencies
+        run: npm ci
+
+      - name: Build site
+        env:
+          SITE_BASE: "/${{ steps.version.outputs.version }}/"
+        run: |
+          npm run prepare-content
+          npx astro build
+          npx pagefind --site dist
+
+      - name: Configure git
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+
+      - name: Fetch gh-pages branch
+        run: git fetch origin gh-pages:gh-pages || true
+
+      - name: Deploy versioned docs
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+          ALIAS: ${{ steps.version.outputs.alias }}
+        run: |
+          if git rev-parse --verify gh-pages >/dev/null 2>&1; then
+            git worktree add /tmp/gh-pages gh-pages
+          else
+            git worktree add --orphan /tmp/gh-pages gh-pages
+          fi
+
+          # Remove old version directory
+          rm -rf "/tmp/gh-pages/${VERSION}"
+          mkdir -p "/tmp/gh-pages/${VERSION}"
+          cp -r dist/* "/tmp/gh-pages/${VERSION}/"
+
+          # If this is a tagged release, also create/update the alias directory
+          if [ -n "$ALIAS" ]; then
+            rm -rf "/tmp/gh-pages/${ALIAS}"
+            cp -r dist "/tmp/gh-pages/${ALIAS}"
+          fi
+
+          # Update versions.json manifest
+          cd /tmp/gh-pages
+          python3 - <<'PYEOF'
+          import json, os
+          manifest_path = "versions.json"
+          versions = []
+          if os.path.exists(manifest_path):
+              with open(manifest_path) as f:
+                  data = json.load(f)
+                  versions = data.get("versions", [])
+
+          version = os.environ.get("VERSION", "dev")
+          alias = os.environ.get("ALIAS", "")
+          aliases = [alias] if alias else []
+
+          # Remove existing entry for this version
+          versions = [v for v in versions if v["version"] != version]
+          versions.append({"version": version, "path": f"/{version}/", "aliases": aliases})
+
+          def sort_key(v):
+              if v["version"] == "dev": return (0, "")
+              return (1, v["version"])
+          versions.sort(key=sort_key)
+
+          default = "latest" if any(a for v in versions for a in v.get("aliases", []) if a == "latest") else "dev"
+          with open(manifest_path, "w") as f:
+              json.dump({"versions": versions, "default": default}, f, indent=2)
+          PYEOF
+
+          # Root redirect
+          cat > index.html <<'HTMLEOF'
+          <!DOCTYPE html>
+          <html>
+          <head><meta charset="utf-8">
+          <script>
+            fetch('/versions.json').then(r=>r.json()).then(d=>{
+              const def=d.default||'dev';
+              const v=d.versions.find(v=>v.version===def||(v.aliases||[]).includes(def));
+              window.location.replace(v?v.path:'/dev/');
+            }).catch(()=>window.location.replace('/dev/'));
+          </script></head>
+          <body>Redirecting...</body>
+          </html>
+          HTMLEOF
+
+          echo "story-as-code.dev" > CNAME
+
+          git add -A
+          git diff --cached --quiet && echo "No changes to deploy" && exit 0
+          git commit -m "Deploy ${VERSION}"
+          git push origin gh-pages
+
+      - name: Add raw schemas to gh-pages
+        if: steps.version.outputs.alias == 'latest'
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          cd /tmp/gh-pages
+          mkdir -p "schemas/v${VERSION}"
+          find "$GITHUB_WORKSPACE/spec/schemas" -name '*.schema.json' -exec cp {} "schemas/v${VERSION}/" \;
+
+          git add "schemas/v${VERSION}/"
+          git diff --cached --quiet && exit 0
+          git commit -m "Add raw schemas for v${VERSION}"
+          git push origin gh-pages

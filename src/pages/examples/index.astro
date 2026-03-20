@@ -1,0 +1,33 @@
+---
+import DocLayout from '../../layouts/DocLayout.astro';
+import { exampleSidebar } from '../../data/navigation';
+import { getCollection } from 'astro:content';
+
+const examples = await getCollection('examples');
+---
+
+<DocLayout title="Examples" sidebarItems={exampleSidebar}>
+  <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-4">Examples</h1>
+  <p class="text-lg text-slate-600 dark:text-slate-400 mb-10">
+    Complete, working projects that show how all schema pieces fit together.
+  </p>
+
+  <div class="grid gap-6">
+    {examples.map(ex => (
+      <a href={`/examples/${ex.slug}/`} class="group block p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-600 transition-all hover:shadow-lg hover:shadow-violet-500/5">
+        <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors mb-2">
+          {ex.data.title}
+        </h2>
+        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-4">{ex.data.description}</p>
+        <div class="flex items-center gap-4 text-xs">
+          <span class="text-violet-600 dark:text-violet-400 font-medium">View full example &rarr;</span>
+          {ex.data.hasGraph && (
+            <span class="text-slate-400 dark:text-slate-500">
+              Includes interactive graph
+            </span>
+          )}
+        </div>
+      </a>
+    ))}
+  </div>
+</DocLayout>
