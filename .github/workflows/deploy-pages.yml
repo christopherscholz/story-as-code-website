@@ -181,13 +181,3 @@ jobs:
           git diff --cached --quiet && exit 0
           git commit -m "Add raw spec files for v${VERSION}"
           git push origin gh-pages
-
-      - name: Update submodule pointer on main
-        run: |
-          SPEC_SHA=$(git -C spec rev-parse HEAD)
-          git fetch origin main
-          git checkout main
-          git add spec
-          git diff --cached --quiet && echo "Submodule pointer already up to date" && exit 0
-          git commit -m "chore: update spec submodule to ${SPEC_SHA:0:7}"
-          git push origin main
