@@ -4,7 +4,7 @@ This page clarifies what the Story as Code specification covers — and what it 
 
 ## What the Spec Defines
 
-The specification defines a **declarative schema language** for describing worlds as temporal graphs. Concretely, it covers:
+The specification defines a **declarative JSON-LD format** for describing worlds as temporal graphs. Concretely, it covers:
 
 The specification is organized into two layers:
 
