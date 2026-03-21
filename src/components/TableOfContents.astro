@@ -10,25 +10,32 @@ interface Props {
 }
 
 const { headings } = Astro.props;
-const filteredHeadings = headings.filter(h => h.depth >= 2 && h.depth <= 3);
+const filteredHeadings = headings.filter((h) => h.depth >= 2 && h.depth <= 3);
 ---
 
-{filteredHeadings.length > 0 && (
-  <aside class="hidden xl:block w-56 shrink-0">
-    <nav class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8" aria-label="Table of contents">
-      <h2 class="text-xs font-semibold text-slate-900 dark:text-slate-200 uppercase tracking-wider mb-3">On this page</h2>
-      <ul class="space-y-1 text-sm">
-        {filteredHeadings.map(h => (
-          <li style={`padding-left: ${(h.depth - 2) * 0.75}rem`}>
-            <a
-              href={`#${h.slug}`}
-              class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate"
-            >
-              {h.text}
-            </a>
-          </li>
-        ))}
-      </ul>
-    </nav>
-  </aside>
-)}
+{
+  filteredHeadings.length > 0 && (
+    <aside class="hidden xl:block w-56 shrink-0">
+      <nav
+        class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8"
+        aria-label="Table of contents"
+      >
+        <h2 class="text-xs font-semibold text-slate-900 dark:text-slate-200 uppercase tracking-wider mb-3">
+          On this page
+        </h2>
+        <ul class="space-y-1 text-sm">
+          {filteredHeadings.map((h) => (
+            <li style={`padding-left: ${(h.depth - 2) * 0.75}rem`}>
+              <a
+                href={`#${h.slug}`}
+                class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate"
+              >
+                {h.text}
+              </a>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
+  )
+}

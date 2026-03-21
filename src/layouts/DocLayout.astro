@@ -17,18 +17,21 @@ const { title, description, sidebarItems = [], headings = [] } = Astro.props;
 
 <BaseLayout title={title} description={description}>
   <div class="flex gap-8 py-8">
-    {sidebarItems.length > 0 && (
-      <Sidebar items={sidebarItems} currentPath={Astro.url.pathname} />
-    )}
+    {
+      sidebarItems.length > 0 && (
+        <Sidebar items={sidebarItems} currentPath={Astro.url.pathname} />
+      )
+    }
 
     <article class="flex-1 min-w-0">
-      <div class="prose prose-slate dark:prose-invert max-w-none" data-pagefind-body>
+      <div
+        class="prose prose-slate dark:prose-invert max-w-none"
+        data-pagefind-body
+      >
         <slot />
       </div>
     </article>
 
-    {headings.length > 0 && (
-      <TableOfContents headings={headings} />
-    )}
+    {headings.length > 0 && <TableOfContents headings={headings} />}
   </div>
 </BaseLayout>

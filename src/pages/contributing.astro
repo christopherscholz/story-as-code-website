@@ -3,7 +3,8 @@ import { getEntry } from 'astro:content';
 import DocLayout from '../layouts/DocLayout.astro';
 
 const page = await getEntry('pages', 'contributing');
-let Content: any, headings: any[] = [];
+let Content: any,
+  headings: any[] = [];
 if (page) {
   const rendered = await page.render();
   Content = rendered.Content;
@@ -12,6 +13,10 @@ if (page) {
 ---
 
 <DocLayout title="Contributing" headings={headings}>
-  <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-6">Contributing</h1>
+  <h1
+    class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-6"
+  >
+    Contributing
+  </h1>
   {Content && <Content />}
 </DocLayout>

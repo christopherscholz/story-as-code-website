@@ -5,7 +5,13 @@ const schemas = defineCollection({
   schema: z.object({
     title: z.string(),
     description: z.string(),
-    category: z.enum(['root', 'world', 'narrative', 'definitions', 'derivation']),
+    category: z.enum([
+      'root',
+      'world',
+      'narrative',
+      'definitions',
+      'derivation',
+    ]),
     order: z.number(),
   }),
 });

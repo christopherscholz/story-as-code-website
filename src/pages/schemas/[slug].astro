@@ -5,7 +5,7 @@ import { schemaSidebar } from '../../data/navigation';
 
 export async function getStaticPaths() {
   const schemas = await getCollection('schemas');
-  return schemas.map(entry => ({
+  return schemas.map((entry) => ({
     params: { slug: entry.slug },
     props: { entry },
   }));
@@ -23,17 +23,24 @@ const { Content, headings } = await entry.render();
 >
   <div class="mb-6">
     <div class="flex items-center gap-3 mb-2">
-      <span class:list={[
-        'inline-block w-2.5 h-2.5 rounded-full',
-        entry.data.category === 'world' ? 'bg-emerald-500' :
-        entry.data.category === 'narrative' ? 'bg-violet-500' :
-        'bg-slate-400'
-      ]}></span>
-      <span class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400">
+      <span
+        class:list={[
+          'inline-block w-2.5 h-2.5 rounded-full',
+          entry.data.category === 'world'
+            ? 'bg-emerald-500'
+            : entry.data.category === 'narrative'
+              ? 'bg-violet-500'
+              : 'bg-slate-400',
+        ]}></span>
+      <span
+        class="text-xs font-mono uppercase tracking-wider text-slate-500 dark:text-slate-400"
+      >
         {entry.data.category} layer
       </span>
     </div>
-    <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white">{entry.data.title}</h1>
+    <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white">
+      {entry.data.title}
+    </h1>
   </div>
   <Content />
 </DocLayout>

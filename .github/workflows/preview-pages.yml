@@ -24,11 +24,11 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Install Python dependencies
         run: pip install pyyaml "json-schema-for-humans>=1.5,<2.0"
@@ -41,7 +41,7 @@ jobs:
 
       - name: Build site
         env:
-          SITE_BASE: "/pr-${{ github.event.number }}/"
+          SITE_BASE: '/pr-${{ github.event.number }}/'
         run: |
           npm run prepare-content
           npx astro build

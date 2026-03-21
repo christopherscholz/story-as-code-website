@@ -16,7 +16,14 @@
  *   - public/data/           (resolved JSON for graph visualization)
  */
 
-import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, readdirSync } from 'fs';
+import {
+  readFileSync,
+  writeFileSync,
+  mkdirSync,
+  existsSync,
+  copyFileSync,
+  readdirSync,
+} from 'fs';
 import { join, basename, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -42,24 +49,117 @@ function readFile(path) {
 
 // ── Schema metadata ──────────────────────────────────────────────
 const SCHEMA_META = {
-  'story':           { title: 'Story Schema',           description: 'Root document of a Story as Code project.',                            category: 'root',        order: 0  },
-  'world':           { title: 'World Schema',           description: 'The world graph — ground truth of the story universe.',                category: 'world',       order: 10 },
-  'time-system':     { title: 'Time System Schema',     description: 'Defines how time works in this world.',                                category: 'world',       order: 11 },
-  'node':            { title: 'Node Schema',            description: 'An entity in the world graph.',                                        category: 'world',       order: 12 },
-  'edge':            { title: 'Edge Schema',            description: 'A relationship between nodes.',                                        category: 'world',       order: 13 },
-  'frame':           { title: 'Frame Schema',           description: 'An alternative timeline or branch.',                                   category: 'world',       order: 14 },
-  'constraint':      { title: 'Constraint Schema',      description: 'A world rule with scope filters and severity levels.',                  category: 'world',       order: 15 },
-  'narrative':       { title: 'Narrative Schema',       description: 'The narrative layer — storytelling perspective on the world.',           category: 'narrative',   order: 20 },
-  'lens':            { title: 'Lens Schema',            description: 'Narrative perspective — filters and interprets world content.',          category: 'narrative',   order: 21 },
-  'format':          { title: 'Format Schema',          description: 'Output format definition with structural hierarchy and pacing rules.',   category: 'narrative',   order: 22 },
-  'beat':            { title: 'Beat Schema',            description: 'A story beat — selects world elements and adds dramaturgical structure.',category: 'narrative',   order: 23 },
-  'device':          { title: 'Device Schema',          description: 'A narrative device — rhetorical connection between beats.',              category: 'narrative',   order: 24 },
-  'thread':          { title: 'Thread Schema',          description: 'A thematic thread — horizontal chaining across storylines.',             category: 'narrative',   order: 25 },
-  'variant-meta':    { title: 'Variant Meta Schema',    description: 'Parallel world version metadata.',                                      category: 'narrative',   order: 26 },
-  'definitions':     { title: 'Definitions Schema',     description: 'Reusable tag and type definitions.',                                    category: 'definitions', order: 30 },
-  'tag':             { title: 'Tag Schema',             description: 'A tag definition for categorization.',                                  category: 'definitions', order: 31 },
-  'type':            { title: 'Type Schema',            description: 'A type definition for extensible classification.',                      category: 'definitions', order: 32 },
-  'derivation-meta': { title: 'Derivation Meta Schema', description: 'Validation contract for a compiled output.',                            category: 'derivation',  order: 40 },
+  story: {
+    title: 'Story Schema',
+    description: 'Root document of a Story as Code project.',
+    category: 'root',
+    order: 0,
+  },
+  world: {
+    title: 'World Schema',
+    description: 'The world graph — ground truth of the story universe.',
+    category: 'world',
+    order: 10,
+  },
+  'time-system': {
+    title: 'Time System Schema',
+    description: 'Defines how time works in this world.',
+    category: 'world',
+    order: 11,
+  },
+  node: {
+    title: 'Node Schema',
+    description: 'An entity in the world graph.',
+    category: 'world',
+    order: 12,
+  },
+  edge: {
+    title: 'Edge Schema',
+    description: 'A relationship between nodes.',
+    category: 'world',
+    order: 13,
+  },
+  frame: {
+    title: 'Frame Schema',
+    description: 'An alternative timeline or branch.',
+    category: 'world',
+    order: 14,
+  },
+  constraint: {
+    title: 'Constraint Schema',
+    description: 'A world rule with scope filters and severity levels.',
+    category: 'world',
+    order: 15,
+  },
+  narrative: {
+    title: 'Narrative Schema',
+    description: 'The narrative layer — storytelling perspective on the world.',
+    category: 'narrative',
+    order: 20,
+  },
+  lens: {
+    title: 'Lens Schema',
+    description:
+      'Narrative perspective — filters and interprets world content.',
+    category: 'narrative',
+    order: 21,
+  },
+  format: {
+    title: 'Format Schema',
+    description:
+      'Output format definition with structural hierarchy and pacing rules.',
+    category: 'narrative',
+    order: 22,
+  },
+  beat: {
+    title: 'Beat Schema',
+    description:
+      'A story beat — selects world elements and adds dramaturgical structure.',
+    category: 'narrative',
+    order: 23,
+  },
+  device: {
+    title: 'Device Schema',
+    description: 'A narrative device — rhetorical connection between beats.',
+    category: 'narrative',
+    order: 24,
+  },
+  thread: {
+    title: 'Thread Schema',
+    description: 'A thematic thread — horizontal chaining across storylines.',
+    category: 'narrative',
+    order: 25,
+  },
+  'variant-meta': {
+    title: 'Variant Meta Schema',
+    description: 'Parallel world version metadata.',
+    category: 'narrative',
+    order: 26,
+  },
+  definitions: {
+    title: 'Definitions Schema',
+    description: 'Reusable tag and type definitions.',
+    category: 'definitions',
+    order: 30,
+  },
+  tag: {
+    title: 'Tag Schema',
+    description: 'A tag definition for categorization.',
+    category: 'definitions',
+    order: 31,
+  },
+  type: {
+    title: 'Type Schema',
+    description: 'A type definition for extensible classification.',
+    category: 'definitions',
+    order: 32,
+  },
+  'derivation-meta': {
+    title: 'Derivation Meta Schema',
+    description: 'Validation contract for a compiled output.',
+    category: 'derivation',
+    order: 40,
+  },
 };
 
 // ── 1. Schema pages ──────────────────────────────────────────────
@@ -88,7 +188,8 @@ function prepareSchemas() {
       const genContent = generated.replace(/^# Schema Docs\n*/, '');
       content += genContent;
     } else {
-      content += '*Schema reference documentation will be generated during build.*\n';
+      content +=
+        '*Schema reference documentation will be generated during build.*\n';
     }
 
     writeFileSync(join(outDir, `${slug}.md`), content);
@@ -104,17 +205,21 @@ function prepareExamples() {
 
   const generatedDir = join(GENERATED_DIR, 'examples');
   if (!existsSync(generatedDir)) {
-    console.log('⚠ No generated example docs found (run generate-example-docs.py first)');
+    console.log(
+      '⚠ No generated example docs found (run generate-example-docs.py first)',
+    );
     return;
   }
 
-  const files = readdirSync(generatedDir).filter(f => f.endsWith('.md'));
+  const files = readdirSync(generatedDir).filter((f) => f.endsWith('.md'));
   for (const file of files) {
     const slug = basename(file, '.md');
     let content = readFileSync(join(generatedDir, file), 'utf-8');
 
     const titleMatch = content.match(/^# (.+)$/m);
-    const title = titleMatch ? titleMatch[1] : slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
+    const title = titleMatch
+      ? titleMatch[1]
+      : slug.replace(/-/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase());
 
     const lines = content.split('\n');
     let desc = '';
@@ -152,55 +257,67 @@ function prepareStandalonePages() {
   const scope = readFile(join(CONTENT_SOURCE, 'scope.md'));
   if (scope) {
     let content = scope.replace(/^# .+\n*/, '');
-    writeFileSync(join(outDir, 'scope.md'), [
-      '---',
-      'title: "Scope & Boundaries"',
-      'description: "What the Story as Code specification covers — and what it intentionally leaves to other layers."',
-      '---',
-      '',
-      content,
-    ].join('\n'));
+    writeFileSync(
+      join(outDir, 'scope.md'),
+      [
+        '---',
+        'title: "Scope & Boundaries"',
+        'description: "What the Story as Code specification covers — and what it intentionally leaves to other layers."',
+        '---',
+        '',
+        content,
+      ].join('\n'),
+    );
   }
 
   // Contributing (from spec)
   const contributing = readFile(join(SPEC_ROOT, 'CONTRIBUTING.md'));
   if (contributing) {
-    writeFileSync(join(outDir, 'contributing.md'), [
-      '---',
-      'title: "Contributing"',
-      'description: "How to participate in the development of the Story as Code specification."',
-      '---',
-      '',
-      contributing.replace(/^# .+\n*/, ''),
-    ].join('\n'));
+    writeFileSync(
+      join(outDir, 'contributing.md'),
+      [
+        '---',
+        'title: "Contributing"',
+        'description: "How to participate in the development of the Story as Code specification."',
+        '---',
+        '',
+        contributing.replace(/^# .+\n*/, ''),
+      ].join('\n'),
+    );
   }
 
   // Code of Conduct (from spec)
   const coc = readFile(join(SPEC_ROOT, 'CODE_OF_CONDUCT.md'));
   if (coc) {
-    writeFileSync(join(outDir, 'code-of-conduct.md'), [
-      '---',
-      'title: "Code of Conduct"',
-      'description: "Contributor Covenant Code of Conduct for the Story as Code project."',
-      '---',
-      '',
-      coc.replace(/^# .+\n*/, ''),
-    ].join('\n'));
+    writeFileSync(
+      join(outDir, 'code-of-conduct.md'),
+      [
+        '---',
+        'title: "Code of Conduct"',
+        'description: "Contributor Covenant Code of Conduct for the Story as Code project."',
+        '---',
+        '',
+        coc.replace(/^# .+\n*/, ''),
+      ].join('\n'),
+    );
   }
 
   // License (from spec)
   const license = readFile(join(SPEC_ROOT, 'LICENSE'));
   if (license) {
-    writeFileSync(join(outDir, 'license.md'), [
-      '---',
-      'title: "License"',
-      'description: "Apache License 2.0"',
-      '---',
-      '',
-      '```',
-      license,
-      '```',
-    ].join('\n'));
+    writeFileSync(
+      join(outDir, 'license.md'),
+      [
+        '---',
+        'title: "License"',
+        'description: "Apache License 2.0"',
+        '---',
+        '',
+        '```',
+        license,
+        '```',
+      ].join('\n'),
+    );
   }
 
   console.log('✓ Standalone pages prepared');
@@ -217,7 +334,7 @@ function copyResolvedData() {
     return;
   }
 
-  const files = readdirSync(srcDir).filter(f => f.endsWith('.json'));
+  const files = readdirSync(srcDir).filter((f) => f.endsWith('.json'));
   for (const file of files) {
     copyFileSync(join(srcDir, file), join(dataDir, file));
   }

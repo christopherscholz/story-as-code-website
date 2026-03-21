@@ -10,7 +10,7 @@ on:
       spec_version:
         description: "Spec version to deploy (e.g. '1.0.0' or 'dev')"
         required: false
-        default: "dev"
+        default: 'dev'
 
 permissions:
   contents: write
@@ -30,11 +30,11 @@ jobs:
 
       - uses: actions/setup-python@v5
         with:
-          python-version: "3.12"
+          python-version: '3.12'
 
       - uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: '20'
 
       - name: Determine version
         id: version
@@ -75,7 +75,7 @@ jobs:
 
       - name: Build site
         env:
-          SITE_BASE: "/${{ steps.version.outputs.version }}/"
+          SITE_BASE: '/${{ steps.version.outputs.version }}/'
         run: |
           npm run prepare-content
           npx astro build
