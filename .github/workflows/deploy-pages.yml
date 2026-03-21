@@ -157,6 +157,7 @@ jobs:
           HTMLEOF
 
           echo "story-as-code.dev" > CNAME
+          touch .nojekyll
 
           git add -A
           git diff --cached --quiet && echo "No changes to deploy" && exit 0

@@ -64,7 +64,8 @@ jobs:
           cp -r dist "/tmp/gh-pages/pr-${{ github.event.number }}"
 
           cd /tmp/gh-pages
-          git add "pr-${{ github.event.number }}"
+          touch .nojekyll
+          git add .nojekyll "pr-${{ github.event.number }}"
           git diff --cached --quiet && echo "No docs changes to preview" && exit 0
           git commit -m "Deploy preview for PR #${{ github.event.number }}"
           git push origin gh-pages
