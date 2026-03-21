@@ -40,6 +40,15 @@
     return isDark() ? cl.dark : cl.light;
   }
 
+  // nodeType/edgeType may be resolved TypeDefinition objects {id, name, ...}
+  // or plain strings — typeId() normalises both to the string ID.
+  function typeId(t) {
+    return t?.id ?? t ?? '';
+  }
+  function typeName(t) {
+    return t?.name ?? t?.id ?? t ?? '';
+  }
+
   // All type→color mappings are auto-assigned via colorFor(). No hardcoded
   // assumptions about specific schema enum values (beat functions, device
   // types, reliability levels, etc.).
@@ -199,8 +208,8 @@
     // pre-assign colors for all types found in data
     const w = story.world || {},
       _n = story.narrative || {};
-    (w.nodes || []).forEach((nd) => colorFor(nd.nodeType));
-    (w.edges || []).forEach((e) => colorFor(e.edgeType));
+    (w.nodes || []).forEach((nd) => colorFor(typeId(nd.nodeType)));
+    (w.edges || []).forEach((e) => colorFor(typeId(e.edgeType)));
 
     renderAllSections();
 
@@ -293,8 +302,8 @@
 
     const filterBar = document.createElement('div');
     filterBar.className = 'world-filters';
-    const nodeTypes = [...new Set(nodes.map((n) => n.nodeType))];
-    const edgeTypes = [...new Set(edges.map((e) => e.edgeType))];
+    const nodeTypes = [...new Set(nodes.map((n) => typeId(n.nodeType)))];
+    const edgeTypes = [...new Set(edges.map((e) => typeId(e.edgeType)))];
     filterBar.innerHTML =
       '<span class="filter-label">Nodes:</span>' +
       nodeTypes
@@ -319,7 +328,8 @@
     // deterministic initial positions: group by type in a wide circle
     const typeGroups = {};
     nodes.forEach((n) => {
-      (typeGroups[n.nodeType] = typeGroups[n.nodeType] || []).push(n);
+      const nt = typeId(n.nodeType);
+      (typeGroups[nt] = typeGroups[nt] || []).push(n);
     });
     const typeKeys = Object.keys(typeGroups);
     const initPos = {};
@@ -343,8 +353,8 @@
     nodes.forEach((n) =>
       elements.push({
         group: 'nodes',
-        data: { id: n.id, label: n.name || n.id, type: n.nodeType },
-        classes: n.nodeType,
+        data: { id: n.id, label: n.name || n.id, type: typeId(n.nodeType) },
+        classes: typeId(n.nodeType),
         position: initPos[n.id],
       }),
     );
@@ -356,10 +366,10 @@
           source: e.source,
           target: e.target,
           label: e.name || '',
-          type: e.edgeType,
+          type: typeId(e.edgeType),
           hasScope: !!e.scope,
         },
-        classes: e.edgeType,
+        classes: typeId(e.edgeType),
       }),
     );
 
@@ -1329,7 +1339,7 @@
 
   /* ── detail HTML builders ──────────────────────────────────────── */
   function nodeDetailHTML(node) {
-    let h = `<h4>${esc(node.name)}</h4><span class="info-badge" style="background:${c(node.nodeType)}">${node.nodeType}</span>`;
+    let h = `<h4>${esc(node.name)}</h4><span class="info-badge" style="background:${c(typeId(node.nodeType))}">${typeName(node.nodeType)}</span>`;
     if (node.description)
       h += `<p class="info-desc">${esc(node.description)}</p>`;
     if (node.tags?.length)
@@ -1344,7 +1354,7 @@
     return h;
   }
   function edgeDetailHTML(edge) {
-    let h = `<h4>${esc(edge.name)}</h4><span class="info-badge" style="background:${c(edge.edgeType)}">${edge.edgeType}</span>`;
+    let h = `<h4>${esc(edge.name)}</h4><span class="info-badge" style="background:${c(typeId(edge.edgeType))}">${typeName(edge.edgeType)}</span>`;
     h += `<p><strong>${esc(edge.source)}</strong> &rarr; <strong>${esc(edge.target)}</strong></p>`;
     if (edge.description)
       h += `<p class="info-desc">${esc(edge.description)}</p>`;
