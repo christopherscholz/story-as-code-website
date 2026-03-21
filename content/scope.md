@@ -33,7 +33,7 @@ The following concerns are **intentionally out of scope**. They belong to toolin
 
 ### File System Layout
 
-The spec defines **what** is valid (schemas), not **where** files are stored. A conforming story can be a single `story.yaml` with everything inline, or a multi-file project with `$ref` references pointing to any directory structure. How files are organized on disk is a tooling and user-preference concern — the spec is layout-agnostic.
+The spec defines **what** is valid (ontology + shapes), not **where** files are stored. A conforming story can be a single `story.jsonld` with everything inline, or a multi-file project with `@id` references pointing to any directory structure. How files are organized on disk is a tooling and user-preference concern — the spec is layout-agnostic.
 
 ### Storage & Persistence
 

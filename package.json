@@ -4,7 +4,7 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "generate": "bash scripts/generate-schema-docs.sh && python3 scripts/generate-example-docs.py && python3 scripts/resolve-story.py",
+    "generate": "python3 scripts/generate-schema-docs.py && python3 scripts/generate-example-docs.py && python3 scripts/resolve-story.py",
     "prepare-content": "node scripts/prepare-content.mjs",
     "dev": "npm run prepare-content && astro dev",
     "build": "npm run prepare-content && astro build",

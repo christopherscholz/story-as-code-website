@@ -40,6 +40,15 @@
     return isDark() ? cl.dark : cl.light;
   }
 
+  // nodeType/edgeType may be resolved TypeDefinition objects {id, name, ...}
+  // or plain strings — typeId() normalises both to the string ID.
+  function typeId(t) {
+    return t?.id ?? t ?? '';
+  }
+  function typeName(t) {
+    return t?.name ?? t?.id ?? t ?? '';
+  }
+
   // All type→color mappings are auto-assigned via colorFor(). No hardcoded
   // assumptions about specific schema enum values (beat functions, device
   // types, reliability levels, etc.).
@@ -88,7 +97,7 @@
       });
       // beats referencing node
       beats.forEach((b) => {
-        if ((b.node_ids || []).includes(sel.id)) ids.beats.add(b.id);
+        if ((b.nodeIds || []).includes(sel.id)) ids.beats.add(b.id);
       });
       // lenses
       lenses.forEach((l) => {
@@ -107,14 +116,14 @@
         ids.nodes.add(edge.target);
       }
       beats.forEach((b) => {
-        if ((b.edge_ids || []).includes(sel.id)) ids.beats.add(b.id);
+        if ((b.edgeIds || []).includes(sel.id)) ids.beats.add(b.id);
       });
     } else if (sel.kind === 'beat') {
       ids.beats.add(sel.id);
       const beat = beats.find((b) => b.id === sel.id);
       if (beat) {
-        (beat.node_ids || []).forEach((id) => ids.nodes.add(id));
-        (beat.edge_ids || []).forEach((id) => {
+        (beat.nodeIds || []).forEach((id) => ids.nodes.add(id));
+        (beat.edgeIds || []).forEach((id) => {
           ids.edges.add(id);
           const e = (w.edges || []).find((e) => e.id === id);
           if (e) {
@@ -124,7 +133,7 @@
         });
       }
       threads.forEach((t) => {
-        if ((t.appearances || []).some((a) => a.beat_id === sel.id))
+        if ((t.appearances || []).some((a) => a.beatId === sel.id))
           ids.threads.add(t.id);
       });
       devices.forEach((d) => {
@@ -139,9 +148,9 @@
       const thread = threads.find((t) => t.id === sel.id);
       if (thread)
         (thread.appearances || []).forEach((a) => {
-          ids.beats.add(a.beat_id);
-          const b = beats.find((b) => b.id === a.beat_id);
-          if (b) (b.node_ids || []).forEach((id) => ids.nodes.add(id));
+          ids.beats.add(a.beatId);
+          const b = beats.find((b) => b.id === a.beatId);
+          if (b) (b.nodeIds || []).forEach((id) => ids.nodes.add(id));
         });
     } else if (sel.kind === 'device') {
       ids.devices.add(sel.id);
@@ -150,7 +159,7 @@
         [...(dev.setup || []), ...(dev.payoff || [])].forEach((id) => {
           ids.beats.add(id);
           const b = beats.find((b) => b.id === id);
-          if (b) (b.node_ids || []).forEach((nid) => ids.nodes.add(nid));
+          if (b) (b.nodeIds || []).forEach((nid) => ids.nodes.add(nid));
         });
     } else if (sel.kind === 'lens') {
       ids.lenses.add(sel.id);
@@ -199,8 +208,8 @@
     // pre-assign colors for all types found in data
     const w = story.world || {},
       _n = story.narrative || {};
-    (w.nodes || []).forEach((nd) => colorFor(nd.type));
-    (w.edges || []).forEach((e) => colorFor(e.type));
+    (w.nodes || []).forEach((nd) => colorFor(typeId(nd.nodeType)));
+    (w.edges || []).forEach((e) => colorFor(typeId(e.edgeType)));
 
     renderAllSections();
 
@@ -293,8 +302,8 @@
 
     const filterBar = document.createElement('div');
     filterBar.className = 'world-filters';
-    const nodeTypes = [...new Set(nodes.map((n) => n.type))];
-    const edgeTypes = [...new Set(edges.map((e) => e.type))];
+    const nodeTypes = [...new Set(nodes.map((n) => typeId(n.nodeType)))];
+    const edgeTypes = [...new Set(edges.map((e) => typeId(e.edgeType)))];
     filterBar.innerHTML =
       '<span class="filter-label">Nodes:</span>' +
       nodeTypes
@@ -319,7 +328,8 @@
     // deterministic initial positions: group by type in a wide circle
     const typeGroups = {};
     nodes.forEach((n) => {
-      (typeGroups[n.type] = typeGroups[n.type] || []).push(n);
+      const nt = typeId(n.nodeType);
+      (typeGroups[nt] = typeGroups[nt] || []).push(n);
     });
     const typeKeys = Object.keys(typeGroups);
     const initPos = {};
@@ -343,8 +353,8 @@
     nodes.forEach((n) =>
       elements.push({
         group: 'nodes',
-        data: { id: n.id, label: n.name || n.id, type: n.type },
-        classes: n.type,
+        data: { id: n.id, label: n.name || n.id, type: typeId(n.nodeType) },
+        classes: typeId(n.nodeType),
         position: initPos[n.id],
       }),
     );
@@ -356,10 +366,10 @@
           source: e.source,
           target: e.target,
           label: e.name || '',
-          type: e.type,
+          type: typeId(e.edgeType),
           hasScope: !!e.scope,
         },
-        classes: e.type,
+        classes: typeId(e.edgeType),
       }),
     );
 
@@ -568,10 +578,10 @@
         y = PAD + i * (CARD_H + GAP);
       const funcColor = c(b.function || 'default');
       const emColor =
-        b.emotional_target != null
-          ? b.emotional_target < 0
-            ? `rgba(66,165,245,${Math.abs(b.emotional_target) * 0.15})`
-            : `rgba(255,167,38,${b.emotional_target * 0.15})`
+        b.emotionalTarget != null
+          ? b.emotionalTarget < 0
+            ? `rgba(66,165,245,${Math.abs(b.emotionalTarget) * 0.15})`
+            : `rgba(255,167,38,${b.emotionalTarget * 0.15})`
           : 'transparent';
       const g = svgEl('g', {
         class: 'beat-card',
@@ -687,7 +697,7 @@
           'font-size': 10,
           'text-anchor': 'middle',
         });
-        tl.textContent = b.transition.type;
+        tl.textContent = b.transition.transitionType;
         svg.appendChild(tl);
       }
       svg.appendChild(g);
@@ -756,7 +766,7 @@
       svg.appendChild(labelEl);
 
       const apps = (thread.appearances || [])
-        .map((a) => ({ ...a, idx: beats.findIndex((b) => b.id === a.beat_id) }))
+        .map((a) => ({ ...a, idx: beats.findIndex((b) => b.id === a.beatId) }))
         .filter((a) => a.idx >= 0)
         .sort((a, b) => a.idx - b.idx);
       let lp = '';
@@ -772,7 +782,7 @@
           class: 'thread-dot',
           'data-thread': thread.id,
         });
-        dot.innerHTML = `<title>${esc(a.description || a.beat_id)}</title>`;
+        dot.innerHTML = `<title>${esc(a.description || a.beatId)}</title>`;
         dot.addEventListener('click', (ev) => {
           ev.stopPropagation();
           select({ kind: 'thread', id: thread.id });
@@ -1329,7 +1339,7 @@
 
   /* ── detail HTML builders ──────────────────────────────────────── */
   function nodeDetailHTML(node) {
-    let h = `<h4>${esc(node.name)}</h4><span class="info-badge" style="background:${c(node.type)}">${node.type}</span>`;
+    let h = `<h4>${esc(node.name)}</h4><span class="info-badge" style="background:${c(typeId(node.nodeType))}">${typeName(node.nodeType)}</span>`;
     if (node.description)
       h += `<p class="info-desc">${esc(node.description)}</p>`;
     if (node.tags?.length)
@@ -1344,7 +1354,7 @@
     return h;
   }
   function edgeDetailHTML(edge) {
-    let h = `<h4>${esc(edge.name)}</h4><span class="info-badge" style="background:${c(edge.type)}">${edge.type}</span>`;
+    let h = `<h4>${esc(edge.name)}</h4><span class="info-badge" style="background:${c(typeId(edge.edgeType))}">${typeName(edge.edgeType)}</span>`;
     h += `<p><strong>${esc(edge.source)}</strong> &rarr; <strong>${esc(edge.target)}</strong></p>`;
     if (edge.description)
       h += `<p class="info-desc">${esc(edge.description)}</p>`;
@@ -1360,16 +1370,16 @@
       h += `<p class="info-desc">${esc(beat.description)}</p>`;
     if (beat.tension != null)
       h += `<p><strong>Tension:</strong> ${beat.tension}</p>`;
-    if (beat.emotional_target != null)
-      h += `<p><strong>Emotional:</strong> ${beat.emotional_target}</p>`;
-    if (beat.node_ids)
-      h += `<p><strong>Nodes:</strong> ${beat.node_ids.map((id) => `<a class="info-link" data-kind="node" data-id="${id}">${id}</a>`).join(', ')}</p>`;
-    if (beat.edge_ids)
-      h += `<p><strong>Edges:</strong> ${beat.edge_ids.map((id) => `<a class="info-link" data-kind="edge" data-id="${id}">${id}</a>`).join(', ')}</p>`;
+    if (beat.emotionalTarget != null)
+      h += `<p><strong>Emotional:</strong> ${beat.emotionalTarget}</p>`;
+    if (beat.nodeIds)
+      h += `<p><strong>Nodes:</strong> ${beat.nodeIds.map((id) => `<a class="info-link" data-kind="node" data-id="${id}">${id}</a>`).join(', ')}</p>`;
+    if (beat.edgeIds)
+      h += `<p><strong>Edges:</strong> ${beat.edgeIds.map((id) => `<a class="info-link" data-kind="edge" data-id="${id}">${id}</a>`).join(', ')}</p>`;
     if (beat.reveals?.length)
       h += `<p><strong>Reveals:</strong> ${beat.reveals.map((r) => `${r.target} (${r.degree || 'FULL'})`).join(', ')}</p>`;
     if (beat.transition)
-      h += `<p><strong>Transition:</strong> ${beat.transition.type}</p>`;
+      h += `<p><strong>Transition:</strong> ${beat.transition.transitionType}</p>`;
     return h;
   }
   function threadDetailHTML(thread) {
@@ -1379,7 +1389,7 @@
     if (thread.appearances) {
       h += '<ul class="appearance-list">';
       thread.appearances.forEach((a) => {
-        h += `<li><a class="info-link" data-kind="beat" data-id="${a.beat_id}"><strong>${a.beat_id}</strong></a>: ${esc(a.description || '')}</li>`;
+        h += `<li><a class="info-link" data-kind="beat" data-id="${a.beatId}"><strong>${a.beatId}</strong></a>: ${esc(a.description || '')}</li>`;
       });
       h += '</ul>';
     }
@@ -1421,7 +1431,8 @@
   /* ── helpers ────────────────────────────────────────────────────── */
   function scopeRefFrame(scope, frameId) {
     if (!scope) return false;
-    if (scope.type === 'frame' && scope.item === frameId) return true;
+    if (scope.selectorType === 'frame' && scope.selectorItem === frameId)
+      return true;
     if (scope.and) return scope.and.some((s) => scopeRefFrame(s, frameId));
     if (scope.or) return scope.or.some((s) => scopeRefFrame(s, frameId));
     if (scope.not) return scopeRefFrame(scope.not, frameId);
@@ -1453,8 +1464,8 @@
 
   function renderScope(scope) {
     if (!scope) return '';
-    if (scope.type && scope.item)
-      return `<code>${scope.type}: ${scope.item}</code>`;
+    if (scope.selectorType && scope.selectorItem)
+      return `<code>${scope.selectorType}: ${scope.selectorItem}</code>`;
     if (scope.and) return '(' + scope.and.map(renderScope).join(' AND ') + ')';
     if (scope.or) return '(' + scope.or.map(renderScope).join(' OR ') + ')';
     if (scope.not) return 'NOT ' + renderScope(scope.not);
@@ -1483,8 +1494,8 @@
   }
   function collectTimePoints(scope, set) {
     if (!scope) return;
-    if (scope.type === 'time' && scope.item) {
-      set.add(scope.item);
+    if (scope.selectorType === 'time' && scope.selectorItem) {
+      set.add(scope.selectorItem);
       return;
     }
     if (scope.range) {

@@ -67,7 +67,7 @@ jobs:
           fi
 
       - name: Install Python dependencies
-        run: pip install pyyaml "json-schema-for-humans>=1.5,<2.0"
+        run: pip install -r spec/requirements.txt
 
       - name: Generate spec docs
         run: npm run generate
@@ -166,16 +166,28 @@ jobs:
           git commit -m "Deploy ${VERSION}"
           git push origin gh-pages
 
-      - name: Add raw schemas to gh-pages
+      - name: Add raw spec files to gh-pages
         if: steps.version.outputs.alias == 'latest'
         env:
           VERSION: ${{ steps.version.outputs.version }}
         run: |
           cd /tmp/gh-pages
           mkdir -p "schemas/v${VERSION}"
-          find "$GITHUB_WORKSPACE/spec/schemas" -name '*.schema.json' -exec cp {} "schemas/v${VERSION}/" \;
+          cp "$GITHUB_WORKSPACE/spec/ontology/"*.ttl "schemas/v${VERSION}/"
+          cp "$GITHUB_WORKSPACE/spec/context/"*.jsonld "schemas/v${VERSION}/"
+          find "$GITHUB_WORKSPACE/spec/shapes" -name '*.shapes.ttl' -exec cp {} "schemas/v${VERSION}/" \;
 
           git add "schemas/v${VERSION}/"
           git diff --cached --quiet && exit 0
-          git commit -m "Add raw schemas for v${VERSION}"
+          git commit -m "Add raw spec files for v${VERSION}"
           git push origin gh-pages
+
+      - name: Update submodule pointer on main
+        run: |
+          SPEC_SHA=$(git -C spec rev-parse HEAD)
+          git fetch origin main
+          git checkout main
+          git add spec
+          git diff --cached --quiet && echo "Submodule pointer already up to date" && exit 0
+          git commit -m "chore: update spec submodule to ${SPEC_SHA:0:7}"
+          git push origin main
