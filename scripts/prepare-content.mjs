@@ -154,6 +154,12 @@ const SCHEMA_META = {
     category: 'definitions',
     order: 32,
   },
+  value: {
+    title: 'Value Definition Schema',
+    description: 'Defines the meaning of a controlled vocabulary value.',
+    category: 'definitions',
+    order: 33,
+  },
   'derivation-meta': {
     title: 'Derivation Meta Schema',
     description: 'Validation contract for a compiled output.',

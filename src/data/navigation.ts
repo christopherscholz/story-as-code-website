@@ -32,6 +32,7 @@ export const schemaSidebar: SidebarItem[] = [
     children: [
       { label: 'Tag', href: '/schemas/tag/' },
       { label: 'Type', href: '/schemas/type/' },
+      { label: 'Value', href: '/schemas/value/' },
     ],
   },
   { label: 'Derivation Meta', href: '/schemas/derivation-meta/' },

@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 """Generate documentation pages for all examples.
 
-Scans spec/examples/ for directories containing a story.yaml.
+Scans spec/examples/ for directories containing a story.jsonld.
 For each example, generates a markdown page in .generated/examples/
-with the README.md as intro and all YAML files as collapsible sections.
+with the README.md as intro and all JSON-LD files as collapsible sections.
 """
+import json
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -17,6 +18,7 @@ DIR_LABELS = {
     "narrative": "Narrative",
     "tags": "Tags",
     "types": "Types",
+    "values": "Values",
     "characters": "Characters",
     "locations": "Locations",
     "objects": "Objects",
@@ -32,7 +34,7 @@ DIR_LABELS = {
 SECTION_ORDER = ["definitions", "world", "narrative"]
 
 SUBSECTION_ORDER = [
-    "tags", "types",
+    "tags", "types", "values",
     "characters", "locations", "objects", "events", "edges",
     "lenses", "beats", "devices", "threads", "formats",
 ]
@@ -42,13 +44,17 @@ def slug(name: str) -> str:
     return name.lower().replace(" ", "-").replace("'", "").replace("\u2019", "")
 
 
-def yaml_section(filepath: Path) -> str:
-    """Create a collapsible details section for a YAML file."""
-    content = filepath.read_text().rstrip()
+def jsonld_section(filepath: Path) -> str:
+    """Create a collapsible details section for a JSON-LD file."""
+    try:
+        data = json.loads(filepath.read_text())
+        content = json.dumps(data, indent=2, ensure_ascii=False)
+    except Exception:
+        content = filepath.read_text().rstrip()
     return (
         f'<details>\n'
         f'<summary>{filepath.name}</summary>\n\n'
-        f'```yaml\n{content}\n```\n\n'
+        f'```json\n{content}\n```\n\n'
         f'</details>\n'
     )
 
@@ -71,15 +77,15 @@ def generate_example_page(example_dir: Path) -> str:
         name = example_dir.name.replace("-", " ").title()
         parts.append(f"# {name}")
 
-    root_yamls = sorted(example_dir.glob("*.yaml"))
-    story_file = example_dir / "story.yaml"
+    root_jsonlds = sorted(example_dir.glob("*.jsonld"))
+    story_file = example_dir / "story.jsonld"
     if story_file.exists():
-        root_yamls = [story_file] + [f for f in root_yamls if f != story_file]
+        root_jsonlds = [story_file] + [f for f in root_jsonlds if f != story_file]
 
-    if root_yamls:
+    if root_jsonlds:
         parts.append("## Root Files\n")
-        for f in root_yamls:
-            parts.append(yaml_section(f))
+        for f in root_jsonlds:
+            parts.append(jsonld_section(f))
 
     top_dirs = sorted(
         [d for d in example_dir.iterdir() if d.is_dir()],
@@ -92,28 +98,28 @@ def generate_example_page(example_dir: Path) -> str:
             key=lambda d: sort_key(d.name, SUBSECTION_ORDER),
         )
         has_subsections = bool(sub_dirs)
-        index_yamls = sorted(top_dir.glob("*.yaml"))
+        index_jsonlds = sorted(top_dir.glob("*.jsonld"))
 
         if not has_subsections:
-            if not index_yamls:
+            if not index_jsonlds:
                 continue
             label = DIR_LABELS.get(top_dir.name, top_dir.name.title())
             parts.append(f"## {label}\n")
-            for f in index_yamls:
-                parts.append(yaml_section(f))
+            for f in index_jsonlds:
+                parts.append(jsonld_section(f))
         else:
             label = DIR_LABELS.get(top_dir.name, top_dir.name.title())
             parts.append(f"## {label}\n")
-            for f in index_yamls:
-                parts.append(yaml_section(f))
+            for f in index_jsonlds:
+                parts.append(jsonld_section(f))
             for sub_dir in sub_dirs:
-                sub_yamls = sorted(sub_dir.glob("*.yaml"))
-                if not sub_yamls:
+                sub_jsonlds = sorted(sub_dir.glob("*.jsonld"))
+                if not sub_jsonlds:
                     continue
                 sub_label = DIR_LABELS.get(sub_dir.name, sub_dir.name.title())
                 parts.append(f"### {sub_label}\n")
-                for f in sub_yamls:
-                    parts.append(yaml_section(f))
+                for f in sub_jsonlds:
+                    parts.append(jsonld_section(f))
 
     return "\n".join(parts) + "\n"
 
@@ -124,7 +130,7 @@ def main():
     for example_dir in sorted(EXAMPLES_DIR.iterdir()):
         if not example_dir.is_dir():
             continue
-        if not (example_dir / "story.yaml").exists():
+        if not (example_dir / "story.jsonld").exists():
             continue
 
         readme = example_dir / "README.md"
