@@ -5,6 +5,7 @@ import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
 export default defineConfig({
   site: 'https://story-as-code.dev',
+  server: { host: true },
   base: process.env.SITE_BASE || '/',
   output: 'static',
   trailingSlash: 'always',
