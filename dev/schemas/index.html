@@ -1,4 +1,4 @@
-<!DOCTYPE html><html lang="en" class=""> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Declarative YAML specification for defining worlds as temporal graphs and deriving outputs from them."><link rel="canonical" href="https://story-as-code.dev/dev/schemas/"><title>Schemas — Story as Code</title><!-- Prevent FOUC for dark mode --><script>
+<!DOCTYPE html><html lang="en" class=""> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Declarative JSON-LD specification for defining worlds as temporal graphs and deriving outputs from them."><link rel="canonical" href="https://story-as-code.dev/dev/schemas/"><title>Schemas — Story as Code</title><!-- Prevent FOUC for dark mode --><script>
       (function () {
         const stored = localStorage.getItem('theme');
         if (
@@ -8,7 +8,7 @@
           document.documentElement.classList.add('dark');
         }
       })();
-    </script><link rel="stylesheet" href="/dev/_astro/code-of-conduct.BrPwEFrX.css"></head> <body class="min-h-screen flex flex-col"> <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/dev/" class="flex items-center gap-3 group"> <span class="text-2xl" aria-hidden="true">&#9670;</span> <span class="font-display text-lg font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+    </script><link rel="stylesheet" href="/dev/_astro/code-of-conduct.BmkKm0cm.css"></head> <body class="min-h-screen flex flex-col"> <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/dev/" class="flex items-center gap-3 group"> <span class="text-2xl" aria-hidden="true">&#9670;</span> <span class="font-display text-lg font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
 Story as Code
 </span> <span class="hidden sm:inline-block text-[0.65rem] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 uppercase tracking-wider font-medium">
 Spec
@@ -35,13 +35,15 @@ Supporting Schemas
 </h2> <div class="grid gap-2 mb-8"> <a href="/dev/schemas/definitions/" class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"> <span class="font-mono text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:underline">Definitions</span> <span class="text-sm text-slate-500 dark:text-slate-400">Reusable tag and type definitions</span> </a> <a href="/dev/schemas/derivation-meta/" class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"> <span class="font-mono text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:underline">Derivation Meta</span> <span class="text-sm text-slate-500 dark:text-slate-400">Validation contracts for compiled outputs</span> </a> </div> <h2 class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10">
 Composition Model
 </h2> <p class="text-slate-600 dark:text-slate-400 mb-4">
-A <code>story.yaml</code> is the root document. It contains a <code>world</code> object (the graph) and an optional <code>narrative</code> object (the storytelling
-    configuration). All item schemas can be <strong>inline</strong> or <strong><code>$ref</code>-referenced</strong>.
+A <code>story.jsonld</code> is the root document. It contains a <code>world</code> object (the graph) and an optional <code>narrative</code> object (the storytelling
+    configuration). All items can be <strong>inline</strong> or split into separate
+    files linked with <strong><code>&#123;"@id": "..."&#125;</code> references</strong>.
 </p> <p class="text-slate-600 dark:text-slate-400">
 The spec does <strong>not</strong> prescribe a directory layout. A single-file
     story and a multi-file project are equally valid.
 </p>  </div> </article>  </div>  </main> <footer class="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-16"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 py-10"> <div class="grid grid-cols-1 sm:grid-cols-3 gap-8"> <!-- Brand --> <div> <span class="font-display text-lg font-semibold text-slate-900 dark:text-white">Story as Code</span> <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-xs">
-Declarative YAML specification for defining worlds as temporal graphs.
+Declarative JSON-LD specification for defining worlds as temporal
+          graphs.
 </p> </div> <!-- Links --> <div> <h3 class="font-display text-sm font-semibold text-slate-900 dark:text-white mb-3">
 Specification
 </h3> <ul class="space-y-2 text-sm"> <li> <a href="/dev/schemas/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Schema Reference</a> </li> <li> <a href="/dev/examples/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Examples</a> </li> <li> <a href="/dev/scope/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Scope & Boundaries</a> </li> </ul> </div> <!-- Community --> <div> <h3 class="font-display text-sm font-semibold text-slate-900 dark:text-white mb-3">
