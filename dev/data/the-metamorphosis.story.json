@@ -2714,10 +2714,7 @@
           "description": "The apple lodges in Gregor's back and rots in place, never removed",
           "scope": {
             "range": {
-              "from": {
-                "selectorType": "time",
-                "selectorItem": "Month 1"
-              },
+              "from": "Month 1",
               "to": null
             }
           }
@@ -2807,10 +2804,7 @@
           },
           "scope": {
             "range": {
-              "from": {
-                "selectorType": "time",
-                "selectorItem": "Month 2"
-              },
+              "from": "Month 2",
               "to": null
             }
           }
@@ -2987,10 +2981,7 @@
           "scope": {
             "range": {
               "from": null,
-              "to": {
-                "selectorType": "time",
-                "selectorItem": "Day 1"
-              }
+              "to": "Day 1"
             }
           }
         },
@@ -3079,10 +3070,7 @@
           "scope": {
             "range": {
               "from": null,
-              "to": {
-                "selectorType": "time",
-                "selectorItem": "Month 3"
-              }
+              "to": "Month 3"
             }
           }
         },
@@ -3335,10 +3323,7 @@
           },
           "scope": {
             "range": {
-              "from": {
-                "selectorType": "time",
-                "selectorItem": "Month 3"
-              },
+              "from": "Month 3",
               "to": null
             }
           }
@@ -3519,10 +3504,7 @@
           "description": "The lodgers effectively take over the living room and dictate household standards",
           "scope": {
             "range": {
-              "from": {
-                "selectorType": "time",
-                "selectorItem": "Month 2"
-              },
+              "from": "Month 2",
               "to": null
             }
           }
@@ -3613,10 +3595,7 @@
           "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
           "scope": {
             "range": {
-              "from": {
-                "selectorType": "time",
-                "selectorItem": "Month 3"
-              },
+              "from": "Month 3",
               "to": null
             }
           }
@@ -3717,10 +3696,7 @@
           "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
           "scope": {
             "range": {
-              "from": {
-                "selectorType": "time",
-                "selectorItem": "Month 1"
-              },
+              "from": "Month 1",
               "to": null
             }
           }
@@ -9192,14 +9168,11 @@
             "description": "A constraint violation that represents a hard error — the story is invalid."
           },
           "scope": {
-            "selectorType": "node_type",
-            "selectorItem": {
-              "type": "TypeDefinition",
-              "id": "CHARACTER",
-              "name": "Character",
-              "appliesTo": "sacsh:NodeShape",
-              "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
-            }
+            "type": "TypeDefinition",
+            "id": "CHARACTER",
+            "name": "Character",
+            "appliesTo": "sacsh:NodeShape",
+            "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
           }
         }
       ]
@@ -9990,10 +9963,7 @@
               "scope": {
                 "range": {
                   "from": null,
-                  "to": {
-                    "selectorType": "time",
-                    "selectorItem": "Day 1"
-                  }
+                  "to": "Day 1"
                 }
               }
             },
@@ -11119,10 +11089,7 @@
               "scope": {
                 "range": {
                   "from": null,
-                  "to": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 3"
-                  }
+                  "to": "Month 3"
                 }
               }
             },
@@ -11359,10 +11326,7 @@
                 "scope": {
                   "range": {
                     "from": null,
-                    "to": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 3"
-                    }
+                    "to": "Month 3"
                   }
                 }
               },
@@ -11884,10 +11848,7 @@
               "description": "The apple lodges in Gregor's back and rots in place, never removed",
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 1"
-                  },
+                  "from": "Month 1",
                   "to": null
                 }
               }
@@ -12384,10 +12345,7 @@
               "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 3"
-                  },
+                  "from": "Month 3",
                   "to": null
                 }
               }
@@ -12477,10 +12435,7 @@
               },
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 2"
-                  },
+                  "from": "Month 2",
                   "to": null
                 }
               }
@@ -12576,10 +12531,7 @@
               "description": "The lodgers effectively take over the living room and dictate household standards",
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 2"
-                  },
+                  "from": "Month 2",
                   "to": null
                 }
               }
@@ -12680,10 +12632,7 @@
               "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 1"
-                  },
+                  "from": "Month 1",
                   "to": null
                 }
               }
@@ -12834,10 +12783,7 @@
                 "description": "The lodgers effectively take over the living room and dictate household standards",
                 "scope": {
                   "range": {
-                    "from": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 2"
-                    },
+                    "from": "Month 2",
                     "to": null
                   }
                 }
@@ -13667,10 +13613,7 @@
               },
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 3"
-                  },
+                  "from": "Month 3",
                   "to": null
                 }
               }
@@ -13766,10 +13709,7 @@
               "description": "The lodgers effectively take over the living room and dictate household standards",
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 2"
-                  },
+                  "from": "Month 2",
                   "to": null
                 }
               }
@@ -13954,10 +13894,7 @@
                 },
                 "scope": {
                   "range": {
-                    "from": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 3"
-                    },
+                    "from": "Month 3",
                     "to": null
                   }
                 }
@@ -14520,10 +14457,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Day 1"
-                      }
+                      "to": "Day 1"
                     }
                   }
                 },
@@ -15105,10 +15039,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      }
+                      "to": "Month 3"
                     }
                   }
                 },
@@ -15345,10 +15276,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -16433,10 +16361,7 @@
                   "description": "The apple lodges in Gregor's back and rots in place, never removed",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -17038,10 +16963,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Day 1"
-                      }
+                      "to": "Day 1"
                     }
                   }
                 },
@@ -17970,10 +17892,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -18069,10 +17988,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -18257,10 +18173,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -18826,10 +18739,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Day 1"
-                        }
+                        "to": "Day 1"
                       }
                     }
                   },
@@ -19961,10 +19871,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -20201,10 +20108,7 @@
                       "scope": {
                         "range": {
                           "from": null,
-                          "to": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 3"
-                          }
+                          "to": "Month 3"
                         }
                       }
                     },
@@ -20729,10 +20633,7 @@
                     "description": "The apple lodges in Gregor's back and rots in place, never removed",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 1"
-                        },
+                        "from": "Month 1",
                         "to": null
                       }
                     }
@@ -21232,10 +21133,7 @@
                     "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -21325,10 +21223,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -21424,10 +21319,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -21528,10 +21420,7 @@
                     "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 1"
-                        },
+                        "from": "Month 1",
                         "to": null
                       }
                     }
@@ -21682,10 +21571,7 @@
                       "description": "The lodgers effectively take over the living room and dictate household standards",
                       "scope": {
                         "range": {
-                          "from": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 2"
-                          },
+                          "from": "Month 2",
                           "to": null
                         }
                       }
@@ -22518,10 +22404,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -22617,10 +22500,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -22805,10 +22685,7 @@
                       },
                       "scope": {
                         "range": {
-                          "from": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 3"
-                          },
+                          "from": "Month 3",
                           "to": null
                         }
                       }
@@ -23374,10 +23251,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Day 1"
-                        }
+                        "to": "Day 1"
                       }
                     }
                   },
@@ -24509,10 +24383,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -24749,10 +24620,7 @@
                       "scope": {
                         "range": {
                           "from": null,
-                          "to": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 3"
-                          }
+                          "to": "Month 3"
                         }
                       }
                     },
@@ -25277,10 +25145,7 @@
                     "description": "The apple lodges in Gregor's back and rots in place, never removed",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 1"
-                        },
+                        "from": "Month 1",
                         "to": null
                       }
                     }
@@ -25780,10 +25645,7 @@
                     "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -25873,10 +25735,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -25972,10 +25831,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -26076,10 +25932,7 @@
                     "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 1"
-                        },
+                        "from": "Month 1",
                         "to": null
                       }
                     }
@@ -26230,10 +26083,7 @@
                       "description": "The lodgers effectively take over the living room and dictate household standards",
                       "scope": {
                         "range": {
-                          "from": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 2"
-                          },
+                          "from": "Month 2",
                           "to": null
                         }
                       }
@@ -27066,10 +26916,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -27165,10 +27012,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -27353,10 +27197,7 @@
                       },
                       "scope": {
                         "range": {
-                          "from": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 3"
-                          },
+                          "from": "Month 3",
                           "to": null
                         }
                       }
@@ -27922,10 +27763,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Day 1"
-                        }
+                        "to": "Day 1"
                       }
                     }
                   },
@@ -29057,10 +28895,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -29297,10 +29132,7 @@
                       "scope": {
                         "range": {
                           "from": null,
-                          "to": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 3"
-                          }
+                          "to": "Month 3"
                         }
                       }
                     },
@@ -29825,10 +29657,7 @@
                     "description": "The apple lodges in Gregor's back and rots in place, never removed",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 1"
-                        },
+                        "from": "Month 1",
                         "to": null
                       }
                     }
@@ -30328,10 +30157,7 @@
                     "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -30421,10 +30247,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -30520,10 +30343,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -30624,10 +30444,7 @@
                     "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 1"
-                        },
+                        "from": "Month 1",
                         "to": null
                       }
                     }
@@ -30778,10 +30595,7 @@
                       "description": "The lodgers effectively take over the living room and dictate household standards",
                       "scope": {
                         "range": {
-                          "from": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 2"
-                          },
+                          "from": "Month 2",
                           "to": null
                         }
                       }
@@ -31614,10 +31428,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -31713,10 +31524,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -31901,10 +31709,7 @@
                       },
                       "scope": {
                         "range": {
-                          "from": {
-                            "selectorType": "time",
-                            "selectorItem": "Month 3"
-                          },
+                          "from": "Month 3",
                           "to": null
                         }
                       }
@@ -34821,10 +34626,7 @@
         "description": "The apple lodges in Gregor's back and rots in place, never removed",
         "scope": {
           "range": {
-            "from": {
-              "selectorType": "time",
-              "selectorItem": "Month 1"
-            },
+            "from": "Month 1",
             "to": null
           }
         }
@@ -34914,10 +34716,7 @@
         },
         "scope": {
           "range": {
-            "from": {
-              "selectorType": "time",
-              "selectorItem": "Month 2"
-            },
+            "from": "Month 2",
             "to": null
           }
         }
@@ -35094,10 +34893,7 @@
         "scope": {
           "range": {
             "from": null,
-            "to": {
-              "selectorType": "time",
-              "selectorItem": "Day 1"
-            }
+            "to": "Day 1"
           }
         }
       },
@@ -35186,10 +34982,7 @@
         "scope": {
           "range": {
             "from": null,
-            "to": {
-              "selectorType": "time",
-              "selectorItem": "Month 3"
-            }
+            "to": "Month 3"
           }
         }
       },
@@ -35442,10 +35235,7 @@
         },
         "scope": {
           "range": {
-            "from": {
-              "selectorType": "time",
-              "selectorItem": "Month 3"
-            },
+            "from": "Month 3",
             "to": null
           }
         }
@@ -35626,10 +35416,7 @@
         "description": "The lodgers effectively take over the living room and dictate household standards",
         "scope": {
           "range": {
-            "from": {
-              "selectorType": "time",
-              "selectorItem": "Month 2"
-            },
+            "from": "Month 2",
             "to": null
           }
         }
@@ -35720,10 +35507,7 @@
         "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
         "scope": {
           "range": {
-            "from": {
-              "selectorType": "time",
-              "selectorItem": "Month 3"
-            },
+            "from": "Month 3",
             "to": null
           }
         }
@@ -35824,10 +35608,7 @@
         "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
         "scope": {
           "range": {
-            "from": {
-              "selectorType": "time",
-              "selectorItem": "Month 1"
-            },
+            "from": "Month 1",
             "to": null
           }
         }
@@ -41299,14 +41080,11 @@
           "description": "A constraint violation that represents a hard error — the story is invalid."
         },
         "scope": {
-          "selectorType": "node_type",
-          "selectorItem": {
-            "type": "TypeDefinition",
-            "id": "CHARACTER",
-            "name": "Character",
-            "appliesTo": "sacsh:NodeShape",
-            "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
-          }
+          "type": "TypeDefinition",
+          "id": "CHARACTER",
+          "name": "Character",
+          "appliesTo": "sacsh:NodeShape",
+          "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
         }
       }
     ]
@@ -42097,10 +41875,7 @@
             "scope": {
               "range": {
                 "from": null,
-                "to": {
-                  "selectorType": "time",
-                  "selectorItem": "Day 1"
-                }
+                "to": "Day 1"
               }
             }
           },
@@ -43226,10 +43001,7 @@
             "scope": {
               "range": {
                 "from": null,
-                "to": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 3"
-                }
+                "to": "Month 3"
               }
             }
           },
@@ -43466,10 +43238,7 @@
               "scope": {
                 "range": {
                   "from": null,
-                  "to": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 3"
-                  }
+                  "to": "Month 3"
                 }
               }
             },
@@ -43991,10 +43760,7 @@
             "description": "The apple lodges in Gregor's back and rots in place, never removed",
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 1"
-                },
+                "from": "Month 1",
                 "to": null
               }
             }
@@ -44491,10 +44257,7 @@
             "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 3"
-                },
+                "from": "Month 3",
                 "to": null
               }
             }
@@ -44584,10 +44347,7 @@
             },
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 2"
-                },
+                "from": "Month 2",
                 "to": null
               }
             }
@@ -44683,10 +44443,7 @@
             "description": "The lodgers effectively take over the living room and dictate household standards",
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 2"
-                },
+                "from": "Month 2",
                 "to": null
               }
             }
@@ -44787,10 +44544,7 @@
             "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 1"
-                },
+                "from": "Month 1",
                 "to": null
               }
             }
@@ -44941,10 +44695,7 @@
               "description": "The lodgers effectively take over the living room and dictate household standards",
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 2"
-                  },
+                  "from": "Month 2",
                   "to": null
                 }
               }
@@ -45774,10 +45525,7 @@
             },
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 3"
-                },
+                "from": "Month 3",
                 "to": null
               }
             }
@@ -45873,10 +45621,7 @@
             "description": "The lodgers effectively take over the living room and dictate household standards",
             "scope": {
               "range": {
-                "from": {
-                  "selectorType": "time",
-                  "selectorItem": "Month 2"
-                },
+                "from": "Month 2",
                 "to": null
               }
             }
@@ -46061,10 +45806,7 @@
               },
               "scope": {
                 "range": {
-                  "from": {
-                    "selectorType": "time",
-                    "selectorItem": "Month 3"
-                  },
+                  "from": "Month 3",
                   "to": null
                 }
               }
@@ -46627,10 +46369,7 @@
                 "scope": {
                   "range": {
                     "from": null,
-                    "to": {
-                      "selectorType": "time",
-                      "selectorItem": "Day 1"
-                    }
+                    "to": "Day 1"
                   }
                 }
               },
@@ -47212,10 +46951,7 @@
                 "scope": {
                   "range": {
                     "from": null,
-                    "to": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 3"
-                    }
+                    "to": "Month 3"
                   }
                 }
               },
@@ -47452,10 +47188,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      }
+                      "to": "Month 3"
                     }
                   }
                 },
@@ -48540,10 +48273,7 @@
                 "description": "The apple lodges in Gregor's back and rots in place, never removed",
                 "scope": {
                   "range": {
-                    "from": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 1"
-                    },
+                    "from": "Month 1",
                     "to": null
                   }
                 }
@@ -49145,10 +48875,7 @@
                 "scope": {
                   "range": {
                     "from": null,
-                    "to": {
-                      "selectorType": "time",
-                      "selectorItem": "Day 1"
-                    }
+                    "to": "Day 1"
                   }
                 }
               },
@@ -50077,10 +49804,7 @@
                 },
                 "scope": {
                   "range": {
-                    "from": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 3"
-                    },
+                    "from": "Month 3",
                     "to": null
                   }
                 }
@@ -50176,10 +49900,7 @@
                 "description": "The lodgers effectively take over the living room and dictate household standards",
                 "scope": {
                   "range": {
-                    "from": {
-                      "selectorType": "time",
-                      "selectorItem": "Month 2"
-                    },
+                    "from": "Month 2",
                     "to": null
                   }
                 }
@@ -50364,10 +50085,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -50933,10 +50651,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Day 1"
-                      }
+                      "to": "Day 1"
                     }
                   }
                 },
@@ -52068,10 +51783,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      }
+                      "to": "Month 3"
                     }
                   }
                 },
@@ -52308,10 +52020,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -52836,10 +52545,7 @@
                   "description": "The apple lodges in Gregor's back and rots in place, never removed",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -53339,10 +53045,7 @@
                   "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -53432,10 +53135,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -53531,10 +53231,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -53635,10 +53332,7 @@
                   "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -53789,10 +53483,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -54625,10 +54316,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -54724,10 +54412,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -54912,10 +54597,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -55481,10 +55163,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Day 1"
-                      }
+                      "to": "Day 1"
                     }
                   }
                 },
@@ -56616,10 +56295,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      }
+                      "to": "Month 3"
                     }
                   }
                 },
@@ -56856,10 +56532,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -57384,10 +57057,7 @@
                   "description": "The apple lodges in Gregor's back and rots in place, never removed",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -57887,10 +57557,7 @@
                   "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -57980,10 +57647,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -58079,10 +57743,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -58183,10 +57844,7 @@
                   "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -58337,10 +57995,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -59173,10 +58828,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -59272,10 +58924,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -59460,10 +59109,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
@@ -60029,10 +59675,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Day 1"
-                      }
+                      "to": "Day 1"
                     }
                   }
                 },
@@ -61164,10 +60807,7 @@
                   "scope": {
                     "range": {
                       "from": null,
-                      "to": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      }
+                      "to": "Month 3"
                     }
                   }
                 },
@@ -61404,10 +61044,7 @@
                     "scope": {
                       "range": {
                         "from": null,
-                        "to": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        }
+                        "to": "Month 3"
                       }
                     }
                   },
@@ -61932,10 +61569,7 @@
                   "description": "The apple lodges in Gregor's back and rots in place, never removed",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -62435,10 +62069,7 @@
                   "description": "The charwoman handles Gregor without fear or sentiment, calling him 'old dung beetle'",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -62528,10 +62159,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -62627,10 +62255,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -62731,10 +62356,7 @@
                   "description": "Father sleeps in his uniform and refuses to take it off — the uniform becomes his new identity",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 1"
-                      },
+                      "from": "Month 1",
                       "to": null
                     }
                   }
@@ -62885,10 +62507,7 @@
                     "description": "The lodgers effectively take over the living room and dictate household standards",
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 2"
-                        },
+                        "from": "Month 2",
                         "to": null
                       }
                     }
@@ -63721,10 +63340,7 @@
                   },
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 3"
-                      },
+                      "from": "Month 3",
                       "to": null
                     }
                   }
@@ -63820,10 +63436,7 @@
                   "description": "The lodgers effectively take over the living room and dictate household standards",
                   "scope": {
                     "range": {
-                      "from": {
-                        "selectorType": "time",
-                        "selectorItem": "Month 2"
-                      },
+                      "from": "Month 2",
                       "to": null
                     }
                   }
@@ -64008,10 +63621,7 @@
                     },
                     "scope": {
                       "range": {
-                        "from": {
-                          "selectorType": "time",
-                          "selectorItem": "Month 3"
-                        },
+                        "from": "Month 3",
                         "to": null
                       }
                     }
