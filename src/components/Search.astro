@@ -17,7 +17,7 @@
   </button>
 
   <!-- Search modal -->
-  <div id="search-modal" class="hidden fixed inset-0 z-[100] flex items-start justify-center pt-[15vh]">
+  <div id="search-modal" class="hidden fixed inset-0 z-100 items-start justify-center pt-[15vh]">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="search-backdrop"></div>
     <div class="relative w-full max-w-2xl mx-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden">
       <div id="search-widget" class="p-4"></div>
@@ -33,6 +33,7 @@
   function openSearch() {
     const modal = document.getElementById('search-modal');
     modal?.classList.remove('hidden');
+    modal?.classList.add('flex');
     document.body.style.overflow = 'hidden';
 
     if (!searchLoaded) {
@@ -63,6 +64,7 @@
 
   function closeSearch() {
     const modal = document.getElementById('search-modal');
+    modal?.classList.remove('flex');
     modal?.classList.add('hidden');
     document.body.style.overflow = '';
   }
