@@ -1,12 +1,13 @@
 ---
 import GraphLayout from '../../../layouts/GraphLayout.astro';
 import '../../../styles/story-graph.css';
+import { url } from '@/utils/url';
 ---
 
 <GraphLayout
   title="Back to the Future — Interactive Graph"
   description="Interactive visualization of the Back to the Future story graph"
-  dataSrc="/data/back-to-the-future.story.json"
+  dataSrc={url('/data/back-to-the-future.story.json')}
 />
 
 <script src="../../../scripts/story-graph.ts"></script>

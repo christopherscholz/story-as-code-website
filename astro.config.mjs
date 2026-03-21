@@ -1,5 +1,5 @@
 import { defineConfig } from 'astro/config';
-import tailwind from '@astrojs/tailwind';
+import tailwindcss from '@tailwindcss/vite';
 import rehypeSlug from 'rehype-slug';
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 
@@ -8,9 +8,14 @@ export default defineConfig({
   base: process.env.SITE_BASE || '/',
   output: 'static',
   trailingSlash: 'always',
-  integrations: [
-    tailwind(),
-  ],
+  vite: {
+    plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        external: ['/pagefind/pagefind-ui.js'],
+      },
+    },
+  },
   markdown: {
     shikiConfig: {
       themes: {
@@ -19,9 +24,6 @@ export default defineConfig({
       },
       wrap: true,
     },
-    rehypePlugins: [
-      rehypeSlug,
-      [rehypeAutolinkHeadings, { behavior: 'wrap' }],
-    ],
+    rehypePlugins: [rehypeSlug, [rehypeAutolinkHeadings, { behavior: 'wrap' }]],
   },
 });

@@ -1,4 +1,6 @@
 ---
+import { url, stripBase } from '@/utils/url';
+
 export interface SidebarItem {
   label: string;
   href: string;
@@ -10,7 +12,8 @@ interface Props {
   currentPath: string;
 }
 
-const { items, currentPath } = Astro.props;
+const { items, currentPath: rawPath } = Astro.props;
+const currentPath = stripBase(rawPath);
 
 function isActive(href: string): boolean {
   return currentPath === href || currentPath === href.replace(/\/$/, '');
@@ -18,58 +21,72 @@ function isActive(href: string): boolean {
 
 function isExpanded(item: SidebarItem): boolean {
   if (isActive(item.href)) return true;
-  return item.children?.some(child => isActive(child.href) || child.children?.some(gc => isActive(gc.href))) ?? false;
+  return (
+    item.children?.some(
+      (child) =>
+        isActive(child.href) || child.children?.some((gc) => isActive(gc.href)),
+    ) ?? false
+  );
 }
 ---
 
 <aside class="hidden lg:block w-64 shrink-0 -ml-1">
-  <nav class="sticky top-20 pr-4 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8" aria-label="Sidebar">
+  <nav
+    class="sticky top-20 pr-4 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8"
+    aria-label="Sidebar"
+  >
     <ul class="space-y-0.5">
-      {items.map(item => (
-        <li>
-          {item.children ? (
-            <details open={isExpanded(item)}>
-              <summary class:list={[
-                'flex items-center gap-1 px-2.5 py-1.5 text-sm rounded-md cursor-pointer select-none transition-colors',
-                isActive(item.href)
-                  ? 'text-violet-600 dark:text-violet-400 font-semibold bg-violet-50 dark:bg-violet-900/20'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
-              ]}>
-                <a href={item.href} class="flex-1">{item.label}</a>
-              </summary>
-              <ul class="ml-3 pl-3 border-l border-slate-200 dark:border-slate-700 mt-0.5 space-y-0.5">
-                {item.children.map(child => (
-                  <li>
-                    <a
-                      href={child.href}
-                      class:list={[
-                        'block px-2.5 py-1 text-sm rounded-md transition-colors',
-                        isActive(child.href)
-                          ? 'text-violet-600 dark:text-violet-400 font-medium bg-violet-50 dark:bg-violet-900/20'
-                          : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
-                      ]}
-                    >
-                      {child.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </details>
-          ) : (
-            <a
-              href={item.href}
-              class:list={[
-                'block px-2.5 py-1.5 text-sm rounded-md transition-colors',
-                isActive(item.href)
-                  ? 'text-violet-600 dark:text-violet-400 font-semibold bg-violet-50 dark:bg-violet-900/20'
-                  : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
-              ]}
-            >
-              {item.label}
-            </a>
-          )}
-        </li>
-      ))}
+      {
+        items.map((item) => (
+          <li>
+            {item.children ? (
+              <details open={isExpanded(item)}>
+                <summary
+                  class:list={[
+                    'flex items-center gap-1 px-2.5 py-1.5 text-sm rounded-md cursor-pointer select-none transition-colors',
+                    isActive(item.href)
+                      ? 'text-violet-600 dark:text-violet-400 font-semibold bg-violet-50 dark:bg-violet-900/20'
+                      : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
+                  ]}
+                >
+                  <a href={url(item.href)} class="flex-1">
+                    {item.label}
+                  </a>
+                </summary>
+                <ul class="ml-3 pl-3 border-l border-slate-200 dark:border-slate-700 mt-0.5 space-y-0.5">
+                  {item.children.map((child) => (
+                    <li>
+                      <a
+                        href={url(child.href)}
+                        class:list={[
+                          'block px-2.5 py-1 text-sm rounded-md transition-colors',
+                          isActive(child.href)
+                            ? 'text-violet-600 dark:text-violet-400 font-medium bg-violet-50 dark:bg-violet-900/20'
+                            : 'text-slate-500 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
+                        ]}
+                      >
+                        {child.label}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </details>
+            ) : (
+              <a
+                href={url(item.href)}
+                class:list={[
+                  'block px-2.5 py-1.5 text-sm rounded-md transition-colors',
+                  isActive(item.href)
+                    ? 'text-violet-600 dark:text-violet-400 font-semibold bg-violet-50 dark:bg-violet-900/20'
+                    : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
+                ]}
+              >
+                {item.label}
+              </a>
+            )}
+          </li>
+        ))
+      }
     </ul>
   </nav>
 </aside>

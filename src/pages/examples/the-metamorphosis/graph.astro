@@ -1,12 +1,13 @@
 ---
 import GraphLayout from '../../../layouts/GraphLayout.astro';
 import '../../../styles/story-graph.css';
+import { url } from '@/utils/url';
 ---
 
 <GraphLayout
   title="The Metamorphosis — Interactive Graph"
   description="Interactive visualization of The Metamorphosis story graph"
-  dataSrc="/data/the-metamorphosis.story.json"
+  dataSrc={url('/data/the-metamorphosis.story.json')}
 />
 
 <script src="../../../scripts/story-graph.ts"></script>

@@ -1,6 +1,41 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
+@plugin "@tailwindcss/typography";
+
+/* ── Dark mode via .dark class ─────────────────────────────────── */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ── Theme ─────────────────────────────────────────────────────── */
+@theme {
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', Menlo, monospace;
+
+  --color-violet-50: #f3e8ff;
+  --color-violet-100: #ede7f6;
+  --color-violet-200: #d1c4e9;
+  --color-violet-300: #b39ddb;
+  --color-violet-400: #9575cd;
+  --color-violet-500: #7e57c2;
+  --color-violet-600: #673ab7;
+  --color-violet-700: #5e35b1;
+  --color-violet-800: #4527a0;
+  --color-violet-900: #311b92;
+  --color-violet-950: #1a0a3e;
+
+  --color-amber-50: #fff8e1;
+  --color-amber-100: #ffecb3;
+  --color-amber-200: #ffe082;
+  --color-amber-300: #ffd54f;
+  --color-amber-400: #ffca28;
+  --color-amber-500: #ffb300;
+  --color-amber-600: #ffa000;
+  --color-amber-700: #ff8f00;
+  --color-amber-800: #ff6f00;
+  --color-amber-900: #e65100;
+
+  --color-slate-850: #1a1d23;
+  --color-slate-950: #0f1117;
+}
 
 /* ── Fonts ────────────────────────────────────────────────────── */
 @import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Inter:wght@300..700&family=JetBrains+Mono:wght@400;500;600&display=swap');
@@ -14,19 +49,74 @@
 
   body {
     @apply bg-white text-slate-800 dark:bg-slate-950 dark:text-slate-200;
-    transition: background-color 0.2s, color 0.2s;
+    transition:
+      background-color 0.2s,
+      color 0.2s;
   }
 
   /* Scrollbar styling */
-  ::-webkit-scrollbar { width: 6px; height: 6px; }
-  ::-webkit-scrollbar-track { @apply bg-transparent; }
-  ::-webkit-scrollbar-thumb { @apply bg-slate-300 dark:bg-slate-700 rounded-full; }
-  ::-webkit-scrollbar-thumb:hover { @apply bg-slate-400 dark:bg-slate-600; }
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-slate-300 dark:bg-slate-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-slate-400 dark:bg-slate-600;
+  }
 
   /* Selection */
   ::selection {
     @apply bg-violet-200 dark:bg-violet-800 text-violet-900 dark:text-violet-100;
   }
+}
+
+/* ── Typography prose overrides ────────────────────────────────── */
+.prose {
+  --tw-prose-body: var(--color-slate-700);
+  --tw-prose-headings: var(--color-slate-900);
+  --tw-prose-links: var(--color-violet-600);
+  --tw-prose-code: var(--color-violet-700);
+}
+
+.prose-invert {
+  --tw-prose-body: var(--color-slate-300);
+  --tw-prose-headings: var(--color-slate-100);
+  --tw-prose-links: var(--color-violet-300);
+  --tw-prose-code: var(--color-violet-300);
+}
+
+.prose h1,
+.prose h2,
+.prose h3,
+.prose h4 {
+  font-family: var(--font-display);
+  font-weight: 600;
+}
+
+.prose code {
+  font-family: var(--font-mono);
+  font-size: 0.875em;
+}
+
+.prose code::before {
+  content: '';
+}
+.prose code::after {
+  content: '';
+}
+
+.prose a {
+  text-decoration-style: dotted;
+  text-underline-offset: 3px;
+}
+
+.prose a:hover {
+  text-decoration-style: solid;
 }
 
 /* ── Custom Properties (for graph CSS) ─────────────────────────── */
@@ -39,9 +129,9 @@
   --color-fg-tertiary: #999;
   --color-border: #e0e0e0;
   --color-border-light: #eee;
-  --color-violet: #673AB7;
-  --color-violet-light: #9575CD;
-  --color-violet-bg: #EDE7F6;
+  --color-violet: #673ab7;
+  --color-violet-light: #9575cd;
+  --color-violet-bg: #ede7f6;
 }
 
 .dark {
@@ -53,15 +143,21 @@
   --color-fg-tertiary: #666;
   --color-border: #333;
   --color-border-light: #333;
-  --color-violet: #9575CD;
-  --color-violet-light: #B39DDB;
-  --color-violet-bg: #311B92;
+  --color-violet: #9575cd;
+  --color-violet-light: #b39ddb;
+  --color-violet-bg: #311b92;
 }
 
 /* ── Shiki dual theme support ──────────────────────────────────── */
-html:not(.dark) .shiki .dark { display: none; }
-html.dark .shiki .light { display: none; }
-html.dark .shiki { background-color: #0d1117 !important; }
+html:not(.dark) .shiki .dark {
+  display: none;
+}
+html.dark .shiki .light {
+  display: none;
+}
+html.dark .shiki {
+  background-color: #0d1117 !important;
+}
 
 /* ── Code blocks ───────────────────────────────────────────────── */
 pre {
@@ -87,7 +183,8 @@ code {
   @apply bg-slate-50 dark:bg-slate-800/50 text-left font-semibold;
 }
 
-.prose td, .prose th {
+.prose td,
+.prose th {
   @apply px-3 py-2 border-b border-slate-200 dark:border-slate-700;
 }
 
@@ -116,13 +213,19 @@ details > :not(summary) {
   @apply border-l-4 rounded-r-lg px-4 py-3 my-4 bg-slate-50 dark:bg-slate-800/30;
 }
 
-.admonition.note { @apply border-violet-500; }
-.admonition.warning { @apply border-amber-500; }
-.admonition.tip { @apply border-emerald-500; }
+.admonition.note {
+  @apply border-violet-500;
+}
+.admonition.warning {
+  @apply border-amber-500;
+}
+.admonition.tip {
+  @apply border-emerald-500;
+}
 
 /* ── Pagefind overrides ────────────────────────────────────────── */
 .pagefind-ui {
-  --pagefind-ui-primary: #673AB7;
+  --pagefind-ui-primary: #673ab7;
   --pagefind-ui-text: #334155;
   --pagefind-ui-background: #fff;
   --pagefind-ui-border: #e2e8f0;
@@ -133,7 +236,7 @@ details > :not(summary) {
 }
 
 .dark .pagefind-ui {
-  --pagefind-ui-primary: #9575CD;
+  --pagefind-ui-primary: #9575cd;
   --pagefind-ui-text: #e2e8f0;
   --pagefind-ui-background: #1a1d23;
   --pagefind-ui-border: #334155;

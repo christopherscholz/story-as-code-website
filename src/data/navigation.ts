@@ -43,14 +43,20 @@ export const exampleSidebar: SidebarItem[] = [
     label: 'The Metamorphosis',
     href: '/examples/the-metamorphosis/',
     children: [
-      { label: 'Interactive Graph', href: '/examples/the-metamorphosis/graph/' },
+      {
+        label: 'Interactive Graph',
+        href: '/examples/the-metamorphosis/graph/',
+      },
     ],
   },
   {
     label: 'Back to the Future',
     href: '/examples/back-to-the-future/',
     children: [
-      { label: 'Interactive Graph', href: '/examples/back-to-the-future/graph/' },
+      {
+        label: 'Interactive Graph',
+        href: '/examples/back-to-the-future/graph/',
+      },
     ],
   },
 ];
