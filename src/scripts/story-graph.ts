@@ -89,10 +89,10 @@
       ids.nodes.add(sel.id);
       // connected edges
       (w.edges || []).forEach((e) => {
-        if (e.source === sel.id || e.target === sel.id) {
+        if (typeId(e.source) === sel.id || typeId(e.target) === sel.id) {
           ids.edges.add(e.id);
-          ids.nodes.add(e.source);
-          ids.nodes.add(e.target);
+          ids.nodes.add(typeId(e.source));
+          ids.nodes.add(typeId(e.target));
         }
       });
       // beats referencing node
@@ -112,8 +112,8 @@
       const edge = (w.edges || []).find((e) => e.id === sel.id);
       if (edge) {
         ids.edges.add(sel.id);
-        ids.nodes.add(edge.source);
-        ids.nodes.add(edge.target);
+        ids.nodes.add(typeId(edge.source));
+        ids.nodes.add(typeId(edge.target));
       }
       beats.forEach((b) => {
         if ((b.edgeIds || []).includes(sel.id)) ids.beats.add(b.id);
@@ -127,8 +127,8 @@
           ids.edges.add(id);
           const e = (w.edges || []).find((e) => e.id === id);
           if (e) {
-            ids.nodes.add(e.source);
-            ids.nodes.add(e.target);
+            ids.nodes.add(typeId(e.source));
+            ids.nodes.add(typeId(e.target));
           }
         });
       }
@@ -176,8 +176,8 @@
       (w.edges || []).forEach((e) => {
         if (!e.scope || scopeRefFrame(e.scope, sel.id)) {
           ids.edges.add(e.id);
-          ids.nodes.add(e.source);
-          ids.nodes.add(e.target);
+          ids.nodes.add(typeId(e.source));
+          ids.nodes.add(typeId(e.target));
         }
       });
     }
@@ -363,8 +363,8 @@
         group: 'edges',
         data: {
           id: e.id,
-          source: e.source,
-          target: e.target,
+          source: typeId(e.source),
+          target: typeId(e.target),
           label: e.name || '',
           type: typeId(e.edgeType),
           hasScope: !!e.scope,
@@ -1355,7 +1355,7 @@
   }
   function edgeDetailHTML(edge) {
     let h = `<h4>${esc(edge.name)}</h4><span class="info-badge" style="background:${c(typeId(edge.edgeType))}">${typeName(edge.edgeType)}</span>`;
-    h += `<p><strong>${esc(edge.source)}</strong> &rarr; <strong>${esc(edge.target)}</strong></p>`;
+    h += `<p><strong>${esc(typeId(edge.source))}</strong> &rarr; <strong>${esc(typeId(edge.target))}</strong></p>`;
     if (edge.description)
       h += `<p class="info-desc">${esc(edge.description)}</p>`;
     if (edge.scope)

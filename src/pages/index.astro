@@ -65,7 +65,7 @@ const principles = [
         <p
           class="font-mono text-sm text-violet-600 dark:text-violet-400 tracking-wider uppercase mb-4"
         >
-          YAML Specification
+          JSON-LD Specification
         </p>
         <h1
           class="font-display text-5xl sm:text-6xl lg:text-7xl font-bold text-slate-900 dark:text-white leading-[1.1] tracking-tight"
@@ -76,9 +76,9 @@ const principles = [
         <p
           class="mt-6 text-lg sm:text-xl text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl"
         >
-          Declarative YAML specification for defining worlds as temporal graphs
-          and deriving outputs from them. Think of it like a compiler: the world
-          graph is your source, the output is your compiled result.
+          Declarative JSON-LD specification for defining worlds as temporal
+          graphs and deriving outputs from them. Think of it like a compiler:
+          the world graph is your source, the output is your compiled result.
         </p>
         <div class="mt-8 flex flex-wrap gap-3">
           <a
@@ -198,33 +198,31 @@ const principles = [
       Quick Start
     </h2>
     <p class="text-slate-600 dark:text-slate-400 mb-6 max-w-2xl">
-      A minimal world is a single <code>story.yaml</code> — everything in one file:
+      A minimal world is a single <code>story.jsonld</code> — everything in one file:
     </p>
     <div class="max-w-3xl">
       <pre
-        class="bg-slate-900! dark:bg-slate-950! text-slate-100! p-6 rounded-xl text-sm leading-relaxed overflow-x-auto"><code class="language-yaml"><span class="text-slate-500"># story.yaml</span>
-<span class="text-violet-300">spec_version</span>: <span class="text-amber-300">"dev"</span>
-<span class="text-violet-300">name</span>: <span class="text-amber-300">"A Simple Fairy Tale"</span>
-<span class="text-violet-300">default_frame</span>: <span class="text-amber-300">"main"</span>
-
-<span class="text-violet-300">nodes</span>:
-  - <span class="text-violet-300">id</span>: hero
-    <span class="text-violet-300">type</span>: CHARACTER
-    <span class="text-violet-300">properties</span>:
-      <span class="text-violet-300">age</span>: <span class="text-emerald-300">18</span>
-      <span class="text-violet-300">trait_courage</span>: <span class="text-emerald-300">0.8</span>
-
-  - <span class="text-violet-300">id</span>: village
-    <span class="text-violet-300">type</span>: LOCATION
-
-<span class="text-violet-300">frames</span>:
-  - <span class="text-violet-300">id</span>: main
-    <span class="text-violet-300">topology</span>: LINEAR
-    <span class="text-violet-300">time_points</span>: [T0, T1, T2]</code></pre>
+        class="bg-slate-900! dark:bg-slate-950! text-slate-100! p-6 rounded-xl text-sm leading-relaxed overflow-x-auto"><code class="language-json"><span class="text-slate-500">// story.jsonld</span>
+<span class="text-slate-300">&#123;</span>
+  <span class="text-violet-300">"@context"</span>: <span class="text-amber-300">"https://story-as-code.dev/latest/context/sac.context.jsonld"</span>,
+  <span class="text-violet-300">"type"</span>: <span class="text-amber-300">"Story"</span>,
+  <span class="text-violet-300">"id"</span>: <span class="text-amber-300">"a-simple-fairy-tale"</span>,
+  <span class="text-violet-300">"specVersion"</span>: <span class="text-amber-300">"dev"</span>,
+  <span class="text-violet-300">"name"</span>: <span class="text-amber-300">"A Simple Fairy Tale"</span>,
+  <span class="text-violet-300">"world"</span>: <span class="text-slate-300">&#123;</span>
+    <span class="text-violet-300">"type"</span>: <span class="text-amber-300">"World"</span>,
+    <span class="text-violet-300">"id"</span>: <span class="text-amber-300">"world-layer"</span>,
+    <span class="text-violet-300">"nodes"</span>: <span class="text-slate-300">[</span>
+      <span class="text-slate-300">&#123;</span> <span class="text-violet-300">"type"</span>: <span class="text-amber-300">"Node"</span>, <span class="text-violet-300">"id"</span>: <span class="text-amber-300">"hero"</span>, <span class="text-violet-300">"nodeType"</span>: <span class="text-amber-300">"CHARACTER"</span>, <span class="text-violet-300">"name"</span>: <span class="text-amber-300">"Hero"</span> <span class="text-slate-300">&#125;</span>,
+      <span class="text-slate-300">&#123;</span> <span class="text-violet-300">"type"</span>: <span class="text-amber-300">"Node"</span>, <span class="text-violet-300">"id"</span>: <span class="text-amber-300">"village"</span>, <span class="text-violet-300">"nodeType"</span>: <span class="text-amber-300">"LOCATION"</span>, <span class="text-violet-300">"name"</span>: <span class="text-amber-300">"Village"</span> <span class="text-slate-300">&#125;</span>
+    <span class="text-slate-300">]</span>
+  <span class="text-slate-300">&#125;</span>
+<span class="text-slate-300">&#125;</span></code></pre>
     </div>
     <p class="mt-6 text-sm text-slate-500 dark:text-slate-400">
-      As projects grow, split items into separate files with <code>$ref</code> references.
-      See the <a
+      As projects grow, split items into separate files linked with <code
+        >&#123;"@id": "..."&#125;</code
+      > references. See the <a
         href={url('/examples/')}
         class="text-violet-600 dark:text-violet-400 hover:underline"
         >full examples</a
