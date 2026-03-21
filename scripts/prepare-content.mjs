@@ -2,12 +2,18 @@
 /**
  * Pre-build content preparation script.
  *
- * Bridges the existing Python-generated docs into Astro content collections:
- * 1. Schema pages: merges hand-written wrapper + generated reference
- * 2. Example pages: copies generated markdown with frontmatter
- * 3. Standalone pages: copies with frontmatter
- * 4. Root files: processes README, CONTRIBUTING, CODE_OF_CONDUCT, LICENSE
- * 5. Resolved JSON: copies to public/data/
+ * Reads from:
+ *   - .generated/schemas/   (output of generate-schema-docs.sh)
+ *   - .generated/examples/  (output of generate-example-docs.py)
+ *   - .generated/data/      (output of resolve-story.py)
+ *   - spec/                 (README, CONTRIBUTING, CODE_OF_CONDUCT, LICENSE)
+ *   - content/              (website-owned content like scope.md)
+ *
+ * Writes to:
+ *   - src/content/schemas/   (Astro content collection)
+ *   - src/content/examples/  (Astro content collection)
+ *   - src/content/pages/     (Astro content collection)
+ *   - public/data/           (resolved JSON for graph visualization)
  */
 
 import { readFileSync, writeFileSync, mkdirSync, existsSync, copyFileSync, readdirSync } from 'fs';
@@ -17,7 +23,8 @@ import { fileURLToPath } from 'url';
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const REPO_ROOT = join(__dirname, '..');
 const SPEC_ROOT = join(REPO_ROOT, 'spec');
-const DOCS_DIR = join(SPEC_ROOT, 'docs');
+const GENERATED_DIR = join(REPO_ROOT, '.generated');
+const CONTENT_SOURCE = join(REPO_ROOT, 'content');
 const CONTENT_DIR = join(REPO_ROOT, 'src', 'content');
 const PUBLIC_DIR = join(REPO_ROOT, 'public');
 
@@ -61,38 +68,23 @@ function prepareSchemas() {
   ensureDir(outDir);
 
   for (const [slug, meta] of Object.entries(SCHEMA_META)) {
-    // Read hand-written wrapper (first two lines: # Title + description)
-    const wrapperPath = join(DOCS_DIR, 'schemas', `${slug}.md`);
-    const wrapper = readFile(wrapperPath);
-
-    // Read generated reference
-    const generatedPath = join(DOCS_DIR, 'schemas', 'generated', `${slug}.md`);
+    const generatedPath = join(GENERATED_DIR, 'schemas', `${slug}.md`);
     const generated = readFile(generatedPath);
 
-    // Extract description from wrapper (second non-empty line)
-    let desc = meta.description;
-    if (wrapper) {
-      const lines = wrapper.split('\n').filter(l => l.trim() && !l.startsWith('#') && !l.startsWith('{%') && !l.includes('include-markdown'));
-      if (lines.length > 0) desc = lines[0].trim();
-    }
-
-    // Build frontmatter
     const frontmatter = [
       '---',
       `title: "${meta.title}"`,
-      `description: "${desc.replace(/"/g, '\\"')}"`,
+      `description: "${meta.description.replace(/"/g, '\\"')}"`,
       `category: "${meta.category}"`,
       `order: ${meta.order}`,
       '---',
       '',
     ].join('\n');
 
-    // Merge: description + generated reference (skip first "# Schema Docs" heading from generated)
     let content = frontmatter;
-    content += `${desc}\n\n`;
+    content += `${meta.description}\n\n`;
 
     if (generated) {
-      // Strip the first "# Schema Docs" line if present
       const genContent = generated.replace(/^# Schema Docs\n*/, '');
       content += genContent;
     } else {
@@ -105,56 +97,12 @@ function prepareSchemas() {
   console.log(`✓ ${Object.keys(SCHEMA_META).length} schema pages prepared`);
 }
 
-// ── 2. Schema index (hand-written, no include-markdown) ──────────
-function prepareSchemaIndex() {
-  const outDir = join(CONTENT_DIR, 'schemas');
-  ensureDir(outDir);
-
-  const indexContent = readFile(join(DOCS_DIR, 'schemas', 'index.md'));
-  if (!indexContent) return;
-
-  // Rewrite links from relative MkDocs to Astro paths
-  let processed = indexContent
-    .replace(/\(story\.md\)/g, '(/schemas/story/)')
-    .replace(/\(world\.md\)/g, '(/schemas/world/)')
-    .replace(/\(time-system\.md\)/g, '(/schemas/time-system/)')
-    .replace(/\(node\.md\)/g, '(/schemas/node/)')
-    .replace(/\(edge\.md\)/g, '(/schemas/edge/)')
-    .replace(/\(frame\.md\)/g, '(/schemas/frame/)')
-    .replace(/\(constraint\.md\)/g, '(/schemas/constraint/)')
-    .replace(/\(narrative\.md\)/g, '(/schemas/narrative/)')
-    .replace(/\(lens\.md\)/g, '(/schemas/lens/)')
-    .replace(/\(format\.md\)/g, '(/schemas/format/)')
-    .replace(/\(beat\.md\)/g, '(/schemas/beat/)')
-    .replace(/\(device\.md\)/g, '(/schemas/device/)')
-    .replace(/\(thread\.md\)/g, '(/schemas/thread/)')
-    .replace(/\(variant-meta\.md\)/g, '(/schemas/variant-meta/)')
-    .replace(/\(definitions\.md\)/g, '(/schemas/definitions/)')
-    .replace(/\(tag\.md\)/g, '(/schemas/tag/)')
-    .replace(/\(type\.md\)/g, '(/schemas/type/)')
-    .replace(/\(derivation-meta\.md\)/g, '(/schemas/derivation-meta/)');
-
-  const frontmatter = [
-    '---',
-    'title: "Schemas"',
-    'description: "Schema reference for the Story as Code specification."',
-    '---',
-    '',
-  ].join('\n');
-
-  // Remove the first heading (we render it in the page)
-  processed = processed.replace(/^# Schemas\n*/, '');
-
-  writeFileSync(join(outDir, '_index.md'), frontmatter + processed);
-  console.log('✓ Schema index prepared');
-}
-
-// ── 3. Example pages ─────────────────────────────────────────────
+// ── 2. Example pages ─────────────────────────────────────────────
 function prepareExamples() {
   const outDir = join(CONTENT_DIR, 'examples');
   ensureDir(outDir);
 
-  const generatedDir = join(DOCS_DIR, 'examples', 'generated');
+  const generatedDir = join(GENERATED_DIR, 'examples');
   if (!existsSync(generatedDir)) {
     console.log('⚠ No generated example docs found (run generate-example-docs.py first)');
     return;
@@ -165,11 +113,9 @@ function prepareExamples() {
     const slug = basename(file, '.md');
     let content = readFileSync(join(generatedDir, file), 'utf-8');
 
-    // Extract title from first heading
     const titleMatch = content.match(/^# (.+)$/m);
     const title = titleMatch ? titleMatch[1] : slug.replace(/-/g, ' ').replace(/\b\w/g, c => c.toUpperCase());
 
-    // Extract description (first non-heading, non-empty line)
     const lines = content.split('\n');
     let desc = '';
     for (const line of lines) {
@@ -180,15 +126,6 @@ function prepareExamples() {
       }
     }
 
-    // Convert pymdownx ??? syntax to HTML <details>/<summary>
-    content = content.replace(
-      /\?\?\? example "([^"]+)"\n\n((?:    .*\n?)*)/g,
-      (_, title, body) => {
-        const unindented = body.replace(/^    /gm, '');
-        return `<details>\n<summary>${title}</summary>\n\n${unindented}\n</details>\n`;
-      }
-    );
-
     const frontmatter = [
       '---',
       `title: "${title.replace(/"/g, '\\"')}"`,
@@ -198,7 +135,6 @@ function prepareExamples() {
       '',
     ].join('\n');
 
-    // Remove the first heading (rendered by page template)
     content = content.replace(/^# .+\n*/, '');
 
     writeFileSync(join(outDir, `${slug}.md`), frontmatter + content);
@@ -207,19 +143,15 @@ function prepareExamples() {
   console.log(`✓ ${files.length} example pages prepared`);
 }
 
-// ── 4. Standalone pages ──────────────────────────────────────────
+// ── 3. Standalone pages ──────────────────────────────────────────
 function prepareStandalonePages() {
   const outDir = join(CONTENT_DIR, 'pages');
   ensureDir(outDir);
 
-  // Scope
-  const scope = readFile(join(DOCS_DIR, 'scope.md'));
+  // Scope (from website's own content/)
+  const scope = readFile(join(CONTENT_SOURCE, 'scope.md'));
   if (scope) {
     let content = scope.replace(/^# .+\n*/, '');
-    // Fix schema links
-    content = content.replace(/\(schemas\/constraint\.md\)/g, '(/schemas/constraint/)');
-    content = content.replace(/\(schemas\/derivation-meta\.md\)/g, '(/schemas/derivation-meta/)');
-
     writeFileSync(join(outDir, 'scope.md'), [
       '---',
       'title: "Scope & Boundaries"',
@@ -230,7 +162,7 @@ function prepareStandalonePages() {
     ].join('\n'));
   }
 
-  // Contributing
+  // Contributing (from spec)
   const contributing = readFile(join(SPEC_ROOT, 'CONTRIBUTING.md'));
   if (contributing) {
     writeFileSync(join(outDir, 'contributing.md'), [
@@ -243,7 +175,7 @@ function prepareStandalonePages() {
     ].join('\n'));
   }
 
-  // Code of Conduct
+  // Code of Conduct (from spec)
   const coc = readFile(join(SPEC_ROOT, 'CODE_OF_CONDUCT.md'));
   if (coc) {
     writeFileSync(join(outDir, 'code-of-conduct.md'), [
@@ -256,7 +188,7 @@ function prepareStandalonePages() {
     ].join('\n'));
   }
 
-  // License
+  // License (from spec)
   const license = readFile(join(SPEC_ROOT, 'LICENSE'));
   if (license) {
     writeFileSync(join(outDir, 'license.md'), [
@@ -274,12 +206,12 @@ function prepareStandalonePages() {
   console.log('✓ Standalone pages prepared');
 }
 
-// ── 5. Resolved JSON data ────────────────────────────────────────
+// ── 4. Resolved JSON data ────────────────────────────────────────
 function copyResolvedData() {
   const dataDir = join(PUBLIC_DIR, 'data');
   ensureDir(dataDir);
 
-  const srcDir = join(DOCS_DIR, 'assets', 'data');
+  const srcDir = join(GENERATED_DIR, 'data');
   if (!existsSync(srcDir)) {
     console.log('⚠ No resolved data found (run resolve-story.py first)');
     return;
@@ -296,7 +228,6 @@ function copyResolvedData() {
 console.log('Preparing content for Astro...\n');
 
 prepareSchemas();
-prepareSchemaIndex();
 prepareExamples();
 prepareStandalonePages();
 copyResolvedData();

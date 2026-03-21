@@ -5,17 +5,14 @@ dist/
 # Dependencies
 node_modules/
 
-# Generated content (produced by prepare-content.mjs)
+# Build artifacts (produced by generation scripts)
+.generated/
+
+# Astro content collections (produced by prepare-content.mjs)
 src/content/schemas/
 src/content/examples/
 src/content/pages/
 public/data/
-
-# Generated docs in spec submodule (produced by Python scripts)
-spec/docs/schemas/generated/
-spec/docs/examples/generated/
-spec/docs/examples/index.md
-spec/docs/assets/data/
 
 # Python
 __pycache__/

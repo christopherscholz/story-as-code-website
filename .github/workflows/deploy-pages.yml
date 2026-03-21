@@ -65,7 +65,7 @@ jobs:
           fi
 
       - name: Install Python dependencies
-        run: pip install -r spec/requirements.txt
+        run: pip install pyyaml "json-schema-for-humans>=1.5,<2.0"
 
       - name: Generate spec docs
         run: npm run generate

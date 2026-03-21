@@ -9,7 +9,7 @@
       "version": "3.12"
     }
   },
-  "postCreateCommand": "npm install && pip install -r spec/requirements.txt",
+  "postCreateCommand": "npm install && pip install pyyaml 'json-schema-for-humans>=1.5,<2.0'",
   "forwardPorts": [4321],
   "customizations": {
     "vscode": {
