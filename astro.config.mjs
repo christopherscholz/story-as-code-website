@@ -10,6 +10,11 @@ export default defineConfig({
   trailingSlash: 'always',
   vite: {
     plugins: [tailwindcss()],
+    build: {
+      rollupOptions: {
+        external: ['/pagefind/pagefind-ui.js'],
+      },
+    },
   },
   markdown: {
     shikiConfig: {
