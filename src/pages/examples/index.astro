@@ -1,9 +1,10 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro';
 import { exampleSidebar } from '../../data/navigation';
-import { getCollection } from 'astro:content';
+import { getCollection, type CollectionEntry } from 'astro:content';
+import { url } from '@/utils/url';
 
-const examples = await getCollection('examples');
+const examples: CollectionEntry<'examples'>[] = await getCollection('examples');
 ---
 
 <DocLayout title="Examples" sidebarItems={exampleSidebar}>
@@ -20,7 +21,7 @@ const examples = await getCollection('examples');
     {
       examples.map((ex) => (
         <a
-          href={`/examples/${ex.slug}/`}
+          href={url(`/examples/${ex.slug}/`)}
           class="group block p-6 rounded-xl border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-600 transition-all hover:shadow-lg hover:shadow-violet-500/5"
         >
           <h2 class="font-display text-2xl font-bold text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors mb-2">

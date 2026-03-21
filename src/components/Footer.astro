@@ -1,5 +1,5 @@
 ---
-
+import { url } from '@/utils/url';
 ---
 
 <footer
@@ -28,21 +28,21 @@
         <ul class="space-y-2 text-sm">
           <li>
             <a
-              href="/schemas/"
+              href={url('/schemas/')}
               class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
               >Schema Reference</a
             >
           </li>
           <li>
             <a
-              href="/examples/"
+              href={url('/examples/')}
               class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
               >Examples</a
             >
           </li>
           <li>
             <a
-              href="/scope/"
+              href={url('/scope/')}
               class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
               >Scope & Boundaries</a
             >
@@ -60,14 +60,14 @@
         <ul class="space-y-2 text-sm">
           <li>
             <a
-              href="/contributing/"
+              href={url('/contributing/')}
               class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
               >Contributing</a
             >
           </li>
           <li>
             <a
-              href="/code-of-conduct/"
+              href={url('/code-of-conduct/')}
               class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors"
               >Code of Conduct</a
             >

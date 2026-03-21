@@ -1,6 +1,7 @@
 ---
 import DocLayout from '../../layouts/DocLayout.astro';
 import { schemaSidebar } from '../../data/navigation';
+import { url } from '@/utils/url';
 
 const worldSchemas = [
   {
@@ -80,7 +81,7 @@ const narrativeSchemas = [
   </h2>
   <div class="mb-8">
     <a
-      href="/schemas/story/"
+      href={url('/schemas/story/')}
       class="group block p-4 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-600 transition-colors"
     >
       <span
@@ -111,7 +112,7 @@ const narrativeSchemas = [
     {
       worldSchemas.map((s) => (
         <a
-          href={s.href}
+          href={url(s.href)}
           class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-emerald-300 dark:hover:border-emerald-700 transition-colors"
         >
           <span class="font-mono text-sm font-semibold text-emerald-600 dark:text-emerald-400 group-hover:underline whitespace-nowrap">
@@ -141,7 +142,7 @@ const narrativeSchemas = [
     {
       narrativeSchemas.map((s) => (
         <a
-          href={s.href}
+          href={url(s.href)}
           class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-violet-300 dark:hover:border-violet-700 transition-colors"
         >
           <span class="font-mono text-sm font-semibold text-violet-600 dark:text-violet-400 group-hover:underline whitespace-nowrap">
@@ -162,7 +163,7 @@ const narrativeSchemas = [
   </h2>
   <div class="grid gap-2 mb-8">
     <a
-      href="/schemas/definitions/"
+      href={url('/schemas/definitions/')}
       class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
     >
       <span
@@ -174,7 +175,7 @@ const narrativeSchemas = [
       >
     </a>
     <a
-      href="/schemas/derivation-meta/"
+      href={url('/schemas/derivation-meta/')}
       class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
     >
       <span

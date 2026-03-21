@@ -1,4 +1,6 @@
 ---
+import { url, stripBase } from '@/utils/url';
+
 export interface SidebarItem {
   label: string;
   href: string;
@@ -10,7 +12,8 @@ interface Props {
   currentPath: string;
 }
 
-const { items, currentPath } = Astro.props;
+const { items, currentPath: rawPath } = Astro.props;
+const currentPath = stripBase(rawPath);
 
 function isActive(href: string): boolean {
   return currentPath === href || currentPath === href.replace(/\/$/, '');
@@ -46,7 +49,7 @@ function isExpanded(item: SidebarItem): boolean {
                       : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200 hover:bg-slate-50 dark:hover:bg-slate-800/50',
                   ]}
                 >
-                  <a href={item.href} class="flex-1">
+                  <a href={url(item.href)} class="flex-1">
                     {item.label}
                   </a>
                 </summary>
@@ -54,7 +57,7 @@ function isExpanded(item: SidebarItem): boolean {
                   {item.children.map((child) => (
                     <li>
                       <a
-                        href={child.href}
+                        href={url(child.href)}
                         class:list={[
                           'block px-2.5 py-1 text-sm rounded-md transition-colors',
                           isActive(child.href)
@@ -70,7 +73,7 @@ function isExpanded(item: SidebarItem): boolean {
               </details>
             ) : (
               <a
-                href={item.href}
+                href={url(item.href)}
                 class:list={[
                   'block px-2.5 py-1.5 text-sm rounded-md transition-colors',
                   isActive(item.href)

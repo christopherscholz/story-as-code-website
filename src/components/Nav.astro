@@ -2,6 +2,7 @@
 import DarkModeToggle from './DarkModeToggle.astro';
 import Search from './Search.astro';
 import VersionSwitcher from './VersionSwitcher.astro';
+import { url, stripBase } from '@/utils/url';
 
 const navItems = [
   { label: 'Home', href: '/' },
@@ -11,7 +12,7 @@ const navItems = [
   { label: 'Contributing', href: '/contributing/' },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = stripBase(Astro.url.pathname);
 
 function isActive(href: string): boolean {
   if (href === '/') return currentPath === '/' || currentPath === '/index.html';
@@ -25,7 +26,7 @@ function isActive(href: string): boolean {
   <div class="max-w-[90rem] mx-auto px-4 sm:px-6 lg:px-8">
     <div class="flex items-center justify-between h-16">
       <!-- Logo -->
-      <a href="/" class="flex items-center gap-3 group">
+      <a href={url('/')} class="flex items-center gap-3 group">
         <span class="text-2xl" aria-hidden="true">&#9670;</span>
         <span
           class="font-display text-lg font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors"
@@ -47,7 +48,7 @@ function isActive(href: string): boolean {
         {
           navItems.map((item) => (
             <a
-              href={item.href}
+              href={url(item.href)}
               class:list={[
                 'px-3 py-2 rounded-md text-sm font-medium transition-colors',
                 isActive(item.href)
