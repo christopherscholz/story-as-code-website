@@ -8,7 +8,7 @@
           document.documentElement.classList.add('dark');
         }
       })();
-    </script><link rel="stylesheet" href="/dev/_astro/code-of-conduct.IfO07MdY.css"></head> <body class="min-h-screen flex flex-col"> <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/dev/" class="flex items-center gap-3 group"> <span class="text-2xl" aria-hidden="true">&#9670;</span> <span class="font-display text-lg font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+    </script><link rel="stylesheet" href="/dev/_astro/code-of-conduct.BrPwEFrX.css"></head> <body class="min-h-screen flex flex-col"> <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/dev/" class="flex items-center gap-3 group"> <span class="text-2xl" aria-hidden="true">&#9670;</span> <span class="font-display text-lg font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
 Story as Code
 </span> <span class="hidden sm:inline-block text-[0.65rem] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 uppercase tracking-wider font-medium">
 Spec
@@ -41,7 +41,7 @@ Scope & Boundaries
 <h2 id="what-the-spec-does-not-define"><a href="#what-the-spec-does-not-define">What the Spec Does Not Define</a></h2>
 <p>The following concerns are <strong>intentionally out of scope</strong>. They belong to tooling, implementations, or ecosystem layers built on top of the specification.</p>
 <h3 id="file-system-layout"><a href="#file-system-layout">File System Layout</a></h3>
-<p>The spec defines <strong>what</strong> is valid (schemas), not <strong>where</strong> files are stored. A conforming story can be a single <code>story.yaml</code> with everything inline, or a multi-file project with <code>$ref</code> references pointing to any directory structure. How files are organized on disk is a tooling and user-preference concern — the spec is layout-agnostic.</p>
+<p>The spec defines <strong>what</strong> is valid (ontology + shapes), not <strong>where</strong> files are stored. A conforming story can be a single <code>story.jsonld</code> with everything inline, or a multi-file project with <code>@id</code> references pointing to any directory structure. How files are organized on disk is a tooling and user-preference concern — the spec is layout-agnostic.</p>
 <h3 id="storage--persistence"><a href="#storage--persistence">Storage &#x26; Persistence</a></h3>
 <p>The spec does not prescribe how or where files are stored. It is storage-agnostic — a conforming implementation could use a file system, a database, an object store, or any other backend.</p>
 <h3 id="error-analysis--story-validation"><a href="#error-analysis--story-validation">Error Analysis &#x26; Story Validation</a></h3>
