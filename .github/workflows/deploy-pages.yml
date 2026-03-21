@@ -41,14 +41,16 @@ jobs:
         run: |
           if [[ "${{ github.event_name }}" == "repository_dispatch" ]]; then
             VERSION="${{ github.event.client_payload.version }}"
-            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
-            echo "alias=latest" >> "$GITHUB_OUTPUT"
-          elif [[ -n "${{ github.event.inputs.spec_version }}" && "${{ github.event.inputs.spec_version }}" != "dev" ]]; then
+          elif [[ -n "${{ github.event.inputs.spec_version }}" ]]; then
             VERSION="${{ github.event.inputs.spec_version }}"
-            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          else
+            VERSION="dev"
+          fi
+
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if [[ "$VERSION" != "dev" ]]; then
             echo "alias=latest" >> "$GITHUB_OUTPUT"
           else
-            echo "version=dev" >> "$GITHUB_OUTPUT"
             echo "alias=" >> "$GITHUB_OUTPUT"
           fi
 
