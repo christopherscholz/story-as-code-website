@@ -7,9 +7,13 @@
     },
     "ghcr.io/devcontainers/features/python:1": {
       "version": "3.12"
-    }
+    },
+    "ghcr.io/devcontainers/features/github-cli:1": {}
   },
-  "postCreateCommand": "npm install && pip install pyyaml 'json-schema-for-humans>=1.5,<2.0'",
+  "mounts": [
+    "source=${localEnv:HOME}/.gitconfig,target=/home/vscode/.gitconfig,type=bind,consistency=cached"
+  ],
+  "postCreateCommand": "npm install && pip install pyyaml 'json-schema-for-humans>=1.5,<2.0' && git config --global commit.gpgsign false",
   "forwardPorts": [4321],
   "customizations": {
     "vscode": {
