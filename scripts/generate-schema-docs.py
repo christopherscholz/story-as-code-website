@@ -46,6 +46,17 @@ SHAPE_FILES = {
     "derivation-meta": "shapes/derivation-meta.shapes.ttl",
 }
 
+# Map: slug → path components under spec/examples/*/
+EXAMPLE_DIRS: dict[str, list[str]] = {
+    "lens": ["narrative", "lenses"],
+    "beat": ["narrative", "beats"],
+    "device": ["narrative", "devices"],
+    "thread": ["narrative", "threads"],
+    "format": ["narrative", "formats"],
+    "node": ["world", "characters"],
+    "edge": ["world", "edges"],
+}
+
 
 def build_context_reverse_map() -> dict:
     """Parse sac.context.jsonld and build full_URI → compact_name map."""
@@ -81,6 +92,13 @@ def build_context_reverse_map() -> dict:
     return reverse
 
 
+def shape_local_name(shape_iri) -> str:
+    """Extract local name from a shape IRI, stripping 'Shape' suffix."""
+    raw = str(shape_iri)
+    local = raw.split("/")[-1].split("#")[-1]
+    return local.replace("Shape", "")
+
+
 def type_label(g: Graph, prop_node, ctx_map: dict) -> str:
     """Derive a human-readable type label for a SHACL property constraint."""
     datatype = g.value(prop_node, SH.datatype)
@@ -114,8 +132,9 @@ def type_label(g: Graph, prop_node, ctx_map: dict) -> str:
         return f"[{compact}]()"
 
     if sh_node:
-        local = str(sh_node).split("#")[-1].split("Shape")[0]
-        return f"object ({local})"
+        local = shape_local_name(sh_node)
+        anchor = local.lower()
+        return f"object ([{local}](#{anchor}))"
 
     if node_kind:
         local = str(node_kind).split("#")[-1]
@@ -127,51 +146,121 @@ def type_label(g: Graph, prop_node, ctx_map: dict) -> str:
     return "any"
 
 
+def ordered_sub_shapes(g: Graph, primary_shape) -> list:
+    """BFS traversal of sub-shapes referenced via sh:node from a primary shape."""
+    seen = {str(primary_shape)}
+    order = []
+    queue = [primary_shape]
+    while queue:
+        current = queue.pop(0)
+        for prop_node in g.objects(current, SH["property"]):
+            sh_node = g.value(prop_node, SH.node)
+            if sh_node and str(sh_node) not in seen:
+                seen.add(str(sh_node))
+                order.append(sh_node)
+                queue.append(sh_node)
+    return order
+
+
+def generate_shape_section(g: Graph, shape, ctx_map: dict) -> list[str]:
+    """Generate markdown lines for a single shape section (heading + table)."""
+    local = shape_local_name(shape)
+    target = g.value(shape, SH.targetClass)
+    comment = str(g.value(target, RDFS.comment) or "") if target else ""
+
+    # Collect properties
+    props = []
+    for prop_node in g.objects(shape, SH["property"]):
+        path = g.value(prop_node, SH["path"])
+        if path is None:
+            continue
+        path_uri = str(path)
+        compact = ctx_map.get(path_uri, path_uri.split("#")[-1])
+
+        min_count = g.value(prop_node, SH.minCount)
+        required = "✓" if (min_count and int(min_count) >= 1) else ""
+
+        max_count = g.value(prop_node, SH.maxCount)
+        multi = "" if (max_count and int(max_count) == 1) else " (multi)"
+
+        type_str = type_label(g, prop_node, ctx_map) + multi
+        desc = str(g.value(path, RDFS.comment) or "")
+
+        props.append((compact, type_str, required, desc))
+
+    if not props and not comment:
+        return []
+
+    lines: list[str] = []
+    lines.append(f"## {local}\n")
+    if comment:
+        lines.append(f"{comment}\n")
+    if props:
+        lines.append("| Property | Type | Required | Description |")
+        lines.append("|---|---|:---:|---|")
+        for compact, type_str, req, desc in props:
+            lines.append(f"| `{compact}` | {type_str} | {req} | {desc} |")
+        lines.append("")
+    return lines
+
+
+def find_example(slug: str) -> str | None:
+    """Return the content of the first available example JSON-LD for this slug."""
+    path_parts = EXAMPLE_DIRS.get(slug)
+    if not path_parts:
+        return None
+    examples_root = SPEC_ROOT / "examples"
+    for example_dir in sorted(examples_root.iterdir()):
+        if not example_dir.is_dir():
+            continue
+        target_dir = example_dir
+        for part in path_parts:
+            target_dir = target_dir / part
+        if target_dir.exists():
+            files = sorted(target_dir.glob("*.jsonld"))
+            if files:
+                return files[0].read_text()
+    return None
+
+
 def generate_shape_doc(slug: str, g: Graph, ctx_map: dict) -> str:
-    """Generate markdown for a single shape slug."""
+    """Generate markdown for a shape file."""
     lines: list[str] = []
 
-    # Find NodeShape(s) in graph
-    shapes = list(g.subjects(RDF.type, SH.NodeShape))
-    if not shapes:
+    all_shapes = list(g.subjects(RDF.type, SH.NodeShape))
+    primaries = [s for s in all_shapes if g.value(s, SH.targetClass) is not None]
+    if not primaries:
         return ""
 
-    for shape in shapes:
-        target = g.value(shape, SH.targetClass)
-        class_name = str(target).split("#")[-1] if target else slug.title()
-        comment = str(g.value(target, RDFS.comment) or "") if target else ""
+    # Build ordered shape list: primary shapes first, then BFS sub-shapes
+    seen: set[str] = set()
+    ordered = []
+    for primary in primaries:
+        if str(primary) not in seen:
+            seen.add(str(primary))
+            ordered.append(primary)
+        for sub in ordered_sub_shapes(g, primary):
+            if str(sub) not in seen:
+                seen.add(str(sub))
+                ordered.append(sub)
 
-        if comment:
-            lines.append(f"{comment}\n")
+    # Any shapes in the file not reachable via BFS (edge case)
+    for shape in all_shapes:
+        if str(shape) not in seen:
+            seen.add(str(shape))
+            ordered.append(shape)
 
-        # Collect properties
-        props = []
-        for prop_node in g.objects(shape, SH["property"]):
-            path = g.value(prop_node, SH["path"])
-            if path is None:
-                continue
-            path_uri = str(path)
-            compact = ctx_map.get(path_uri, path_uri.split("#")[-1])
+    for shape in ordered:
+        lines.extend(generate_shape_section(g, shape, ctx_map))
 
-            min_count = g.value(prop_node, SH.minCount)
-            required = "✓" if (min_count and int(min_count) >= 1) else ""
-
-            max_count = g.value(prop_node, SH.maxCount)
-            multi = "" if (max_count and int(max_count) == 1) else " (multi)"
-
-            type_str = type_label(g, prop_node, ctx_map) + multi
-
-            desc = str(g.value(path, RDFS.comment) or "")
-
-            props.append((compact, type_str, required, desc))
-
-        if props:
-            lines.append("## Properties\n")
-            lines.append("| Property | Type | Required | Description |")
-            lines.append("|---|---|:---:|---|")
-            for compact, type_str, req, desc in props:
-                lines.append(f"| `{compact}` | {type_str} | {req} | {desc} |")
-            lines.append("")
+    # Example section
+    example = find_example(slug)
+    if example:
+        lines.append("## Example\n")
+        lines.append("```json")
+        lines.append(example.strip())
+        lines.append("```")
+        lines.append("")
 
     return "\n".join(lines)
 
