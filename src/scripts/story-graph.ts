@@ -173,6 +173,44 @@ interface Scope {
   in?: Scope[];
   range?: { from?: Scope; to?: Scope; item?: string };
 }
+interface TextAnnotation {
+  ref: IdOrRef;
+  start: number;
+  end: number;
+  exact?: string;
+}
+interface Passage {
+  type: string;
+  id: string;
+  beat?: IdOrRef;
+  order?: number;
+  content?: string;
+  annotations?: TextAnnotation[];
+  edgeIds?: IdOrRef[];
+  passageStatus?: string;
+}
+interface Section {
+  type: string;
+  id: string;
+  sectionType?: string;
+  title?: string;
+  order?: number;
+  passages?: Passage[];
+}
+interface Rendering {
+  type: string;
+  id: string;
+  name?: string;
+  description?: string;
+  renderingLens?: IdOrRef;
+  renderingFormat?: IdOrRef;
+  sections?: Section[];
+}
+interface Derivation {
+  type: string;
+  id: string;
+  renderings?: Rendering[];
+}
 interface Story {
   type: string;
   id: string;
@@ -196,6 +234,7 @@ interface Story {
     threads: Thread[];
     formats: Format[];
   };
+  derivation?: Derivation;
 }
 interface StorySelection {
   kind: string;
@@ -333,6 +372,7 @@ interface ColorPair {
     threads: Set<string>;
     devices: Set<string>;
     lenses: Set<string>;
+    passages: Set<string>;
   } | null {
     if (!sel || !story) return null;
 
@@ -343,6 +383,7 @@ interface ColorPair {
       threads: new Set<string>(),
       devices: new Set<string>(),
       lenses: new Set<string>(),
+      passages: new Set<string>(),
     };
 
     const nodes = story.world?.nodes ?? [];
@@ -452,7 +493,46 @@ interface ColorPair {
           ids.nodes.add(typeId(e.target));
         }
       }
+    } else if (sel.kind === 'passage') {
+      ids.passages.add(sel.id);
+      for (const rendering of story.derivation?.renderings ?? []) {
+        for (const section of rendering.sections ?? []) {
+          const passage = (section.passages ?? []).find((p) => p.id === sel.id);
+          if (passage) {
+            if (passage.beat) ids.beats.add(typeId(passage.beat));
+            for (const ann of passage.annotations ?? [])
+              ids.nodes.add(typeId(ann.ref));
+            for (const eRef of passage.edgeIds ?? []) {
+              const eid = typeId(eRef);
+              ids.edges.add(eid);
+              const e = edges.find((edge) => edge.id === eid);
+              if (e) {
+                ids.nodes.add(typeId(e.source));
+                ids.nodes.add(typeId(e.target));
+              }
+            }
+          }
+        }
+      }
     }
+
+    // When a node or edge is selected, also mark passages that reference it
+    if (sel.kind === 'node' || sel.kind === 'edge') {
+      for (const rendering of story.derivation?.renderings ?? []) {
+        for (const section of rendering.sections ?? []) {
+          for (const passage of section.passages ?? []) {
+            const refNode = (passage.annotations ?? []).some(
+              (a) => typeId(a.ref) === sel.id,
+            );
+            const refEdge = (passage.edgeIds ?? []).some(
+              (e) => typeId(e) === sel.id,
+            );
+            if (refNode || refEdge) ids.passages.add(passage.id);
+          }
+        }
+      }
+    }
+
     // silence unused-var for nodes array (only used indirectly via edges)
     void nodes;
     return ids;
@@ -535,6 +615,9 @@ interface ColorPair {
         case 'constraints':
           renderConstraints(content);
           break;
+        case 'derivation':
+          renderDerivation(content);
+          break;
       }
     });
   }
@@ -576,6 +659,19 @@ interface ColorPair {
       } else if (sel.kind === 'frame') {
         const f = (w?.frames ?? []).find((x) => x.id === sel.id);
         if (f) html = frameDetailHTML(f);
+      } else if (sel.kind === 'passage') {
+        for (const rendering of story?.derivation?.renderings ?? []) {
+          for (const section of rendering.sections ?? []) {
+            const passage = (section.passages ?? []).find(
+              (p) => p.id === sel.id,
+            );
+            if (passage) {
+              html = passageDetailHTML(passage);
+              break;
+            }
+          }
+          if (html) break;
+        }
       }
 
       dp.innerHTML = `<button class="detail-close">&times;</button>${html}`;
@@ -1603,6 +1699,240 @@ interface ColorPair {
   /* ══════════════════════════════════════════════════════════════════════
      VIEW 6 — CONSTRAINTS
   ══════════════════════════════════════════════════════════════════════ */
+
+  /* ══════════════════════════════════════════════════════════════════════
+     VIEW 7 — DERIVATION LAYER
+  ══════════════════════════════════════════════════════════════════════ */
+  function renderDerivation(container: HTMLElement): void {
+    const derivation = story?.derivation;
+    if (!derivation?.renderings?.length) {
+      container.innerHTML =
+        '<p class="empty-msg">No derivation layer defined.</p>';
+      return;
+    }
+
+    const renderings = derivation.renderings;
+
+    /* Tab bar for multiple renderings */
+    const tabBar = document.createElement('div');
+    tabBar.className = 'deriv-tabs';
+    const panels: HTMLElement[] = [];
+
+    renderings.forEach((rendering, ri) => {
+      const tab = document.createElement('button');
+      tab.className = 'deriv-tab' + (ri === 0 ? ' active' : '');
+      tab.textContent = rendering.name ?? rendering.id;
+      tabBar.appendChild(tab);
+
+      const panel = document.createElement('div');
+      panel.className = 'deriv-panel' + (ri === 0 ? ' active' : '');
+      panels.push(panel);
+
+      /* Rendering meta */
+      const meta = document.createElement('div');
+      meta.className = 'deriv-meta';
+      let metaHtml = '';
+      if (rendering.description)
+        metaHtml += `<p class="deriv-desc">${esc(rendering.description)}</p>`;
+      if (rendering.renderingFormat)
+        metaHtml += `<span class="info-badge">${esc(typeName(rendering.renderingFormat))}</span> `;
+      if (rendering.renderingLens) {
+        const lid = typeId(rendering.renderingLens);
+        metaHtml += `<span class="info-badge" style="cursor:pointer" data-kind="lens" data-id="${esc(lid)}">Lens: ${esc(typeName(rendering.renderingLens) || lid)}</span>`;
+      }
+      meta.innerHTML = metaHtml;
+      panel.appendChild(meta);
+
+      /* Sections */
+      const sections = (rendering.sections ?? []).sort(
+        (a, b) => (a.order ?? 0) - (b.order ?? 0),
+      );
+      sections.forEach((section) => {
+        const secEl = document.createElement('details');
+        secEl.className = 'deriv-section';
+        secEl.open = true;
+
+        const summary = document.createElement('summary');
+        summary.className = 'deriv-section-title';
+        summary.innerHTML =
+          `<span class="deriv-section-type">${esc(section.sectionType ?? 'Section')}</span> ` +
+          esc(section.title ?? section.id);
+        secEl.appendChild(summary);
+
+        /* Passages */
+        const passages = (section.passages ?? []).sort(
+          (a, b) => (a.order ?? 0) - (b.order ?? 0),
+        );
+        passages.forEach((passage) => {
+          const passEl = document.createElement('div');
+          passEl.className = 'deriv-passage';
+          passEl.dataset['passage'] = passage.id;
+
+          /* Header row */
+          const header = document.createElement('div');
+          header.className = 'deriv-passage-header';
+          const beatId = typeId(passage.beat);
+          header.innerHTML =
+            (beatId
+              ? `<a class="info-link deriv-beat-link" data-kind="beat" data-id="${esc(beatId)}">${esc(typeName(passage.beat) || beatId)}</a>`
+              : '') +
+            (passage.passageStatus
+              ? `<span class="deriv-status deriv-status-${esc(passage.passageStatus.toLowerCase())}">${esc(passage.passageStatus)}</span>`
+              : '');
+          passEl.appendChild(header);
+
+          /* Content with inline annotation highlights */
+          const contentEl = document.createElement('div');
+          contentEl.className = 'deriv-content';
+          contentEl.innerHTML = annotatedText(
+            passage.content ?? '',
+            passage.annotations ?? [],
+          );
+          passEl.appendChild(contentEl);
+
+          /* Annotation chips */
+          if (passage.annotations?.length || passage.edgeIds?.length) {
+            const chips = document.createElement('div');
+            chips.className = 'deriv-chips';
+            (passage.annotations ?? []).forEach((ann) => {
+              const nid = typeId(ann.ref);
+              const chip = document.createElement('span');
+              chip.className = 'deriv-chip deriv-chip-node';
+              chip.dataset['kind'] = 'node';
+              chip.dataset['id'] = nid;
+              chip.style.borderColor = c(
+                typeId(
+                  typeof ann.ref === 'object' && 'nodeType' in ann.ref
+                    ? (ann.ref as StoryNode).nodeType
+                    : null,
+                ),
+              );
+              chip.textContent = ann.exact ?? typeName(ann.ref) ?? nid;
+              chips.appendChild(chip);
+            });
+            (passage.edgeIds ?? []).forEach((eRef) => {
+              const eid = typeId(eRef);
+              const chip = document.createElement('span');
+              chip.className = 'deriv-chip deriv-chip-edge';
+              chip.dataset['kind'] = 'edge';
+              chip.dataset['id'] = eid;
+              chip.textContent = typeName(eRef) || eid;
+              chips.appendChild(chip);
+            });
+            passEl.appendChild(chips);
+          }
+
+          passEl.addEventListener('click', (e) => {
+            if ((e.target as Element).closest('[data-kind]')) return;
+            select({ kind: 'passage', id: passage.id });
+          });
+
+          secEl.appendChild(passEl);
+        });
+
+        panel.appendChild(secEl);
+      });
+
+      container.appendChild(panel);
+
+      tab.addEventListener('click', () => {
+        tabBar
+          .querySelectorAll('.deriv-tab')
+          .forEach((t) => t.classList.remove('active'));
+        panels.forEach((p) => p.classList.remove('active'));
+        tab.classList.add('active');
+        panel.classList.add('active');
+      });
+    });
+
+    container.insertBefore(tabBar, container.firstChild);
+
+    /* Chip click → select node/edge */
+    container.addEventListener('click', (e) => {
+      const chip = (e.target as Element).closest<HTMLElement>('[data-kind]');
+      if (!chip) return;
+      const kind = chip.dataset['kind'] ?? '';
+      const id = chip.dataset['id'] ?? '';
+      if (kind && id) select({ kind, id });
+    });
+
+    /* Highlight passages on selection */
+    onSelect((sel) => {
+      const rel = relatedIds(sel);
+      container.querySelectorAll<HTMLElement>('.deriv-passage').forEach((p) => {
+        const pid = p.dataset['passage'] ?? '';
+        if (!rel) {
+          p.classList.remove('greyed', 'sel-highlight');
+        } else {
+          p.classList.toggle('greyed', !rel.passages.has(pid));
+          p.classList.toggle('sel-highlight', rel.passages.has(pid));
+        }
+      });
+    });
+  }
+
+  /** Render passage text with annotated spans highlighted. */
+  function annotatedText(
+    content: string,
+    annotations: TextAnnotation[],
+  ): string {
+    if (!annotations.length)
+      return `<pre class="passage-text">${esc(content)}</pre>`;
+
+    // Sort by start offset, deduplicate overlaps
+    const sorted = [...annotations].sort((a, b) => a.start - b.start);
+    let result = '';
+    let cursor = 0;
+    for (const ann of sorted) {
+      if (ann.start < cursor) continue; // skip overlap
+      if (ann.start > cursor) result += esc(content.slice(cursor, ann.start));
+      const nid = typeId(ann.ref);
+      const nodeType =
+        typeof ann.ref === 'object' && 'nodeType' in ann.ref
+          ? typeId((ann.ref as StoryNode).nodeType)
+          : '';
+      const col = nodeType ? c(nodeType) : '#7E57C2';
+      result +=
+        `<mark class="ann-mark" style="background:${col}22;border-bottom:2px solid ${col}" ` +
+        `data-kind="node" data-id="${esc(nid)}" title="${esc(typeName(ann.ref) || nid)}">` +
+        esc(content.slice(ann.start, ann.end)) +
+        `</mark>`;
+      cursor = ann.end;
+    }
+    if (cursor < content.length) result += esc(content.slice(cursor));
+    return `<pre class="passage-text">${result}</pre>`;
+  }
+
+  function passageDetailHTML(passage: Passage): string {
+    const beatId = typeId(passage.beat);
+    let h = `<h4>${esc(passage.id)}</h4>`;
+    if (passage.passageStatus)
+      h += `<span class="info-badge deriv-status-${esc(passage.passageStatus.toLowerCase())}">${esc(passage.passageStatus)}</span> `;
+    if (beatId)
+      h += `<a class="info-link" data-kind="beat" data-id="${esc(beatId)}">Beat: ${esc(typeName(passage.beat) || beatId)}</a>`;
+    if (passage.annotations?.length) {
+      h += '<p><strong>Annotations:</strong></p><ul class="appearance-list">';
+      passage.annotations.forEach((ann) => {
+        const nid = typeId(ann.ref);
+        h += `<li><a class="info-link" data-kind="node" data-id="${esc(nid)}">${esc(typeName(ann.ref) || nid)}</a>`;
+        if (ann.exact) h += ` — <em>"${esc(ann.exact)}"</em>`;
+        h += '</li>';
+      });
+      h += '</ul>';
+    }
+    if (passage.edgeIds?.length) {
+      h += '<p><strong>Edges:</strong> ';
+      h += passage.edgeIds
+        .map((e) => {
+          const eid = typeId(e);
+          return `<a class="info-link" data-kind="edge" data-id="${esc(eid)}">${esc(typeName(e) || eid)}</a>`;
+        })
+        .join(', ');
+      h += '</p>';
+    }
+    return h;
+  }
+
   function renderConstraints(container: HTMLElement): void {
     const constraints = story?.world?.constraints ?? [];
     if (!constraints.length) {
