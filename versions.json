@@ -1,0 +1,10 @@
+{
+  "versions": [
+    {
+      "version": "dev",
+      "path": "/dev/",
+      "aliases": []
+    }
+  ],
+  "default": "dev"
+}

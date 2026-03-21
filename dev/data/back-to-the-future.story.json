@@ -1,0 +1,1541 @@
+{
+  "spec_version": "dev",
+  "name": "Back to the Future",
+  "settings": {
+    "default_language": "en"
+  },
+  "definitions": {
+    "tags": [
+      {
+        "id": "protagonist",
+        "name": "Protagonist",
+        "description": "The central character driving the story."
+      },
+      {
+        "id": "antagonist",
+        "name": "Antagonist",
+        "description": "A character who opposes or obstructs the protagonist."
+      },
+      {
+        "id": "mentor",
+        "name": "Mentor",
+        "description": "A guide or teacher figure for the protagonist."
+      },
+      {
+        "id": "family",
+        "name": "Family",
+        "description": "Related to the protagonist's family unit."
+      },
+      {
+        "id": "time-travel",
+        "name": "Time Travel",
+        "description": "Related to temporal displacement or its consequences."
+      },
+      {
+        "id": "sci-fi",
+        "name": "Science Fiction",
+        "description": "Speculative technology or science-driven elements."
+      },
+      {
+        "id": "teenager",
+        "name": "Teenager",
+        "description": "A young person navigating adolescence."
+      },
+      {
+        "id": "scientist",
+        "name": "Scientist",
+        "description": "A character defined by scientific pursuit."
+      },
+      {
+        "id": "bully",
+        "name": "Bully",
+        "description": "A character who intimidates or dominates others through force."
+      },
+      {
+        "id": "love-interest",
+        "name": "Love Interest",
+        "description": "A character who is the object of romantic attention."
+      },
+      {
+        "id": "iconic",
+        "name": "Iconic",
+        "description": "An element that is culturally emblematic of the story."
+      },
+      {
+        "id": "vehicle",
+        "name": "Vehicle",
+        "description": "A mode of transportation."
+      },
+      {
+        "id": "public-space",
+        "name": "Public Space",
+        "description": "A location accessible to the general public."
+      },
+      {
+        "id": "private-space",
+        "name": "Private Space",
+        "description": "A location belonging to a specific character or group."
+      },
+      {
+        "id": "school",
+        "name": "School",
+        "description": "Related to an educational institution."
+      }
+    ],
+    "types": [
+      {
+        "id": "CHARACTER",
+        "name": "Character",
+        "applies_to": "NODE",
+        "description": "A sentient being who acts, speaks, or is acted upon."
+      },
+      {
+        "id": "LOCATION",
+        "name": "Location",
+        "applies_to": "NODE",
+        "description": "A physical space where events unfold."
+      },
+      {
+        "id": "OBJECT",
+        "name": "Object",
+        "applies_to": "NODE",
+        "description": "A physical thing with narrative significance."
+      },
+      {
+        "id": "EVENT",
+        "name": "Event",
+        "applies_to": "NODE",
+        "description": "A discrete occurrence that changes the state of the world."
+      },
+      {
+        "id": "SPATIAL",
+        "name": "Spatial Relationship",
+        "applies_to": "EDGE",
+        "description": "A spatial or containment relationship."
+      },
+      {
+        "id": "RELATIONSHIP",
+        "name": "Interpersonal Relationship",
+        "applies_to": "EDGE",
+        "description": "An emotional or social bond between characters."
+      },
+      {
+        "id": "KINSHIP",
+        "name": "Kinship",
+        "applies_to": "EDGE",
+        "description": "A family relationship."
+      },
+      {
+        "id": "CONFLICT",
+        "name": "Conflict",
+        "applies_to": "EDGE",
+        "description": "An opposition or antagonistic relationship."
+      },
+      {
+        "id": "OWNERSHIP",
+        "name": "Ownership",
+        "applies_to": "EDGE",
+        "description": "A possession or creation relationship."
+      },
+      {
+        "id": "PARTICIPATION",
+        "name": "Participation",
+        "applies_to": "EDGE",
+        "description": "A character's involvement in an event."
+      },
+      {
+        "id": "OCCURRENCE",
+        "name": "Occurrence",
+        "applies_to": "EDGE",
+        "description": "Where an event takes place."
+      },
+      {
+        "id": "SETUP_PAYOFF",
+        "name": "Setup & Payoff",
+        "applies_to": "DEVICE",
+        "description": "Something planted early that pays off later."
+      },
+      {
+        "id": "CHEKHOV_GUN",
+        "name": "Chekhov's Gun",
+        "applies_to": "DEVICE",
+        "description": "An element introduced early that must become significant later."
+      },
+      {
+        "id": "DRAMATIC_IRONY",
+        "name": "Dramatic Irony",
+        "applies_to": "DEVICE",
+        "description": "The audience knows something the characters do not."
+      },
+      {
+        "id": "SCREENPLAY",
+        "name": "Screenplay",
+        "applies_to": "FORMAT",
+        "description": "A film script structured in acts and scenes."
+      },
+      {
+        "id": "SIMPLE",
+        "name": "Simple Lens",
+        "applies_to": "LENS",
+        "description": "A single, non-composite narrative perspective."
+      },
+      {
+        "id": "THEME",
+        "name": "Theme",
+        "applies_to": "THREAD",
+        "description": "An abstract idea that recurs across the narrative."
+      },
+      {
+        "id": "MOTIF",
+        "name": "Motif",
+        "applies_to": "THREAD",
+        "description": "A recurring symbolic element."
+      }
+    ]
+  },
+  "world": {
+    "time_system": {
+      "id": "earth-calendar",
+      "name": "Earth Calendar",
+      "type": "LINEAR"
+    },
+    "nodes": [
+      {
+        "id": "marty",
+        "name": "Marty McFly",
+        "type": "CHARACTER",
+        "description": "A seventeen-year-old high school student and aspiring rock guitarist. Marty is likeable, impulsive, and insecure about being called a coward. When he is accidentally sent to 1955 in Doc Brown's time machine, he must navigate his parents' adolescence, ensure they fall in love at the Enchantment Under the Sea dance, and find a way back to 1985 before he is erased from existence.\n",
+        "properties": {
+          "age": 17,
+          "name_variants": [
+            "Marty",
+            "Calvin Klein"
+          ]
+        },
+        "tags": [
+          "protagonist",
+          "teenager"
+        ]
+      },
+      {
+        "id": "doc-brown",
+        "name": "Dr. Emmett Brown",
+        "type": "CHARACTER",
+        "description": "An eccentric inventor and nuclear physicist who has spent thirty years and his family fortune trying to build a working time machine. In 1985 he finally succeeds, using a DeLorean and stolen plutonium. He is shot by Libyan terrorists moments after the first test, but his younger 1955 self — initially disbelieving — helps Marty harness a lightning strike to power the return trip. His friendship with Marty transcends decades.\n",
+        "properties": {
+          "age": 65,
+          "name_variants": [
+            "Doc",
+            "Dr. Brown",
+            "the Doc"
+          ]
+        },
+        "tags": [
+          "mentor",
+          "scientist",
+          "sci-fi"
+        ]
+      },
+      {
+        "id": "george",
+        "name": "George McFly",
+        "type": "CHARACTER",
+        "description": "Marty's father — in 1985, a spineless pushover still bullied by Biff Tannen. In 1955, a shy, nerdy teenager who peeps at girls through binoculars and writes science fiction stories in secret. Marty's interference forces George to confront Biff at the dance, punching him for the first time and winning Lorraine's admiration. This single act of courage rewrites George's entire future.\n",
+        "properties": {
+          "age_1955": 17,
+          "age_1985": 47,
+          "name_variants": [
+            "George",
+            "McFly"
+          ]
+        },
+        "tags": [
+          "family"
+        ]
+      },
+      {
+        "id": "lorraine",
+        "name": "Lorraine Baines",
+        "type": "CHARACTER",
+        "description": "Marty's mother — in 1985, a disillusioned, overweight woman who drinks too much. In 1955, a lively teenager who falls for the boy her father hit with his car — originally George, but now Marty. Her misplaced infatuation with her own future son creates the story's central paradox: Marty must redirect her affection to George or he will never be born.\n",
+        "properties": {
+          "age_1955": 17,
+          "age_1985": 47,
+          "name_variants": [
+            "Lorraine",
+            "Lorraine Baines McFly"
+          ]
+        },
+        "tags": [
+          "family",
+          "love-interest"
+        ]
+      },
+      {
+        "id": "biff",
+        "name": "Biff Tannen",
+        "type": "CHARACTER",
+        "description": "The story's antagonist across both timelines. In 1985, he is George McFly's supervisor and still bullies him decades after high school. In 1955, he is the thuggish school bully who terrorises George and pursues Lorraine aggressively. His defeat at the dance — when George punches him unconscious — reshapes the power dynamic for the next thirty years.\n",
+        "properties": {
+          "name_variants": [
+            "Biff",
+            "Tannen"
+          ]
+        },
+        "tags": [
+          "antagonist",
+          "bully"
+        ]
+      },
+      {
+        "id": "jennifer",
+        "name": "Jennifer Parker",
+        "type": "CHARACTER",
+        "description": "Marty's girlfriend. She appears briefly in 1985 before the time-travel journey begins, serving as Marty's emotional anchor and his reason to return.\n",
+        "properties": {
+          "name_variants": [
+            "Jennifer"
+          ]
+        },
+        "tags": [
+          "love-interest"
+        ]
+      },
+      {
+        "id": "hill-valley-1985",
+        "name": "Hill Valley (1985)",
+        "type": "LOCATION",
+        "description": "The town of Hill Valley in 1985 — run-down, with a derelict town square and a broken clock tower that stopped at 10:04 PM on November 12, 1955. The McFly house is modest and Biff still lords over George.\n",
+        "tags": [
+          "public-space"
+        ]
+      },
+      {
+        "id": "hill-valley-1955",
+        "name": "Hill Valley (1955)",
+        "type": "LOCATION",
+        "description": "Hill Valley thirty years earlier — a thriving small town with a pristine town square, a functioning courthouse clock, and a soda fountain where teenagers gather. Everything Marty knows looks different, yet recognisably the same.\n",
+        "tags": [
+          "public-space"
+        ]
+      },
+      {
+        "id": "twin-pines-mall",
+        "name": "Twin Pines Mall",
+        "type": "LOCATION",
+        "description": "A shopping mall parking lot where Doc Brown conducts the first time-travel test at 1:15 AM. After Marty's trip to 1955, the mall is renamed Lone Pine Mall — one of the pines was destroyed when Marty crashed into Farmer Peabody's barn.\n",
+        "tags": [
+          "public-space"
+        ]
+      },
+      {
+        "id": "docs-lab",
+        "name": "Doc Brown's Lab",
+        "type": "LOCATION",
+        "description": "Doc's garage laboratory, filled with clocks, inventions, and a model of Hill Valley. In 1955 it is the Brown mansion; in 1985 it is the garage behind the burned-down site.\n",
+        "tags": [
+          "private-space",
+          "sci-fi"
+        ]
+      },
+      {
+        "id": "hill-valley-high",
+        "name": "Hill Valley High School",
+        "type": "LOCATION",
+        "description": "The high school attended by both Marty (1985) and his parents (1955). The gym hosts the Enchantment Under the Sea dance where George and Lorraine must kiss.\n",
+        "tags": [
+          "school",
+          "public-space"
+        ]
+      },
+      {
+        "id": "clock-tower",
+        "name": "Clock Tower",
+        "type": "LOCATION",
+        "description": "The Hill Valley courthouse clock tower. Lightning strikes it at 10:04 PM on November 12, 1955, stopping the clock permanently. Doc Brown uses this known event to channel 1.21 gigawatts into the DeLorean's flux capacitor, sending Marty home.\n",
+        "tags": [
+          "public-space",
+          "iconic"
+        ]
+      },
+      {
+        "id": "delorean",
+        "name": "DeLorean Time Machine",
+        "type": "OBJECT",
+        "description": "A modified 1981 DeLorean DMC-12 fitted with a flux capacitor. It requires 1.21 gigawatts of power and a speed of 88 miles per hour to activate time travel. Originally powered by stolen plutonium, the return trip is powered by a lightning strike.\n",
+        "properties": {
+          "speed_threshold": "88 mph",
+          "power_requirement": "1.21 gigawatts"
+        },
+        "tags": [
+          "sci-fi",
+          "iconic",
+          "vehicle",
+          "time-travel"
+        ]
+      },
+      {
+        "id": "flux-capacitor",
+        "name": "Flux Capacitor",
+        "type": "OBJECT",
+        "description": "The device that makes time travel possible. Doc conceived it on November 5, 1955, after slipping off his toilet and hitting his head. It took him thirty years and his entire family fortune to turn the vision into a working device.\n",
+        "tags": [
+          "sci-fi",
+          "iconic",
+          "time-travel"
+        ]
+      },
+      {
+        "id": "photo",
+        "name": "Family Photo",
+        "type": "OBJECT",
+        "description": "A photograph of Marty and his siblings. As Marty's interference threatens his parents' meeting, the siblings begin to fade from the image. The photo serves as a visual countdown: when it goes blank, Marty will cease to exist. After George and Lorraine kiss at the dance, the photo is restored.\n",
+        "tags": [
+          "iconic",
+          "time-travel"
+        ]
+      },
+      {
+        "id": "clock-tower-flyer",
+        "name": "Clock Tower Flyer",
+        "type": "OBJECT",
+        "description": "A flyer handed to Marty by a woman collecting donations to save the clock tower. It records the exact date and time of the lightning strike — information that becomes essential for powering the DeLorean's return trip.\n",
+        "tags": [
+          "time-travel"
+        ]
+      },
+      {
+        "id": "guitar",
+        "name": "Guitar",
+        "type": "OBJECT",
+        "description": "Marty's instrument. He plays a blistering rendition of 'Johnny B. Goode' at the Enchantment Under the Sea dance, inadvertently inventing rock and roll before its time — a temporal paradox played for comedy.\n",
+        "tags": [
+          "iconic"
+        ]
+      },
+      {
+        "id": "time-machine-test",
+        "name": "Time Machine Test",
+        "type": "EVENT",
+        "description": "Doc Brown demonstrates the DeLorean at Twin Pines Mall at 1:15 AM, sending Einstein the dog one minute into the future. Moments later, Libyan terrorists arrive to reclaim their stolen plutonium.\n",
+        "properties": {
+          "participants": [
+            "doc-brown",
+            "marty"
+          ],
+          "location": "twin-pines-mall"
+        },
+        "tags": [
+          "sci-fi",
+          "time-travel"
+        ]
+      },
+      {
+        "id": "libyan-attack",
+        "name": "Libyan Attack",
+        "type": "EVENT",
+        "description": "Libyan terrorists track Doc to the mall and gun him down. Marty flees in the DeLorean, accidentally reaching 88 mph and triggering the flux capacitor. He is sent to November 5, 1955.\n",
+        "properties": {
+          "severity": 0.9,
+          "participants": [
+            "doc-brown",
+            "marty"
+          ],
+          "location": "twin-pines-mall"
+        },
+        "tags": [
+          "time-travel"
+        ]
+      },
+      {
+        "id": "arrival-1955",
+        "name": "Arrival in 1955",
+        "type": "EVENT",
+        "description": "Marty materialises in 1955, crashing through Farmer Peabody's barn and destroying one of the twin pines. The DeLorean is out of plutonium — he is stranded thirty years in the past.\n",
+        "properties": {
+          "participants": [
+            "marty"
+          ],
+          "location": "hill-valley-1955"
+        },
+        "tags": [
+          "time-travel"
+        ]
+      },
+      {
+        "id": "marty-hit-by-car",
+        "name": "Marty Hit by Car",
+        "type": "EVENT",
+        "description": "Marty is hit by Lorraine's father's car — the event that was supposed to happen to George. Lorraine nurses Marty back to health and develops a crush on him instead of George, threatening Marty's existence.\n",
+        "properties": {
+          "participants": [
+            "marty",
+            "lorraine"
+          ],
+          "location": "hill-valley-1955"
+        }
+      },
+      {
+        "id": "marty-meets-doc-1955",
+        "name": "Marty Meets Doc (1955)",
+        "type": "EVENT",
+        "description": "Marty finds the 1955 Doc Brown and proves he is from the future by describing the flux capacitor. Doc is astonished but agrees to help Marty get home — if they can find 1.21 gigawatts of power.\n",
+        "properties": {
+          "participants": [
+            "marty",
+            "doc-brown"
+          ],
+          "location": "docs-lab"
+        },
+        "tags": [
+          "time-travel"
+        ]
+      },
+      {
+        "id": "skateboard-chase",
+        "name": "Skateboard Chase",
+        "type": "EVENT",
+        "description": "Biff and his gang chase Marty through the town square. Marty improvises a skateboard from a child's scooter and outruns them, causing Biff to crash into a manure truck — a humiliation that echoes across both timelines.\n",
+        "properties": {
+          "participants": [
+            "marty",
+            "biff"
+          ],
+          "location": "hill-valley-1955"
+        }
+      },
+      {
+        "id": "enchantment-dance",
+        "name": "Enchantment Under the Sea Dance",
+        "type": "EVENT",
+        "description": "The high school dance where George and Lorraine must share their first kiss. Marty's plan to have George rescue Lorraine nearly fails when Biff assaults her in the parking lot. George, summoning unexpected courage, punches Biff unconscious. George and Lorraine kiss on the dance floor, and Marty's fading photo is restored.\n",
+        "properties": {
+          "severity": 0.9,
+          "participants": [
+            "marty",
+            "george",
+            "lorraine",
+            "biff"
+          ],
+          "location": "hill-valley-high"
+        },
+        "tags": [
+          "iconic"
+        ]
+      },
+      {
+        "id": "george-punches-biff",
+        "name": "George Punches Biff",
+        "type": "EVENT",
+        "description": "The story's pivotal moment. George arrives to rescue Lorraine from Biff's assault and, for the first time in his life, stands up to his bully. One punch knocks Biff out cold and transforms George's destiny — from lifelong victim to confident man.\n",
+        "properties": {
+          "severity": 1.0,
+          "participants": [
+            "george",
+            "biff",
+            "lorraine"
+          ],
+          "location": "hill-valley-high"
+        },
+        "tags": [
+          "iconic"
+        ]
+      },
+      {
+        "id": "lightning-strike",
+        "name": "Lightning Strike",
+        "type": "EVENT",
+        "description": "At 10:04 PM on November 12, 1955, lightning strikes the clock tower. Doc has rigged a cable from the tower to the street. The DeLorean races toward it at 88 mph, the lightning channels through the cable into the flux capacitor, and Marty is sent back to 1985.\n",
+        "properties": {
+          "severity": 1.0,
+          "participants": [
+            "marty",
+            "doc-brown"
+          ],
+          "location": "clock-tower"
+        },
+        "tags": [
+          "sci-fi",
+          "time-travel",
+          "iconic"
+        ]
+      },
+      {
+        "id": "return-to-1985",
+        "name": "Return to 1985",
+        "type": "EVENT",
+        "description": "Marty arrives back in 1985 at the mall — now named Lone Pine Mall. He races to find Doc, but arrives moments too late to prevent the shooting. However, Doc reveals he read Marty's warning letter and wore a bulletproof vest. The next morning, Marty discovers his family's life has been transformed: George is a successful author, Lorraine is fit and happy, and Biff now waxes their car.\n",
+        "properties": {
+          "participants": [
+            "marty",
+            "doc-brown"
+          ],
+          "location": "twin-pines-mall"
+        },
+        "tags": [
+          "time-travel"
+        ]
+      }
+    ],
+    "edges": [
+      {
+        "id": "marty-son-of-george",
+        "type": "KINSHIP",
+        "name": "son-of",
+        "source": "marty",
+        "target": "george"
+      },
+      {
+        "id": "marty-son-of-lorraine",
+        "type": "KINSHIP",
+        "name": "son-of",
+        "source": "marty",
+        "target": "lorraine"
+      },
+      {
+        "id": "george-married-to-lorraine",
+        "type": "KINSHIP",
+        "name": "married-to",
+        "source": "george",
+        "target": "lorraine",
+        "directed": false,
+        "scope": {
+          "range": {
+            "from": {
+              "type": "time",
+              "item": "1958"
+            },
+            "to": null
+          }
+        }
+      },
+      {
+        "id": "marty-friends-with-doc",
+        "type": "RELATIONSHIP",
+        "name": "friends-with",
+        "source": "marty",
+        "target": "doc-brown",
+        "directed": false
+      },
+      {
+        "id": "marty-dating-jennifer",
+        "type": "RELATIONSHIP",
+        "name": "dating",
+        "source": "marty",
+        "target": "jennifer",
+        "directed": false
+      },
+      {
+        "id": "lorraine-infatuated-with-marty",
+        "type": "RELATIONSHIP",
+        "name": "infatuated-with",
+        "source": "lorraine",
+        "target": "marty",
+        "description": "Lorraine develops a crush on Marty after nursing him — the affection meant for George",
+        "scope": {
+          "and": [
+            {
+              "type": "frame",
+              "item": "1955-timeline"
+            },
+            {
+              "range": {
+                "from": {
+                  "type": "time",
+                  "item": "1955-11-05"
+                },
+                "to": {
+                  "type": "time",
+                  "item": "1955-11-12"
+                }
+              }
+            }
+          ]
+        }
+      },
+      {
+        "id": "george-rescues-lorraine",
+        "type": "RELATIONSHIP",
+        "name": "rescues",
+        "source": "george",
+        "target": "lorraine",
+        "scope": {
+          "type": "time",
+          "item": "1955-11-12"
+        }
+      },
+      {
+        "id": "biff-bullies-george",
+        "type": "CONFLICT",
+        "name": "bullies",
+        "source": "biff",
+        "target": "george",
+        "scope": {
+          "range": {
+            "from": null,
+            "to": {
+              "type": "time",
+              "item": "1955-11-12"
+            }
+          }
+        }
+      },
+      {
+        "id": "biff-pursues-lorraine",
+        "type": "CONFLICT",
+        "name": "pursues",
+        "source": "biff",
+        "target": "lorraine",
+        "scope": {
+          "type": "frame",
+          "item": "1955-timeline"
+        }
+      },
+      {
+        "id": "biff-supervises-george",
+        "type": "CONFLICT",
+        "name": "supervises",
+        "source": "biff",
+        "target": "george",
+        "description": "In the original 1985, Biff is George's supervisor and still bullies him",
+        "scope": {
+          "and": [
+            {
+              "type": "frame",
+              "item": "original-1985"
+            },
+            {
+              "type": "time",
+              "item": "1985-10-26"
+            }
+          ]
+        }
+      },
+      {
+        "id": "biff-waxes-george-car",
+        "type": "RELATIONSHIP",
+        "name": "works-for",
+        "source": "biff",
+        "target": "george",
+        "description": "In the improved 1985, Biff now waxes George's car — the power dynamic is reversed",
+        "scope": {
+          "and": [
+            {
+              "type": "frame",
+              "item": "improved-1985"
+            },
+            {
+              "type": "time",
+              "item": "1985-10-26"
+            }
+          ]
+        }
+      },
+      {
+        "id": "george-successful-author",
+        "type": "RELATIONSHIP",
+        "name": "fulfilled-by",
+        "source": "george",
+        "target": "hill-valley-1985",
+        "description": "In the improved 1985, George is a confident, successful science fiction author",
+        "scope": {
+          "and": [
+            {
+              "type": "frame",
+              "item": "improved-1985"
+            },
+            {
+              "type": "time",
+              "item": "1985-10-26"
+            }
+          ]
+        }
+      },
+      {
+        "id": "doc-owns-delorean",
+        "type": "OWNERSHIP",
+        "name": "built",
+        "source": "doc-brown",
+        "target": "delorean"
+      },
+      {
+        "id": "doc-invented-flux",
+        "type": "OWNERSHIP",
+        "name": "invented",
+        "source": "doc-brown",
+        "target": "flux-capacitor"
+      },
+      {
+        "id": "flux-in-delorean",
+        "type": "SPATIAL",
+        "name": "installed-in",
+        "source": "flux-capacitor",
+        "target": "delorean"
+      },
+      {
+        "id": "clock-tower-in-hill-valley",
+        "type": "SPATIAL",
+        "name": "part-of",
+        "source": "clock-tower",
+        "target": "hill-valley-1955"
+      },
+      {
+        "id": "high-school-in-hill-valley",
+        "type": "SPATIAL",
+        "name": "part-of",
+        "source": "hill-valley-high",
+        "target": "hill-valley-1955"
+      },
+      {
+        "id": "docs-lab-in-hill-valley",
+        "type": "SPATIAL",
+        "name": "part-of",
+        "source": "docs-lab",
+        "target": "hill-valley-1955"
+      },
+      {
+        "id": "mall-in-hill-valley",
+        "type": "SPATIAL",
+        "name": "part-of",
+        "source": "twin-pines-mall",
+        "target": "hill-valley-1985"
+      },
+      {
+        "id": "marty-in-time-machine-test",
+        "type": "PARTICIPATION",
+        "name": "witnesses",
+        "source": "marty",
+        "target": "time-machine-test"
+      },
+      {
+        "id": "doc-brown-in-time-machine-test",
+        "type": "PARTICIPATION",
+        "name": "conducts",
+        "source": "doc-brown",
+        "target": "time-machine-test"
+      },
+      {
+        "id": "marty-in-libyan-attack",
+        "type": "PARTICIPATION",
+        "name": "flees-during",
+        "source": "marty",
+        "target": "libyan-attack"
+      },
+      {
+        "id": "doc-brown-in-libyan-attack",
+        "type": "PARTICIPATION",
+        "name": "shot-during",
+        "source": "doc-brown",
+        "target": "libyan-attack"
+      },
+      {
+        "id": "marty-in-arrival-1955",
+        "type": "PARTICIPATION",
+        "name": "arrives-in",
+        "source": "marty",
+        "target": "arrival-1955"
+      },
+      {
+        "id": "marty-in-marty-hit-by-car",
+        "type": "PARTICIPATION",
+        "name": "injured-in",
+        "source": "marty",
+        "target": "marty-hit-by-car"
+      },
+      {
+        "id": "lorraine-in-marty-hit-by-car",
+        "type": "PARTICIPATION",
+        "name": "nurses-after",
+        "source": "lorraine",
+        "target": "marty-hit-by-car"
+      },
+      {
+        "id": "marty-in-marty-meets-doc-1955",
+        "type": "PARTICIPATION",
+        "name": "initiates",
+        "source": "marty",
+        "target": "marty-meets-doc-1955"
+      },
+      {
+        "id": "doc-brown-in-marty-meets-doc-1955",
+        "type": "PARTICIPATION",
+        "name": "convinced-during",
+        "source": "doc-brown",
+        "target": "marty-meets-doc-1955"
+      },
+      {
+        "id": "marty-in-skateboard-chase",
+        "type": "PARTICIPATION",
+        "name": "flees-in",
+        "source": "marty",
+        "target": "skateboard-chase"
+      },
+      {
+        "id": "biff-in-skateboard-chase",
+        "type": "PARTICIPATION",
+        "name": "pursues-in",
+        "source": "biff",
+        "target": "skateboard-chase"
+      },
+      {
+        "id": "marty-in-enchantment-dance",
+        "type": "PARTICIPATION",
+        "name": "orchestrates",
+        "source": "marty",
+        "target": "enchantment-dance"
+      },
+      {
+        "id": "george-in-enchantment-dance",
+        "type": "PARTICIPATION",
+        "name": "attends",
+        "source": "george",
+        "target": "enchantment-dance"
+      },
+      {
+        "id": "lorraine-in-enchantment-dance",
+        "type": "PARTICIPATION",
+        "name": "attends",
+        "source": "lorraine",
+        "target": "enchantment-dance"
+      },
+      {
+        "id": "biff-in-enchantment-dance",
+        "type": "PARTICIPATION",
+        "name": "crashes",
+        "source": "biff",
+        "target": "enchantment-dance"
+      },
+      {
+        "id": "george-in-george-punches-biff",
+        "type": "PARTICIPATION",
+        "name": "punches-in",
+        "source": "george",
+        "target": "george-punches-biff"
+      },
+      {
+        "id": "biff-in-george-punches-biff",
+        "type": "PARTICIPATION",
+        "name": "knocked-out-in",
+        "source": "biff",
+        "target": "george-punches-biff"
+      },
+      {
+        "id": "lorraine-in-george-punches-biff",
+        "type": "PARTICIPATION",
+        "name": "witnesses",
+        "source": "lorraine",
+        "target": "george-punches-biff"
+      },
+      {
+        "id": "marty-in-lightning-strike",
+        "type": "PARTICIPATION",
+        "name": "drives-during",
+        "source": "marty",
+        "target": "lightning-strike"
+      },
+      {
+        "id": "doc-brown-in-lightning-strike",
+        "type": "PARTICIPATION",
+        "name": "engineers",
+        "source": "doc-brown",
+        "target": "lightning-strike"
+      },
+      {
+        "id": "marty-in-return-to-1985",
+        "type": "PARTICIPATION",
+        "name": "returns-in",
+        "source": "marty",
+        "target": "return-to-1985"
+      },
+      {
+        "id": "doc-brown-in-return-to-1985",
+        "type": "PARTICIPATION",
+        "name": "survives-in",
+        "source": "doc-brown",
+        "target": "return-to-1985"
+      },
+      {
+        "id": "time-machine-test-at-twin-pines-mall",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "time-machine-test",
+        "target": "twin-pines-mall"
+      },
+      {
+        "id": "libyan-attack-at-twin-pines-mall",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "libyan-attack",
+        "target": "twin-pines-mall"
+      },
+      {
+        "id": "arrival-1955-at-hill-valley-1955",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "arrival-1955",
+        "target": "hill-valley-1955"
+      },
+      {
+        "id": "marty-hit-by-car-at-hill-valley-1955",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "marty-hit-by-car",
+        "target": "hill-valley-1955"
+      },
+      {
+        "id": "marty-meets-doc-1955-at-docs-lab",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "marty-meets-doc-1955",
+        "target": "docs-lab"
+      },
+      {
+        "id": "skateboard-chase-at-hill-valley-1955",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "skateboard-chase",
+        "target": "hill-valley-1955"
+      },
+      {
+        "id": "enchantment-dance-at-hill-valley-high",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "enchantment-dance",
+        "target": "hill-valley-high"
+      },
+      {
+        "id": "george-punches-biff-at-hill-valley-high",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "george-punches-biff",
+        "target": "hill-valley-high"
+      },
+      {
+        "id": "lightning-strike-at-clock-tower",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "lightning-strike",
+        "target": "clock-tower"
+      },
+      {
+        "id": "return-to-1985-at-twin-pines-mall",
+        "type": "OCCURRENCE",
+        "name": "occurs-at",
+        "source": "return-to-1985",
+        "target": "twin-pines-mall"
+      }
+    ],
+    "frames": [
+      {
+        "id": "original-1985",
+        "name": "Original 1985",
+        "description": "The timeline Marty leaves — George is a pushover, Biff is his boss, the family is unhappy."
+      },
+      {
+        "id": "1955-timeline",
+        "name": "1955 Adventure",
+        "parent": "original-1985",
+        "branches_at": "1985-10-26",
+        "description": "Marty's time in 1955, where his actions alter the course of his parents' lives.",
+        "relations": [
+          {
+            "target": "original-1985",
+            "type": "BRANCHES_INTO",
+            "at": "1985-10-26"
+          }
+        ]
+      },
+      {
+        "id": "improved-1985",
+        "name": "Improved 1985",
+        "parent": "1955-timeline",
+        "branches_at": "1955-11-12",
+        "description": "The new timeline Marty returns to — George is a confident author, Lorraine is happy, Biff waxes their car.",
+        "relations": [
+          {
+            "target": "1955-timeline",
+            "type": "BRANCHES_INTO",
+            "at": "1955-11-12"
+          }
+        ]
+      }
+    ],
+    "constraints": [
+      {
+        "id": "paradox-prevention",
+        "name": "Marty must ensure his parents meet",
+        "description": "If George and Lorraine do not fall in love, Marty and his siblings will never be born. The fading family photo visualises this constraint.\n",
+        "severity": "ERROR",
+        "scope": {
+          "type": "node",
+          "item": "marty"
+        }
+      }
+    ]
+  },
+  "narrative": {
+    "lenses": [
+      {
+        "id": "marty-pov",
+        "type": "SIMPLE",
+        "perspective": {
+          "type": "CHARACTER_BOUND",
+          "anchor": "marty",
+          "person": "THIRD"
+        },
+        "knowledge": {
+          "mode": "CHARACTER_KNOWLEDGE",
+          "include_subconscious": false,
+          "include_wrong_beliefs": true
+        },
+        "temporal_position": {
+          "type": "IN_MOMENT"
+        },
+        "emotional": {
+          "source": "CHARACTER_STATE",
+          "bias": {
+            "toward": [
+              "george",
+              "lorraine",
+              "doc-brown"
+            ],
+            "bias_strength": 0.6
+          }
+        },
+        "voice": {
+          "vocabulary_level": "COLLOQUIAL",
+          "sentence_tendency": "SHORT_STACCATO",
+          "inner_monologue": true,
+          "metaphor_density": "LOW",
+          "verbal_tics": [
+            "this is heavy",
+            "what the hell"
+          ]
+        },
+        "reliability": {
+          "level": "RELIABLE"
+        }
+      }
+    ],
+    "beats": [
+      {
+        "id": "main-storyline",
+        "name": "Back to the Future",
+        "description": "A teenager is sent to 1955, must reunite his future parents, and find a way home."
+      },
+      {
+        "id": "setup-1985",
+        "name": "Late for School",
+        "description": "Marty's life in 1985 — his band rejection, his loser father, Biff. Doc calls him to the mall at 1 AM.",
+        "parent": "main-storyline",
+        "order": 1,
+        "node_ids": [
+          "marty",
+          "doc-brown",
+          "george",
+          "lorraine",
+          "biff",
+          "jennifer",
+          "hill-valley-1985",
+          "delorean"
+        ],
+        "edge_ids": [
+          "marty-son-of-george",
+          "marty-son-of-lorraine",
+          "biff-bullies-george",
+          "marty-friends-with-doc",
+          "marty-dating-jennifer"
+        ],
+        "function": "HOOK",
+        "tension": 0.2,
+        "emotional_target": -0.1,
+        "transition": {
+          "type": "CONTINUATION"
+        }
+      },
+      {
+        "id": "the-test",
+        "name": "Twin Pines Mall",
+        "description": "Doc demonstrates the time machine. Libyans attack. Marty flees in the DeLorean and hits 88 mph.",
+        "parent": "main-storyline",
+        "order": 2,
+        "node_ids": [
+          "marty",
+          "doc-brown",
+          "delorean",
+          "flux-capacitor",
+          "twin-pines-mall",
+          "time-machine-test",
+          "libyan-attack"
+        ],
+        "edge_ids": [
+          "doc-owns-delorean",
+          "doc-invented-flux",
+          "flux-in-delorean",
+          "marty-in-time-machine-test",
+          "doc-brown-in-libyan-attack",
+          "marty-in-libyan-attack"
+        ],
+        "function": "INCITING_INCIDENT",
+        "tension": 0.7,
+        "emotional_target": -0.6,
+        "reveals": [
+          {
+            "target": "delorean",
+            "degree": "FULL"
+          },
+          {
+            "target": "flux-capacitor",
+            "degree": "FULL"
+          }
+        ],
+        "transition": {
+          "type": "CUT"
+        }
+      },
+      {
+        "id": "stranded-in-1955",
+        "name": "Where Am I?",
+        "description": "Marty arrives in 1955. No plutonium. He accidentally prevents his parents' meeting and is hit by a car instead of George.",
+        "parent": "main-storyline",
+        "order": 3,
+        "node_ids": [
+          "marty",
+          "lorraine",
+          "george",
+          "hill-valley-1955",
+          "arrival-1955",
+          "marty-hit-by-car",
+          "photo"
+        ],
+        "edge_ids": [
+          "marty-in-arrival-1955",
+          "marty-in-marty-hit-by-car",
+          "lorraine-in-marty-hit-by-car",
+          "lorraine-infatuated-with-marty"
+        ],
+        "function": "FIRST_THRESHOLD",
+        "tension": 0.5,
+        "emotional_target": -0.4,
+        "reveals": [
+          {
+            "target": "photo",
+            "degree": "PARTIAL"
+          }
+        ],
+        "transition": {
+          "type": "CONTINUATION"
+        }
+      },
+      {
+        "id": "the-plan",
+        "name": "The Plan",
+        "description": "Marty finds Doc in 1955. Together they hatch a plan: reunite George and Lorraine at the dance, and use a lightning strike to power the return trip.",
+        "parent": "main-storyline",
+        "order": 4,
+        "node_ids": [
+          "marty",
+          "doc-brown",
+          "clock-tower-flyer",
+          "clock-tower",
+          "docs-lab",
+          "marty-meets-doc-1955"
+        ],
+        "edge_ids": [
+          "marty-in-marty-meets-doc-1955",
+          "doc-brown-in-marty-meets-doc-1955",
+          "clock-tower-in-hill-valley"
+        ],
+        "function": "RISING_ACTION",
+        "tension": 0.4,
+        "emotional_target": 0.1,
+        "reveals": [
+          {
+            "target": "clock-tower-flyer",
+            "degree": "FULL"
+          }
+        ],
+        "transition": {
+          "type": "CONTINUATION"
+        }
+      },
+      {
+        "id": "matchmaking",
+        "name": "Matchmaking",
+        "description": "Marty tries to get George to ask Lorraine to the dance. Biff interferes. The skateboard chase humiliates Biff and makes George curious.",
+        "parent": "main-storyline",
+        "order": 5,
+        "node_ids": [
+          "marty",
+          "george",
+          "lorraine",
+          "biff",
+          "hill-valley-1955",
+          "skateboard-chase"
+        ],
+        "edge_ids": [
+          "biff-bullies-george",
+          "biff-pursues-lorraine",
+          "marty-in-skateboard-chase",
+          "biff-in-skateboard-chase"
+        ],
+        "function": "RISING_ACTION",
+        "tension": 0.5,
+        "emotional_target": -0.2,
+        "transition": {
+          "type": "CONTINUATION"
+        }
+      },
+      {
+        "id": "the-dance",
+        "name": "Enchantment Under the Sea",
+        "description": "The dance. Biff assaults Lorraine. George punches Biff. George and Lorraine kiss. The photo restores. Marty plays Johnny B. Goode.",
+        "parent": "main-storyline",
+        "order": 6,
+        "node_ids": [
+          "marty",
+          "george",
+          "lorraine",
+          "biff",
+          "guitar",
+          "hill-valley-high",
+          "enchantment-dance",
+          "george-punches-biff",
+          "photo"
+        ],
+        "edge_ids": [
+          "george-rescues-lorraine",
+          "marty-in-enchantment-dance",
+          "george-in-enchantment-dance",
+          "lorraine-in-enchantment-dance",
+          "biff-in-enchantment-dance",
+          "george-in-george-punches-biff",
+          "biff-in-george-punches-biff"
+        ],
+        "function": "CLIMAX",
+        "tension": 0.9,
+        "emotional_target": 0.5,
+        "reveals": [
+          {
+            "target": "george-punches-biff",
+            "degree": "FULL"
+          },
+          {
+            "target": "photo",
+            "degree": "FULL"
+          }
+        ],
+        "transition": {
+          "type": "CUT"
+        }
+      },
+      {
+        "id": "the-return",
+        "name": "Back to the Future",
+        "description": "The lightning strike sends Marty home. Doc survives thanks to a bulletproof vest. Marty wakes to a transformed family.",
+        "parent": "main-storyline",
+        "order": 7,
+        "node_ids": [
+          "marty",
+          "doc-brown",
+          "delorean",
+          "clock-tower",
+          "lightning-strike",
+          "return-to-1985",
+          "hill-valley-1985"
+        ],
+        "edge_ids": [
+          "marty-in-lightning-strike",
+          "doc-brown-in-lightning-strike",
+          "marty-in-return-to-1985",
+          "doc-brown-in-return-to-1985"
+        ],
+        "function": "RESOLUTION",
+        "tension": 0.7,
+        "emotional_target": 0.8,
+        "reveals": [
+          {
+            "target": "return-to-1985",
+            "degree": "FULL"
+          }
+        ],
+        "transition": {
+          "type": "FADE"
+        }
+      }
+    ],
+    "devices": [
+      {
+        "id": "photo-fading",
+        "type": "CHEKHOV_GUN",
+        "description": "The family photo fades as Marty's existence is threatened, then restores when George and Lorraine kiss — a visual countdown for the paradox.",
+        "setup": [
+          "stranded-in-1955"
+        ],
+        "payoff": [
+          "the-dance"
+        ]
+      },
+      {
+        "id": "clock-tower-flyer-device",
+        "type": "SETUP_PAYOFF",
+        "description": "A woman hands Marty a flyer about saving the clock tower. The flyer contains the exact date and time of the lightning strike — the key to getting home.",
+        "setup": [
+          "setup-1985"
+        ],
+        "payoff": [
+          "the-plan"
+        ]
+      },
+      {
+        "id": "bulletproof-vest",
+        "type": "SETUP_PAYOFF",
+        "description": "Marty writes Doc a warning letter about the Libyans. Doc tears it up — but secretly tapes it together and wears a bulletproof vest. The payoff: Doc survives.",
+        "setup": [
+          "the-plan"
+        ],
+        "payoff": [
+          "the-return"
+        ]
+      },
+      {
+        "id": "marty-as-darth-vader",
+        "type": "DRAMATIC_IRONY",
+        "description": "Marty impersonates 'Darth Vader from the planet Vulcan' to scare George into asking Lorraine out — using future pop culture references his father cannot recognise.",
+        "setup": [
+          "matchmaking"
+        ],
+        "payoff": [
+          "the-dance"
+        ]
+      }
+    ],
+    "threads": [
+      {
+        "id": "temporal-paradox",
+        "type": "THEME",
+        "name": "Temporal Paradox",
+        "description": "Actions in the past have cascading consequences in the future. Marty's presence in 1955 disrupts causality: he prevents his parents' meeting, watches himself fade from a photo, and must actively engineer the future he came from.\n",
+        "appearances": [
+          {
+            "beat_id": "the-test",
+            "description": "The time machine enables temporal displacement but provides no safety net"
+          },
+          {
+            "beat_id": "stranded-in-1955",
+            "description": "Marty disrupts his parents' first meeting — the paradox begins"
+          },
+          {
+            "beat_id": "matchmaking",
+            "description": "Every attempt to fix the timeline risks further disruption"
+          },
+          {
+            "beat_id": "the-dance",
+            "description": "The paradox resolves when George and Lorraine kiss — the photo restores"
+          },
+          {
+            "beat_id": "the-return",
+            "description": "The improved 1985 is itself a paradox — Marty remembers a past that no longer exists"
+          }
+        ]
+      },
+      {
+        "id": "courage-and-destiny",
+        "type": "THEME",
+        "name": "Courage and Destiny",
+        "description": "A single act of courage can rewrite a lifetime. George's punch transforms him from victim to hero. The theme mirrors Marty's own arc: he is told never to be called 'chicken,' and his journey in 1955 is ultimately about finding the nerve to act.\n",
+        "appearances": [
+          {
+            "beat_id": "setup-1985",
+            "description": "George is a coward, bullied by Biff for thirty years — destiny as resignation"
+          },
+          {
+            "beat_id": "matchmaking",
+            "description": "Marty tries to teach George confidence — destiny as possibility"
+          },
+          {
+            "beat_id": "the-dance",
+            "description": "George punches Biff — one moment of courage rewrites everything"
+          },
+          {
+            "beat_id": "the-return",
+            "description": "The new 1985 shows the compounding effect of that single brave act"
+          }
+        ]
+      },
+      {
+        "id": "clock-motif",
+        "type": "MOTIF",
+        "name": "Clocks and Time",
+        "description": "Clocks appear throughout the film as markers of time's passage and manipulation. Doc's lab is filled with clocks, the broken clock tower defines Hill Valley, and the climax literally races against the clock.\n",
+        "appearances": [
+          {
+            "beat_id": "setup-1985",
+            "description": "Doc's lab is full of synchronised clocks — time as obsession"
+          },
+          {
+            "beat_id": "the-plan",
+            "description": "The clock tower flyer reveals the exact moment of the lightning strike"
+          },
+          {
+            "beat_id": "the-dance",
+            "description": "Marty races against the clock to get to the wire in time"
+          },
+          {
+            "beat_id": "the-return",
+            "description": "The clock tower cable, the countdown, Doc's watch — every second matters"
+          }
+        ]
+      }
+    ],
+    "formats": [
+      {
+        "id": "screenplay",
+        "name": "Feature Film Screenplay",
+        "type": "SCREENPLAY",
+        "structure": {
+          "type": "film",
+          "constraints": {
+            "count": 1,
+            "target_runtime": "116 minutes"
+          },
+          "children": {
+            "type": "act",
+            "constraints": {
+              "count": 3
+            },
+            "children": {
+              "type": "sequence",
+              "constraints": {
+                "count": "2-4"
+              },
+              "children": {
+                "type": "scene",
+                "constraints": {
+                  "target_runtime": "2-5 minutes"
+                }
+              }
+            }
+          }
+        },
+        "settings": {
+          "pacing": {
+            "act": {
+              "tension_shape": "THREE_ACT"
+            },
+            "sequence": {
+              "tension_shape": "MINI_ARC",
+              "end_hook": "USUALLY"
+            }
+          }
+        }
+      }
+    ],
+    "variants": [
+      {
+        "type": "CANON",
+        "description": "The canonical story — Marty travels to 1955, fixes the timeline, and returns to an improved 1985"
+      }
+    ]
+  }
+}

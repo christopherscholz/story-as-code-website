@@ -1,0 +1,231 @@
+<!DOCTYPE html><html lang="en" class=""> <head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="description" content="Declarative YAML specification for defining worlds as temporal graphs and deriving outputs from them."><link rel="canonical" href="https://story-as-code.dev/dev/license/"><title>License — Story as Code</title><!-- Prevent FOUC for dark mode --><script>
+      (function () {
+        const stored = localStorage.getItem('theme');
+        if (
+          stored === 'dark' ||
+          (!stored && window.matchMedia('(prefers-color-scheme: dark)').matches)
+        ) {
+          document.documentElement.classList.add('dark');
+        }
+      })();
+    </script><link rel="stylesheet" href="/dev/_astro/code-of-conduct.IfO07MdY.css"></head> <body class="min-h-screen flex flex-col"> <header class="sticky top-0 z-50 border-b border-slate-200 dark:border-slate-800 bg-white/80 dark:bg-slate-950/80 backdrop-blur-lg"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8"> <div class="flex items-center justify-between h-16"> <!-- Logo --> <a href="/dev/" class="flex items-center gap-3 group"> <span class="text-2xl" aria-hidden="true">&#9670;</span> <span class="font-display text-lg font-semibold tracking-tight text-slate-900 dark:text-white group-hover:text-violet-600 dark:group-hover:text-violet-400 transition-colors">
+Story as Code
+</span> <span class="hidden sm:inline-block text-[0.65rem] font-mono px-1.5 py-0.5 rounded bg-amber-100 text-amber-700 dark:bg-amber-900/30 dark:text-amber-300 uppercase tracking-wider font-medium">
+Spec
+</span> </a> <!-- Desktop Nav --> <nav class="hidden md:flex items-center gap-1" aria-label="Main navigation"> <a href="/dev/" class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"> Home </a><a href="/dev/scope/" class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"> Scope </a><a href="/dev/schemas/" class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"> Schemas </a><a href="/dev/examples/" class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"> Examples </a><a href="/dev/contributing/" class="px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 hover:bg-slate-50 dark:hover:bg-slate-800/50"> Contributing </a> </nav> <!-- Right side --> <div class="flex items-center gap-2"> <div id="search-container" class="relative"> <button id="search-trigger" class="flex items-center gap-2 px-3 py-1.5 text-sm text-slate-500 dark:text-slate-400 border border-slate-200 dark:border-slate-700 rounded-lg hover:border-violet-300 dark:hover:border-violet-700 transition-colors" aria-label="Search"> <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path> </svg> <span class="hidden sm:inline">Search</span> <kbd class="hidden sm:inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[0.6rem] font-mono border border-slate-200 dark:border-slate-700 rounded bg-slate-50 dark:bg-slate-800 text-slate-400"> <span>&#8984;</span>K
+</kbd> </button> <!-- Search modal --> <div id="search-modal" class="hidden fixed inset-0 z-100 items-start justify-center pt-[15vh]"> <div class="absolute inset-0 bg-black/50 backdrop-blur-sm" id="search-backdrop"></div> <div class="relative w-full max-w-2xl mx-4 bg-white dark:bg-slate-900 rounded-xl shadow-2xl border border-slate-200 dark:border-slate-700 overflow-hidden"> <div id="search-widget" class="p-4"></div> </div> </div> </div> <link href="/dev/pagefind/pagefind-ui.css" rel="stylesheet"> <script type="module">const v="modulepreload",g=function(e){return"/dev/"+e},f={},w=function(s,i,L){let d=Promise.resolve();if(i&&i.length>0){let r=function(t){return Promise.all(t.map(c=>Promise.resolve(c).then(l=>({status:"fulfilled",value:l}),l=>({status:"rejected",reason:l}))))};document.getElementsByTagName("link");const n=document.querySelector("meta[property=csp-nonce]"),m=n?.nonce||n?.getAttribute("nonce");d=r(i.map(t=>{if(t=g(t),t in f)return;f[t]=!0;const c=t.endsWith(".css"),l=c?'[rel="stylesheet"]':"";if(document.querySelector(`link[href="${t}"]${l}`))return;const o=document.createElement("link");if(o.rel=c?"stylesheet":v,c||(o.as="script"),o.crossOrigin="",o.href=t,m&&o.setAttribute("nonce",m),document.head.appendChild(o),c)return new Promise((y,E)=>{o.addEventListener("load",y),o.addEventListener("error",()=>E(new Error(`Unable to preload CSS for ${t}`)))})}))}function u(r){const n=new Event("vite:preloadError",{cancelable:!0});if(n.payload=r,window.dispatchEvent(n),!n.defaultPrevented)throw r}return d.then(r=>{for(const n of r||[])n.status==="rejected"&&u(n.reason);return s().catch(u)})};let h=!1;function p(){const e=document.getElementById("search-modal");e?.classList.remove("hidden"),e?.classList.add("flex"),document.body.style.overflow="hidden",h?setTimeout(()=>{document.querySelector("#search-widget input")?.focus()},50):w(()=>import("/dev/pagefind/pagefind-ui.js"),__VITE_PRELOAD__).then(()=>{new PagefindUI({element:"#search-widget",showSubResults:!0,showImages:!1}),h=!0,setTimeout(()=>{document.querySelector("#search-widget input")?.focus()},100)}).catch(()=>{const s=document.getElementById("search-widget");s&&(s.innerHTML='<p class="text-sm text-slate-500 p-4">Search index not available. Run <code>npm run build</code> first.</p>')})}function a(){const e=document.getElementById("search-modal");e?.classList.remove("flex"),e?.classList.add("hidden"),document.body.style.overflow=""}document.getElementById("search-trigger")?.addEventListener("click",p);document.getElementById("search-backdrop")?.addEventListener("click",a);document.addEventListener("keydown",e=>{(e.metaKey||e.ctrlKey)&&e.key==="k"&&(e.preventDefault(),document.getElementById("search-modal")?.classList.contains("hidden")?p():a()),e.key==="Escape"&&a()});</script> <div id="version-switcher" class="relative inline-block"> <button id="version-btn" class="flex items-center gap-1.5 px-2.5 py-1 text-xs font-mono rounded-md border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-400 hover:border-violet-300 dark:hover:border-violet-700 transition-colors" aria-expanded="false"> <span id="version-label">dev</span> <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path> </svg> </button> <div id="version-dropdown" class="hidden absolute right-0 mt-1 w-40 bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg shadow-lg z-50 py-1"> <!-- Populated dynamically --> </div> </div> <script type="module">const o=document.getElementById("version-btn"),s=document.getElementById("version-dropdown"),d=document.getElementById("version-label"),r=window.location.pathname.split("/").filter(Boolean),i=r[0]||"dev";d&&(d.textContent=i);async function m(){try{const t=await fetch("/versions.json");if(!t.ok)return;const l=await t.json();if(!s)return;s.innerHTML="";for(const e of l.versions){const n=document.createElement("a"),c=e.version===i||(e.aliases||[]).includes(i);if(n.href=e.path+r.slice(1).join("/"),n.className=`block px-3 py-1.5 text-xs font-mono transition-colors ${c?"text-violet-600 dark:text-violet-400 bg-violet-50 dark:bg-violet-900/20 font-semibold":"text-slate-600 dark:text-slate-400 hover:bg-slate-50 dark:hover:bg-slate-800"}`,n.textContent=e.version,e.aliases?.length){const a=document.createElement("span");a.className="ml-1.5 text-[0.6rem] text-slate-400 dark:text-slate-500",a.textContent=`(${e.aliases.join(", ")})`,n.appendChild(a)}s.appendChild(n)}}catch{}}o?.addEventListener("click",()=>{const t=o.getAttribute("aria-expanded")==="true";o.setAttribute("aria-expanded",String(!t)),s?.classList.toggle("hidden"),t||m()});document.addEventListener("click",t=>{document.getElementById("version-switcher")?.contains(t.target)||(s?.classList.add("hidden"),o?.setAttribute("aria-expanded","false"))});</script> <button id="dark-mode-toggle" class="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors rounded-md hover:bg-slate-100 dark:hover:bg-slate-800" aria-label="Toggle dark mode"> <!-- Sun icon (shown in dark mode) --> <svg class="w-5 h-5 hidden dark:block" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path> </svg> <!-- Moon icon (shown in light mode) --> <svg class="w-5 h-5 block dark:hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z"></path> </svg> </button> <script type="module">const t=document.getElementById("dark-mode-toggle");t?.addEventListener("click",()=>{const e=document.documentElement.classList.toggle("dark");localStorage.setItem("theme",e?"dark":"light")});</script> <a href="https://github.com/christopherscholz/story-as-code-spec" class="p-2 text-slate-500 dark:text-slate-400 hover:text-slate-700 dark:hover:text-slate-300 transition-colors" target="_blank" rel="noopener noreferrer" aria-label="GitHub"> <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"> <path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"></path> </svg> </a> <!-- Mobile menu button --> <button id="mobile-menu-toggle" class="md:hidden p-2 text-slate-500 dark:text-slate-400" aria-label="Toggle menu" aria-expanded="false"> <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path> </svg> </button> </div> </div> </div> <!-- Mobile Nav --> <nav id="mobile-menu" class="hidden md:hidden border-t border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 px-4 pb-4" aria-label="Mobile navigation"> <a href="/" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400"> Home </a><a href="/scope/" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400"> Scope </a><a href="/schemas/" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400"> Schemas </a><a href="/examples/" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400"> Examples </a><a href="/contributing/" class="block px-3 py-2 rounded-md text-sm font-medium transition-colors text-slate-600 dark:text-slate-400"> Contributing </a> </nav> </header> <script type="module">const e=document.getElementById("mobile-menu-toggle"),n=document.getElementById("mobile-menu");e?.addEventListener("click",()=>{const t=e.getAttribute("aria-expanded")==="true";e.setAttribute("aria-expanded",String(!t)),n?.classList.toggle("hidden")});</script> <main class="flex-1 max-w-360 mx-auto w-full px-4 sm:px-6 lg:px-8">  <div class="flex gap-8 py-8">  <article class="flex-1 min-w-0"> <div class="prose prose-slate dark:prose-invert max-w-none" data-pagefind-body>  <h1 class="font-display text-4xl font-bold text-slate-900 dark:text-white mb-6">
+License
+</h1> <pre class="astro-code astro-code-themes github-light github-dark" style="background-color:#fff;--shiki-dark-bg:#24292e;color:#24292e;--shiki-dark:#e1e4e8; overflow-x: auto; white-space: pre-wrap; word-wrap: break-word;" tabindex="0" data-language="plaintext"><code><span class="line"><span>                                 Apache License</span></span>
+<span class="line"><span>                           Version 2.0, January 2004</span></span>
+<span class="line"><span>                        http://www.apache.org/licenses/</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   TERMS AND CONDITIONS FOR USE, REPRODUCTION, AND DISTRIBUTION</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   1. Definitions.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "License" shall mean the terms and conditions for use, reproduction,</span></span>
+<span class="line"><span>      and distribution as defined by Sections 1 through 9 of this document.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Licensor" shall mean the copyright owner or entity authorized by</span></span>
+<span class="line"><span>      the copyright owner that is granting the License.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Legal Entity" shall mean the union of the acting entity and all</span></span>
+<span class="line"><span>      other entities that control, are controlled by, or are under common</span></span>
+<span class="line"><span>      control with that entity. For the purposes of this definition,</span></span>
+<span class="line"><span>      "control" means (i) the power, direct or indirect, to cause the</span></span>
+<span class="line"><span>      direction or management of such entity, whether by contract or</span></span>
+<span class="line"><span>      otherwise, or (ii) ownership of fifty percent (50%) or more of the</span></span>
+<span class="line"><span>      outstanding shares, or (iii) beneficial ownership of such entity.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "You" (or "Your") shall mean an individual or Legal Entity</span></span>
+<span class="line"><span>      exercising permissions granted by this License.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Source" form shall mean the preferred form for making modifications,</span></span>
+<span class="line"><span>      including but not limited to software source code, documentation</span></span>
+<span class="line"><span>      source, and configuration files.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Object" form shall mean any form resulting from mechanical</span></span>
+<span class="line"><span>      transformation or translation of a Source form, including but</span></span>
+<span class="line"><span>      not limited to compiled object code, generated documentation,</span></span>
+<span class="line"><span>      and conversions to other media types.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Work" shall mean the work of authorship, whether in Source or</span></span>
+<span class="line"><span>      Object form, made available under the License, as indicated by a</span></span>
+<span class="line"><span>      copyright notice that is included in or attached to the work</span></span>
+<span class="line"><span>      (an example is provided in the Appendix below).</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Derivative Works" shall mean any work, whether in Source or Object</span></span>
+<span class="line"><span>      form, that is based on (or derived from) the Work and for which the</span></span>
+<span class="line"><span>      editorial revisions, annotations, elaborations, or other modifications</span></span>
+<span class="line"><span>      represent, as a whole, an original work of authorship. For the purposes</span></span>
+<span class="line"><span>      of this License, Derivative Works shall not include works that remain</span></span>
+<span class="line"><span>      separable from, or merely link (or bind by name) to the interfaces of,</span></span>
+<span class="line"><span>      the Work and Derivative Works thereof.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Contribution" shall mean any work of authorship, including</span></span>
+<span class="line"><span>      the original version of the Work and any modifications or additions</span></span>
+<span class="line"><span>      to that Work or Derivative Works thereof, that is intentionally</span></span>
+<span class="line"><span>      submitted to Licensor for inclusion in the Work by the copyright owner</span></span>
+<span class="line"><span>      or by an individual or Legal Entity authorized to submit on behalf of</span></span>
+<span class="line"><span>      the copyright owner. For the purposes of this definition, "submitted"</span></span>
+<span class="line"><span>      means any form of electronic, verbal, or written communication sent</span></span>
+<span class="line"><span>      to the Licensor or its representatives, including but not limited to</span></span>
+<span class="line"><span>      communication on electronic mailing lists, source code control systems,</span></span>
+<span class="line"><span>      and issue tracking systems that are managed by, or on behalf of, the</span></span>
+<span class="line"><span>      Licensor for the purpose of discussing and improving the Work, but</span></span>
+<span class="line"><span>      excluding communication that is conspicuously marked or otherwise</span></span>
+<span class="line"><span>      designated in writing by the copyright owner as "Not a Contribution."</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      "Contributor" shall mean Licensor and any individual or Legal Entity</span></span>
+<span class="line"><span>      on behalf of whom a Contribution has been received by Licensor and</span></span>
+<span class="line"><span>      subsequently incorporated within the Work.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   2. Grant of Copyright License. Subject to the terms and conditions of</span></span>
+<span class="line"><span>      this License, each Contributor hereby grants to You a perpetual,</span></span>
+<span class="line"><span>      worldwide, non-exclusive, no-charge, royalty-free, irrevocable</span></span>
+<span class="line"><span>      copyright license to reproduce, prepare Derivative Works of,</span></span>
+<span class="line"><span>      publicly display, publicly perform, sublicense, and distribute the</span></span>
+<span class="line"><span>      Work and such Derivative Works in Source or Object form.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   3. Grant of Patent License. Subject to the terms and conditions of</span></span>
+<span class="line"><span>      this License, each Contributor hereby grants to You a perpetual,</span></span>
+<span class="line"><span>      worldwide, non-exclusive, no-charge, royalty-free, irrevocable</span></span>
+<span class="line"><span>      (except as stated in this section) patent license to make, have made,</span></span>
+<span class="line"><span>      use, offer to sell, sell, import, and otherwise transfer the Work,</span></span>
+<span class="line"><span>      where such license applies only to those patent claims licensable</span></span>
+<span class="line"><span>      by such Contributor that are necessarily infringed by their</span></span>
+<span class="line"><span>      Contribution(s) alone or by combination of their Contribution(s)</span></span>
+<span class="line"><span>      with the Work to which such Contribution(s) was submitted. If You</span></span>
+<span class="line"><span>      institute patent litigation against any entity (including a</span></span>
+<span class="line"><span>      cross-claim or counterclaim in a lawsuit) alleging that the Work</span></span>
+<span class="line"><span>      or a Contribution incorporated within the Work constitutes direct</span></span>
+<span class="line"><span>      or contributory patent infringement, then any patent licenses</span></span>
+<span class="line"><span>      granted to You under this License for that Work shall terminate</span></span>
+<span class="line"><span>      as of the date such litigation is filed.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   4. Redistribution. You may reproduce and distribute copies of the</span></span>
+<span class="line"><span>      Work or Derivative Works thereof in any medium, with or without</span></span>
+<span class="line"><span>      modifications, and in Source or Object form, provided that You</span></span>
+<span class="line"><span>      meet the following conditions:</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      (a) You must give any other recipients of the Work or</span></span>
+<span class="line"><span>          Derivative Works a copy of this License; and</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      (b) You must cause any modified files to carry prominent notices</span></span>
+<span class="line"><span>          stating that You changed the files; and</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      (c) You must retain, in the Source form of any Derivative Works</span></span>
+<span class="line"><span>          that You distribute, all copyright, patent, trademark, and</span></span>
+<span class="line"><span>          attribution notices from the Source form of the Work,</span></span>
+<span class="line"><span>          excluding those notices that do not pertain to any part of</span></span>
+<span class="line"><span>          the Derivative Works; and</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      (d) If the Work includes a "NOTICE" text file as part of its</span></span>
+<span class="line"><span>          distribution, then any Derivative Works that You distribute must</span></span>
+<span class="line"><span>          include a readable copy of the attribution notices contained</span></span>
+<span class="line"><span>          within such NOTICE file, excluding those notices that do not</span></span>
+<span class="line"><span>          pertain to any part of the Derivative Works, in at least one</span></span>
+<span class="line"><span>          of the following places: within a NOTICE text file distributed</span></span>
+<span class="line"><span>          as part of the Derivative Works; within the Source form or</span></span>
+<span class="line"><span>          documentation, if provided along with the Derivative Works; or,</span></span>
+<span class="line"><span>          within a display generated by the Derivative Works, if and</span></span>
+<span class="line"><span>          wherever such third-party notices normally appear. The contents</span></span>
+<span class="line"><span>          of the NOTICE file are for informational purposes only and</span></span>
+<span class="line"><span>          do not modify the License. You may add Your own attribution</span></span>
+<span class="line"><span>          notices within Derivative Works that You distribute, alongside</span></span>
+<span class="line"><span>          or as an addendum to the NOTICE text from the Work, provided</span></span>
+<span class="line"><span>          that such additional attribution notices cannot be construed</span></span>
+<span class="line"><span>          as modifying the License.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      You may add Your own copyright statement to Your modifications and</span></span>
+<span class="line"><span>      may provide additional or different license terms and conditions</span></span>
+<span class="line"><span>      for use, reproduction, or distribution of Your modifications, or</span></span>
+<span class="line"><span>      for any such Derivative Works as a whole, provided Your use,</span></span>
+<span class="line"><span>      reproduction, and distribution of the Work otherwise complies with</span></span>
+<span class="line"><span>      the conditions stated in this License.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   5. Submission of Contributions. Unless You explicitly state otherwise,</span></span>
+<span class="line"><span>      any Contribution intentionally submitted for inclusion in the Work</span></span>
+<span class="line"><span>      by You to the Licensor shall be under the terms and conditions of</span></span>
+<span class="line"><span>      this License, without any additional terms or conditions.</span></span>
+<span class="line"><span>      Notwithstanding the above, nothing herein shall supersede or modify</span></span>
+<span class="line"><span>      the terms of any separate license agreement you may have executed</span></span>
+<span class="line"><span>      with Licensor regarding such Contributions.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   6. Trademarks. This License does not grant permission to use the trade</span></span>
+<span class="line"><span>      names, trademarks, service marks, or product names of the Licensor,</span></span>
+<span class="line"><span>      except as required for reasonable and customary use in describing the</span></span>
+<span class="line"><span>      origin of the Work and reproducing the content of the NOTICE file.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   7. Disclaimer of Warranty. Unless required by applicable law or</span></span>
+<span class="line"><span>      agreed to in writing, Licensor provides the Work (and each</span></span>
+<span class="line"><span>      Contributor provides its Contributions) on an "AS IS" BASIS,</span></span>
+<span class="line"><span>      WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or</span></span>
+<span class="line"><span>      implied, including, without limitation, any warranties or conditions</span></span>
+<span class="line"><span>      of TITLE, NON-INFRINGEMENT, MERCHANTABILITY, or FITNESS FOR A</span></span>
+<span class="line"><span>      PARTICULAR PURPOSE. You are solely responsible for determining the</span></span>
+<span class="line"><span>      appropriateness of using or redistributing the Work and assume any</span></span>
+<span class="line"><span>      risks associated with Your exercise of permissions under this License.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   8. Limitation of Liability. In no event and under no legal theory,</span></span>
+<span class="line"><span>      whether in tort (including negligence), contract, or otherwise,</span></span>
+<span class="line"><span>      unless required by applicable law (such as deliberate and grossly</span></span>
+<span class="line"><span>      negligent acts) or agreed to in writing, shall any Contributor be</span></span>
+<span class="line"><span>      liable to You for damages, including any direct, indirect, special,</span></span>
+<span class="line"><span>      incidental, or consequential damages of any character arising as a</span></span>
+<span class="line"><span>      result of this License or out of the use or inability to use the</span></span>
+<span class="line"><span>      Work (including but not limited to damages for loss of goodwill,</span></span>
+<span class="line"><span>      work stoppage, computer failure or malfunction, or any and all</span></span>
+<span class="line"><span>      other commercial damages or losses), even if such Contributor</span></span>
+<span class="line"><span>      has been advised of the possibility of such damages.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   9. Accepting Warranty or Additional Liability. While redistributing</span></span>
+<span class="line"><span>      the Work or Derivative Works thereof, You may choose to offer,</span></span>
+<span class="line"><span>      and charge a fee for, acceptance of support, warranty, indemnity,</span></span>
+<span class="line"><span>      or other liability obligations and/or rights consistent with this</span></span>
+<span class="line"><span>      License. However, in accepting such obligations, You may act only</span></span>
+<span class="line"><span>      on Your own behalf and on Your sole responsibility, not on behalf</span></span>
+<span class="line"><span>      of any other Contributor, and only if You agree to indemnify,</span></span>
+<span class="line"><span>      defend, and hold each Contributor harmless for any liability</span></span>
+<span class="line"><span>      incurred by, or claims asserted against, such Contributor by reason</span></span>
+<span class="line"><span>      of your accepting any such warranty or additional liability.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   END OF TERMS AND CONDITIONS</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   APPENDIX: How to apply the Apache License to your work.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>      To apply the Apache License to your work, attach the following</span></span>
+<span class="line"><span>      boilerplate notice, with the fields enclosed by brackets "[]"</span></span>
+<span class="line"><span>      replaced with your own identifying information. (Don't include</span></span>
+<span class="line"><span>      the brackets!)  The text should be enclosed in the appropriate</span></span>
+<span class="line"><span>      comment syntax for the file format. We also recommend that a</span></span>
+<span class="line"><span>      file or class name and description of purpose be included on the</span></span>
+<span class="line"><span>      same "printed page" as the copyright notice for easier</span></span>
+<span class="line"><span>      identification within third-party archives.</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   Copyright 2026 Christopher Scholz</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   Licensed under the Apache License, Version 2.0 (the "License");</span></span>
+<span class="line"><span>   you may not use this file except in compliance with the License.</span></span>
+<span class="line"><span>   You may obtain a copy of the License at</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>       http://www.apache.org/licenses/LICENSE-2.0</span></span>
+<span class="line"><span></span></span>
+<span class="line"><span>   Unless required by applicable law or agreed to in writing, software</span></span>
+<span class="line"><span>   distributed under the License is distributed on an "AS IS" BASIS,</span></span>
+<span class="line"><span>   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.</span></span>
+<span class="line"><span>   See the License for the specific language governing permissions and</span></span>
+<span class="line"><span>   limitations under the License.</span></span>
+<span class="line"><span></span></span></code></pre> </div> </article>  </div>  </main> <footer class="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-16"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 py-10"> <div class="grid grid-cols-1 sm:grid-cols-3 gap-8"> <!-- Brand --> <div> <span class="font-display text-lg font-semibold text-slate-900 dark:text-white">Story as Code</span> <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-xs">
+Declarative YAML specification for defining worlds as temporal graphs.
+</p> </div> <!-- Links --> <div> <h3 class="font-display text-sm font-semibold text-slate-900 dark:text-white mb-3">
+Specification
+</h3> <ul class="space-y-2 text-sm"> <li> <a href="/dev/schemas/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Schema Reference</a> </li> <li> <a href="/dev/examples/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Examples</a> </li> <li> <a href="/dev/scope/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Scope & Boundaries</a> </li> </ul> </div> <!-- Community --> <div> <h3 class="font-display text-sm font-semibold text-slate-900 dark:text-white mb-3">
+Community
+</h3> <ul class="space-y-2 text-sm"> <li> <a href="/dev/contributing/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Contributing</a> </li> <li> <a href="/dev/code-of-conduct/" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors">Code of Conduct</a> </li> <li> <a href="https://github.com/christopherscholz/story-as-code-spec" class="text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors" target="_blank" rel="noopener noreferrer">
+GitHub
+</a> </li> </ul> </div> </div> <div class="mt-8 pt-6 border-t border-slate-200 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-3"> <p class="text-xs text-slate-400 dark:text-slate-500">
+Apache License 2.0
+</p> <p class="text-xs text-slate-400 dark:text-slate-500">
+Built with <a href="https://astro.build" class="hover:text-violet-500 transition-colors" target="_blank" rel="noopener noreferrer">Astro</a>
+&middot; Styled with <a href="https://tailwindcss.com" class="hover:text-violet-500 transition-colors" target="_blank" rel="noopener noreferrer">Tailwind CSS</a> </p> </div> </div> </footer> </body></html>

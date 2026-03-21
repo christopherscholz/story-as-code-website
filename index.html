@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8">
+<script>
+  fetch('/versions.json').then(r=>r.json()).then(d=>{
+    const def=d.default||'dev';
+    const v=d.versions.find(v=>v.version===def||(v.aliases||[]).includes(def));
+    window.location.replace(v?v.path:'/dev/');
+  }).catch(()=>window.location.replace('/dev/'));
+</script></head>
+<body>Redirecting...</body>
+</html>
