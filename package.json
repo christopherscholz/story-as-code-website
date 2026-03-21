@@ -18,7 +18,7 @@
     "prepare": "simple-git-hooks"
   },
   "simple-git-hooks": {
-    "pre-commit": "npx lint-staged"
+    "pre-commit": "[ \"$CI\" = \"true\" ] || npx lint-staged"
   },
   "lint-staged": {
     "*.{js,mjs,ts,astro}": [
