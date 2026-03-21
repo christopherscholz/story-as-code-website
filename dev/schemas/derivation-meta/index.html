@@ -58,7 +58,57 @@ Spec
 
 
 
-<table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>derivationLens</code></td><td>IRI</td><td align="center">✓</td><td>Lens used in this derivation</td></tr><tr><td><code>derivationFormat</code></td><td>IRI</td><td align="center">✓</td><td>Format used in this derivation</td></tr><tr><td><code>dependencies</code></td><td>any</td><td align="center">✓</td><td>Dependencies of this derivation</td></tr><tr><td><code>sourceVersion</code></td><td>string</td><td align="center"></td><td>Source version this derivation was compiled from</td></tr><tr><td><code>beatPosition</code></td><td>any</td><td align="center"></td><td>Beat positions in this derivation</td></tr></tbody></table>
+<table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>derivationLens</code></td><td>IRI</td><td align="center">✓</td><td>Lens used in this derivation</td></tr><tr><td><code>derivationFormat</code></td><td>IRI</td><td align="center">✓</td><td>Format used in this derivation</td></tr><tr><td><code>dependencies</code></td><td>object (<a href="#dependencies">Dependencies</a>)</td><td align="center">✓</td><td>Dependencies of this derivation</td></tr><tr><td><code>sourceVersion</code></td><td>string</td><td align="center"></td><td>Source version this derivation was compiled from</td></tr><tr><td><code>beatPosition</code></td><td>object (<a href="#beatposition">BeatPosition</a>)</td><td align="center"></td><td>Beat positions in this derivation</td></tr></tbody></table>
+<h2 id="dependencies"><a href="#dependencies">Dependencies</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>nodeDependencies</code></td><td>object (<a href="#nodedependency">NodeDependency</a>) (multi)</td><td align="center"></td><td>Node dependencies in this derivation</td></tr><tr><td><code>edgeDependencies</code></td><td>object (<a href="#edgedependency">EdgeDependency</a>) (multi)</td><td align="center"></td><td>Edge dependencies in this derivation</td></tr><tr><td><code>revealDependencies</code></td><td>object (<a href="#revealdependency">RevealDependency</a>) (multi)</td><td align="center"></td><td>Reveal dependencies in this derivation</td></tr></tbody></table>
+<h2 id="beatposition"><a href="#beatposition">BeatPosition</a></h2>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>beat</code></td><td>IRI</td><td align="center">✓</td><td>The beat referenced by this position</td></tr></tbody></table>
 <h2 id="nodedependency"><a href="#nodedependency">NodeDependency</a></h2>
 
 
@@ -114,7 +164,7 @@ Spec
 
 
 
-<table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>dependencyId</code></td><td>IRI</td><td align="center">✓</td><td>The resource this dependency refers to</td></tr><tr><td><code>mustExist</code></td><td>boolean</td><td align="center">✓</td><td>Whether the dependency must exist (shared)</td></tr><tr><td><code>requiredProps</code></td><td>JSON object</td><td align="center"></td><td></td></tr></tbody></table>
+<table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>dependencyId</code></td><td>IRI</td><td align="center">✓</td><td>The resource this dependency refers to</td></tr><tr><td><code>mustExist</code></td><td>boolean</td><td align="center">✓</td><td>Whether the dependency must exist (shared)</td></tr><tr><td><code>requiredProps</code></td><td>JSON object</td><td align="center"></td><td>Properties required on the edge for this dependency</td></tr></tbody></table>
 <h2 id="revealdependency"><a href="#revealdependency">RevealDependency</a></h2>
 
 
@@ -147,7 +197,7 @@ Spec
 
 <table><thead><tr><th>Property</th><th>Type</th><th align="center">Required</th><th>Description</th></tr></thead><tbody><tr><td><code>revealNode</code></td><td>IRI</td><td align="center"></td><td>The node whose information is revealed</td></tr><tr><td><code>revealedTo</code></td><td>IRI</td><td align="center"></td><td>The entity to whom information is revealed</td></tr><tr><td><code>revealAt</code></td><td>string</td><td align="center"></td><td>When the reveal must have occurred</td></tr></tbody></table>  </div> </article> <aside class="hidden xl:block w-56 shrink-0"><nav class="sticky top-20 max-h-[calc(100vh-6rem)] overflow-y-auto pb-8" aria-label="Table of contents"><h2 class="text-xs font-semibold text-slate-900 dark:text-slate-200 uppercase tracking-wider mb-3">
 On this page
-</h2><ul class="space-y-1 text-sm"><li style="padding-left: 0rem"><a href="#derivationmeta" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">DerivationMeta</a></li><li style="padding-left: 0rem"><a href="#nodedependency" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">NodeDependency</a></li><li style="padding-left: 0rem"><a href="#edgedependency" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">EdgeDependency</a></li><li style="padding-left: 0rem"><a href="#revealdependency" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">RevealDependency</a></li></ul></nav></aside> </div>  </main> <footer class="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-16"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 py-10"> <div class="grid grid-cols-1 sm:grid-cols-3 gap-8"> <!-- Brand --> <div> <span class="font-display text-lg font-semibold text-slate-900 dark:text-white">Story as Code</span> <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-xs">
+</h2><ul class="space-y-1 text-sm"><li style="padding-left: 0rem"><a href="#derivationmeta" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">DerivationMeta</a></li><li style="padding-left: 0rem"><a href="#dependencies" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">Dependencies</a></li><li style="padding-left: 0rem"><a href="#beatposition" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">BeatPosition</a></li><li style="padding-left: 0rem"><a href="#nodedependency" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">NodeDependency</a></li><li style="padding-left: 0rem"><a href="#edgedependency" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">EdgeDependency</a></li><li style="padding-left: 0rem"><a href="#revealdependency" class="block py-0.5 text-slate-500 dark:text-slate-400 hover:text-violet-600 dark:hover:text-violet-400 transition-colors truncate">RevealDependency</a></li></ul></nav></aside> </div>  </main> <footer class="border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950 mt-16"> <div class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 py-10"> <div class="grid grid-cols-1 sm:grid-cols-3 gap-8"> <!-- Brand --> <div> <span class="font-display text-lg font-semibold text-slate-900 dark:text-white">Story as Code</span> <p class="mt-2 text-sm text-slate-500 dark:text-slate-400 max-w-xs">
 Declarative JSON-LD specification for defining worlds as temporal
           graphs.
 </p> </div> <!-- Links --> <div> <h3 class="font-display text-sm font-semibold text-slate-900 dark:text-white mb-3">
