@@ -1062,13 +1062,19 @@
     ],
     "constraints": [
       {
-        "id": "paradox-prevention",
-        "name": "Marty must ensure his parents meet",
-        "description": "If George and Lorraine do not fall in love, Marty and his siblings will never be born. The fading family photo visualises this constraint.\n",
+        "id": "temporal-existence-dependency",
+        "name": "A person cannot exist in a time period where their birth has been prevented",
+        "description": "If a time traveller's actions in the past prevent their own birth, they progressively cease to exist. Any character whose causal chain of existence is broken cannot persist in any time period.\n",
+        "severity": "ERROR"
+      },
+      {
+        "id": "flux-capacitor-threshold",
+        "name": "Time travel requires 1.21 gigawatts and 88 mph",
+        "description": "The DeLorean can only traverse time when it reaches 88 mph and the flux capacitor is powered by exactly 1.21 gigawatts. Without both conditions met simultaneously, time travel does not occur.\n",
         "severity": "ERROR",
         "scope": {
           "type": "node",
-          "item": "marty"
+          "item": "delorean"
         }
       }
     ]
