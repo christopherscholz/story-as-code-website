@@ -251,12 +251,22 @@ function prepareExamples() {
 
     const lines = content.split('\n');
     let desc = '';
+    let inCodeBlock = false;
     for (const line of lines) {
       const trimmed = line.trim();
-      if (trimmed && !trimmed.startsWith('#')) {
+      if (trimmed.startsWith('```')) {
+        inCodeBlock = !inCodeBlock;
+        continue;
+      }
+      if (inCodeBlock) continue;
+      if (trimmed && !trimmed.startsWith('#') && !trimmed.startsWith('<')) {
         desc = trimmed.substring(0, 160);
         break;
       }
+    }
+
+    if (!desc) {
+      desc = `A complete Story as Code example project: ${title}.`;
     }
 
     const frontmatter = [
