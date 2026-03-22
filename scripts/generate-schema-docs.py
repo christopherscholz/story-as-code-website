@@ -43,6 +43,10 @@ SHAPE_FILES = {
     "tag": "shapes/definitions/tag.shapes.ttl",
     "type": "shapes/definitions/type.shapes.ttl",
     "value": "shapes/definitions/value.shapes.ttl",
+    "derivation": "shapes/derivation/derivation.shapes.ttl",
+    "rendering": "shapes/derivation/rendering.shapes.ttl",
+    "section": "shapes/derivation/section.shapes.ttl",
+    "passage": "shapes/derivation/passage.shapes.ttl",
     "derivation-meta": "shapes/derivation-meta.shapes.ttl",
 }
 
