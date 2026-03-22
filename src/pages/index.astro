@@ -29,9 +29,9 @@ const concepts = [
     icon: '&#9835;',
   },
   {
-    name: 'Formats',
-    desc: 'Output format definitions with pacing rules',
-    icon: '&#9638;',
+    name: 'Derivations',
+    desc: 'Compiled output — renderings, sections, and passages',
+    icon: '&#9998;',
   },
 ];
 
@@ -230,14 +230,14 @@ const principles = [
     </p>
   </section>
 
-  <!-- Two-Layer Architecture -->
+  <!-- Layered Architecture -->
   <section
     class="max-w-360 mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-slate-200 dark:border-slate-800"
   >
     <h2
       class="font-display text-3xl font-bold text-slate-900 dark:text-white mb-10"
     >
-      Two-Layer Architecture
+      Layered Architecture
     </h2>
     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
       <div
@@ -297,6 +297,62 @@ const principles = [
                 </a>
               ),
             )
+          }
+        </div>
+      </div>
+      <div
+        class="p-6 rounded-xl border-2 border-slate-200 dark:border-slate-700 bg-slate-50/50 dark:bg-slate-900/10"
+      >
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-3 h-3 rounded-full bg-slate-500"></span>
+          <h3
+            class="font-display text-lg font-semibold text-slate-900 dark:text-white"
+          >
+            Definitions Layer
+          </h3>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+          Reusable vocabulary. Tags, types, and values shared across the world
+          and narrative.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {
+            ['Definitions', 'Tag', 'Type', 'Value'].map((s) => (
+              <a
+                href={url(`/schemas/${s.toLowerCase()}/`)}
+                class="text-xs font-mono px-2 py-1 rounded bg-slate-100 dark:bg-slate-800/50 text-slate-700 dark:text-slate-300 hover:bg-slate-200 dark:hover:bg-slate-700/50 transition-colors"
+              >
+                {s}
+              </a>
+            ))
+          }
+        </div>
+      </div>
+      <div
+        class="p-6 rounded-xl border-2 border-amber-200 dark:border-amber-800 bg-amber-50/50 dark:bg-amber-900/10"
+      >
+        <div class="flex items-center gap-2 mb-3">
+          <span class="w-3 h-3 rounded-full bg-amber-500"></span>
+          <h3
+            class="font-display text-lg font-semibold text-slate-900 dark:text-white"
+          >
+            Derivation Layer
+          </h3>
+        </div>
+        <p class="text-sm text-slate-600 dark:text-slate-400 mb-4">
+          Compiled output. Rendered text linked back to world entities and
+          narrative beats.
+        </p>
+        <div class="flex flex-wrap gap-2">
+          {
+            ['Derivation', 'Rendering', 'Section', 'Passage'].map((s) => (
+              <a
+                href={url(`/schemas/${s.toLowerCase()}/`)}
+                class="text-xs font-mono px-2 py-1 rounded bg-amber-100 dark:bg-amber-900/30 text-amber-700 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-800/40 transition-colors"
+              >
+                {s}
+              </a>
+            ))
           }
         </div>
       </div>
