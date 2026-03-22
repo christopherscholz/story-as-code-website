@@ -47,7 +47,6 @@ SHAPE_FILES = {
     "rendering": "shapes/derivation/rendering.shapes.ttl",
     "section": "shapes/derivation/section.shapes.ttl",
     "passage": "shapes/derivation/passage.shapes.ttl",
-    "derivation-meta": "shapes/derivation-meta.shapes.ttl",
 }
 
 # Map: slug → path components under spec/examples/*/
