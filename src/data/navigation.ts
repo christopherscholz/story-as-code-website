@@ -68,4 +68,14 @@ export const exampleSidebar: SidebarItem[] = [
       },
     ],
   },
+  {
+    label: 'Star Trek III',
+    href: '/examples/star-trek-iii/',
+    children: [
+      {
+        label: 'Interactive Graph',
+        href: '/examples/star-trek-iii/graph/',
+      },
+    ],
+  },
 ];
