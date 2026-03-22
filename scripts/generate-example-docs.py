@@ -162,7 +162,7 @@ def main():
             if first_line.startswith("# "):
                 name = first_line[2:].strip()
 
-        doc_name = slug(name)
+        doc_name = example_dir.name
         output_file = OUTPUT_DIR / f"{doc_name}.md"
         content = generate_example_page(example_dir, title=name)
         output_file.write_text(content)
