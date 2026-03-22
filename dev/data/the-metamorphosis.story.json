@@ -31904,6 +31904,7 @@
       ],
       "variants": [
         {
+          "type": "VariantMeta",
           "variantType": {
             "type": "ValueDefinition",
             "id": "CANON",
@@ -66363,6 +66364,7 @@
     ],
     "variants": [
       {
+        "type": "VariantMeta",
         "variantType": {
           "type": "ValueDefinition",
           "id": "CANON",
