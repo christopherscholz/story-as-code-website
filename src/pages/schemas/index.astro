@@ -220,8 +220,12 @@ const narrativeSchemas = [
   <h2
     class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10"
   >
-    Supporting Schemas
+    Definitions Layer
   </h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+    Reusable vocabulary. Tags, types, and values shared across the world and
+    narrative.
+  </p>
   <div class="grid gap-2 mb-8">
     <a
       href={url('/schemas/definitions/')}
@@ -232,9 +236,40 @@ const narrativeSchemas = [
         >Definitions</span
       >
       <span class="text-sm text-slate-500 dark:text-slate-400"
-        >Reusable tag and type definitions</span
+        >Container for reusable tag, type, and value definitions</span
       >
     </a>
+    {
+      [
+        {
+          name: 'Tag',
+          href: '/schemas/tag/',
+          desc: 'Tag definitions for categorization',
+        },
+        {
+          name: 'Type',
+          href: '/schemas/type/',
+          desc: 'Extensible type definitions for classification',
+        },
+        {
+          name: 'Value',
+          href: '/schemas/value/',
+          desc: 'Controlled vocabulary value definitions',
+        },
+      ].map((s) => (
+        <a
+          href={url(s.href)}
+          class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
+        >
+          <span class="font-mono text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:underline whitespace-nowrap">
+            {s.name}
+          </span>
+          <span class="text-sm text-slate-500 dark:text-slate-400">
+            {s.desc}
+          </span>
+        </a>
+      ))
+    }
   </div>
 
   <h2
