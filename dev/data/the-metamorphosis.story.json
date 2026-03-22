@@ -33108,6 +33108,325 @@
                           }
                         ]
                       }
+                    },
+                    {
+                      "type": "Edge",
+                      "id": "gregor-in-transformation",
+                      "edgeType": {
+                        "type": "TypeDefinition",
+                        "id": "PARTICIPATION",
+                        "name": "Participation",
+                        "appliesTo": "sacsh:EdgeShape",
+                        "description": "A character's involvement in an event (participates-in, witnesses, causes, suffers)."
+                      },
+                      "name": "undergoes",
+                      "source": {
+                        "type": "Node",
+                        "id": "gregor",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "CHARACTER",
+                          "name": "Character",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                        },
+                        "name": "Gregor Samsa",
+                        "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                        "properties": {
+                          "name_variants": [
+                            "Gregor",
+                            "the insect",
+                            "the vermin"
+                          ],
+                          "age": 29,
+                          "occupation": "traveling-salesman"
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "sympathetic",
+                            "name": "Sympathetic",
+                            "description": "A character who evokes the reader's compassion."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "confinement",
+                            "name": "Confinement",
+                            "description": "Restriction of movement or freedom."
+                          }
+                        ]
+                      },
+                      "target": {
+                        "type": "Node",
+                        "id": "transformation",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "EVENT",
+                          "name": "Event",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A discrete occurrence that changes the state of the world."
+                        },
+                        "name": "The Transformation",
+                        "description": "Gregor Samsa wakes from uneasy dreams to find himself transformed into a monstrous insect. The event is presented without explanation or buildup — it simply is. The transformation is irreversible and sets every subsequent conflict in motion: loss of income, family shame, confinement, and the slow erosion of Gregor's place in the household.",
+                        "properties": {
+                          "name_variants": [
+                            "the metamorphosis"
+                          ],
+                          "severity": 1.0,
+                          "participants": [
+                            {
+                              "type": "Node",
+                              "id": "gregor",
+                              "nodeType": {
+                                "type": "TypeDefinition",
+                                "id": "CHARACTER",
+                                "name": "Character",
+                                "appliesTo": "sacsh:NodeShape",
+                                "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                              },
+                              "name": "Gregor Samsa",
+                              "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                              "properties": {
+                                "name_variants": [
+                                  "Gregor",
+                                  "the insect",
+                                  "the vermin"
+                                ],
+                                "age": 29,
+                                "occupation": "traveling-salesman"
+                              },
+                              "hasTag": [
+                                {
+                                  "type": "Tag",
+                                  "id": "sympathetic",
+                                  "name": "Sympathetic",
+                                  "description": "A character who evokes the reader's compassion."
+                                },
+                                {
+                                  "type": "Tag",
+                                  "id": "confinement",
+                                  "name": "Confinement",
+                                  "description": "Restriction of movement or freedom."
+                                }
+                              ]
+                            }
+                          ],
+                          "location": {
+                            "type": "Node",
+                            "id": "gregors-room",
+                            "nodeType": {
+                              "type": "TypeDefinition",
+                              "id": "LOCATION",
+                              "name": "Location",
+                              "appliesTo": "sacsh:NodeShape",
+                              "description": "A physical space where events unfold and characters exist."
+                            },
+                            "name": "Gregor's Room",
+                            "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                            "properties": {
+                              "name_variants": [
+                                "the room",
+                                "his room"
+                              ]
+                            },
+                            "hasTag": [
+                              {
+                                "type": "Tag",
+                                "id": "domestic",
+                                "name": "Domestic",
+                                "description": "Related to the household and private life."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "confinement",
+                                "name": "Confinement",
+                                "description": "Restriction of movement or freedom."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "contested-space",
+                                "name": "Contested Space",
+                                "description": "A space whose control or meaning is disputed."
+                              }
+                            ]
+                          }
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "supernatural",
+                            "name": "Supernatural",
+                            "description": "Beyond natural explanation."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "identity",
+                            "name": "Identity",
+                            "description": "Related to who a character is or becomes."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Edge",
+                      "id": "transformation-at-gregors-room",
+                      "edgeType": {
+                        "type": "TypeDefinition",
+                        "id": "OCCURRENCE",
+                        "name": "Occurrence",
+                        "appliesTo": "sacsh:EdgeShape",
+                        "description": "Where an event takes place (occurs-at, set-in)."
+                      },
+                      "name": "occurs-at",
+                      "source": {
+                        "type": "Node",
+                        "id": "transformation",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "EVENT",
+                          "name": "Event",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A discrete occurrence that changes the state of the world."
+                        },
+                        "name": "The Transformation",
+                        "description": "Gregor Samsa wakes from uneasy dreams to find himself transformed into a monstrous insect. The event is presented without explanation or buildup — it simply is. The transformation is irreversible and sets every subsequent conflict in motion: loss of income, family shame, confinement, and the slow erosion of Gregor's place in the household.",
+                        "properties": {
+                          "name_variants": [
+                            "the metamorphosis"
+                          ],
+                          "severity": 1.0,
+                          "participants": [
+                            {
+                              "type": "Node",
+                              "id": "gregor",
+                              "nodeType": {
+                                "type": "TypeDefinition",
+                                "id": "CHARACTER",
+                                "name": "Character",
+                                "appliesTo": "sacsh:NodeShape",
+                                "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                              },
+                              "name": "Gregor Samsa",
+                              "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                              "properties": {
+                                "name_variants": [
+                                  "Gregor",
+                                  "the insect",
+                                  "the vermin"
+                                ],
+                                "age": 29,
+                                "occupation": "traveling-salesman"
+                              },
+                              "hasTag": [
+                                {
+                                  "type": "Tag",
+                                  "id": "sympathetic",
+                                  "name": "Sympathetic",
+                                  "description": "A character who evokes the reader's compassion."
+                                },
+                                {
+                                  "type": "Tag",
+                                  "id": "confinement",
+                                  "name": "Confinement",
+                                  "description": "Restriction of movement or freedom."
+                                }
+                              ]
+                            }
+                          ],
+                          "location": {
+                            "type": "Node",
+                            "id": "gregors-room",
+                            "nodeType": {
+                              "type": "TypeDefinition",
+                              "id": "LOCATION",
+                              "name": "Location",
+                              "appliesTo": "sacsh:NodeShape",
+                              "description": "A physical space where events unfold and characters exist."
+                            },
+                            "name": "Gregor's Room",
+                            "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                            "properties": {
+                              "name_variants": [
+                                "the room",
+                                "his room"
+                              ]
+                            },
+                            "hasTag": [
+                              {
+                                "type": "Tag",
+                                "id": "domestic",
+                                "name": "Domestic",
+                                "description": "Related to the household and private life."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "confinement",
+                                "name": "Confinement",
+                                "description": "Restriction of movement or freedom."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "contested-space",
+                                "name": "Contested Space",
+                                "description": "A space whose control or meaning is disputed."
+                              }
+                            ]
+                          }
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "supernatural",
+                            "name": "Supernatural",
+                            "description": "Beyond natural explanation."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "identity",
+                            "name": "Identity",
+                            "description": "Related to who a character is or becomes."
+                          }
+                        ]
+                      },
+                      "target": {
+                        "type": "Node",
+                        "id": "gregors-room",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "LOCATION",
+                          "name": "Location",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A physical space where events unfold and characters exist."
+                        },
+                        "name": "Gregor's Room",
+                        "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                        "properties": {
+                          "name_variants": [
+                            "the room",
+                            "his room"
+                          ]
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "domestic",
+                            "name": "Domestic",
+                            "description": "Related to the household and private life."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "confinement",
+                            "name": "Confinement",
+                            "description": "Restriction of movement or freedom."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "contested-space",
+                            "name": "Contested Space",
+                            "description": "A space whose control or meaning is disputed."
+                          }
+                        ]
+                      }
                     }
                   ],
                   "passageStatus": "FINAL"
@@ -33699,6 +34018,166 @@
                       "start": 0,
                       "end": 2,
                       "exact": "Er"
+                    },
+                    {
+                      "ref": {
+                        "type": "Node",
+                        "id": "transformation",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "EVENT",
+                          "name": "Event",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A discrete occurrence that changes the state of the world."
+                        },
+                        "name": "The Transformation",
+                        "description": "Gregor Samsa wakes from uneasy dreams to find himself transformed into a monstrous insect. The event is presented without explanation or buildup — it simply is. The transformation is irreversible and sets every subsequent conflict in motion: loss of income, family shame, confinement, and the slow erosion of Gregor's place in the household.",
+                        "properties": {
+                          "name_variants": [
+                            "the metamorphosis"
+                          ],
+                          "severity": 1.0,
+                          "participants": [
+                            {
+                              "type": "Node",
+                              "id": "gregor",
+                              "nodeType": {
+                                "type": "TypeDefinition",
+                                "id": "CHARACTER",
+                                "name": "Character",
+                                "appliesTo": "sacsh:NodeShape",
+                                "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                              },
+                              "name": "Gregor Samsa",
+                              "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                              "properties": {
+                                "name_variants": [
+                                  "Gregor",
+                                  "the insect",
+                                  "the vermin"
+                                ],
+                                "age": 29,
+                                "occupation": "traveling-salesman"
+                              },
+                              "hasTag": [
+                                {
+                                  "type": "Tag",
+                                  "id": "sympathetic",
+                                  "name": "Sympathetic",
+                                  "description": "A character who evokes the reader's compassion."
+                                },
+                                {
+                                  "type": "Tag",
+                                  "id": "confinement",
+                                  "name": "Confinement",
+                                  "description": "Restriction of movement or freedom."
+                                }
+                              ]
+                            }
+                          ],
+                          "location": {
+                            "type": "Node",
+                            "id": "gregors-room",
+                            "nodeType": {
+                              "type": "TypeDefinition",
+                              "id": "LOCATION",
+                              "name": "Location",
+                              "appliesTo": "sacsh:NodeShape",
+                              "description": "A physical space where events unfold and characters exist."
+                            },
+                            "name": "Gregor's Room",
+                            "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                            "properties": {
+                              "name_variants": [
+                                "the room",
+                                "his room"
+                              ]
+                            },
+                            "hasTag": [
+                              {
+                                "type": "Tag",
+                                "id": "domestic",
+                                "name": "Domestic",
+                                "description": "Related to the household and private life."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "confinement",
+                                "name": "Confinement",
+                                "description": "Restriction of movement or freedom."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "contested-space",
+                                "name": "Contested Space",
+                                "description": "A space whose control or meaning is disputed."
+                              }
+                            ]
+                          }
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "supernatural",
+                            "name": "Supernatural",
+                            "description": "Beyond natural explanation."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "identity",
+                            "name": "Identity",
+                            "description": "Related to who a character is or becomes."
+                          }
+                        ]
+                      },
+                      "start": 18,
+                      "end": 44,
+                      "exact": "panzerartig harten Ruecken",
+                      "annotationType": "DESCRIBES"
+                    },
+                    {
+                      "ref": {
+                        "type": "Node",
+                        "id": "gregors-room",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "LOCATION",
+                          "name": "Location",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A physical space where events unfold and characters exist."
+                        },
+                        "name": "Gregor's Room",
+                        "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                        "properties": {
+                          "name_variants": [
+                            "the room",
+                            "his room"
+                          ]
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "domestic",
+                            "name": "Domestic",
+                            "description": "Related to the household and private life."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "confinement",
+                            "name": "Confinement",
+                            "description": "Restriction of movement or freedom."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "contested-space",
+                            "name": "Contested Space",
+                            "description": "A space whose control or meaning is disputed."
+                          }
+                        ]
+                      },
+                      "start": 190,
+                      "end": 199,
+                      "exact": "Bettdecke"
                     }
                   ],
                   "nodeIds": [
@@ -33843,6 +34322,93 @@
                             "id": "identity",
                             "name": "Identity",
                             "description": "Related to who a character is or becomes."
+                          }
+                        ]
+                      },
+                      "target": {
+                        "type": "Node",
+                        "id": "gregors-room",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "LOCATION",
+                          "name": "Location",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A physical space where events unfold and characters exist."
+                        },
+                        "name": "Gregor's Room",
+                        "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                        "properties": {
+                          "name_variants": [
+                            "the room",
+                            "his room"
+                          ]
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "domestic",
+                            "name": "Domestic",
+                            "description": "Related to the household and private life."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "confinement",
+                            "name": "Confinement",
+                            "description": "Restriction of movement or freedom."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "contested-space",
+                            "name": "Contested Space",
+                            "description": "A space whose control or meaning is disputed."
+                          }
+                        ]
+                      }
+                    },
+                    {
+                      "type": "Edge",
+                      "id": "gregor-confined-to-room",
+                      "edgeType": {
+                        "type": "TypeDefinition",
+                        "id": "SPATIAL",
+                        "name": "Spatial Relationship",
+                        "appliesTo": "sacsh:EdgeShape",
+                        "description": "A spatial or containment relationship (located-in, part-of, confined-to, embedded-in)."
+                      },
+                      "name": "confined-to",
+                      "source": {
+                        "type": "Node",
+                        "id": "gregor",
+                        "nodeType": {
+                          "type": "TypeDefinition",
+                          "id": "CHARACTER",
+                          "name": "Character",
+                          "appliesTo": "sacsh:NodeShape",
+                          "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                        },
+                        "name": "Gregor Samsa",
+                        "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                        "properties": {
+                          "name_variants": [
+                            "Gregor",
+                            "the insect",
+                            "the vermin"
+                          ],
+                          "age": 29,
+                          "occupation": "traveling-salesman"
+                        },
+                        "hasTag": [
+                          {
+                            "type": "Tag",
+                            "id": "sympathetic",
+                            "name": "Sympathetic",
+                            "description": "A character who evokes the reader's compassion."
+                          },
+                          {
+                            "type": "Tag",
+                            "id": "confinement",
+                            "name": "Confinement",
+                            "description": "Restriction of movement or freedom."
                           }
                         ]
                       },
@@ -67001,6 +67567,325 @@
                         }
                       ]
                     }
+                  },
+                  {
+                    "type": "Edge",
+                    "id": "gregor-in-transformation",
+                    "edgeType": {
+                      "type": "TypeDefinition",
+                      "id": "PARTICIPATION",
+                      "name": "Participation",
+                      "appliesTo": "sacsh:EdgeShape",
+                      "description": "A character's involvement in an event (participates-in, witnesses, causes, suffers)."
+                    },
+                    "name": "undergoes",
+                    "source": {
+                      "type": "Node",
+                      "id": "gregor",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "CHARACTER",
+                        "name": "Character",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                      },
+                      "name": "Gregor Samsa",
+                      "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                      "properties": {
+                        "name_variants": [
+                          "Gregor",
+                          "the insect",
+                          "the vermin"
+                        ],
+                        "age": 29,
+                        "occupation": "traveling-salesman"
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "sympathetic",
+                          "name": "Sympathetic",
+                          "description": "A character who evokes the reader's compassion."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "confinement",
+                          "name": "Confinement",
+                          "description": "Restriction of movement or freedom."
+                        }
+                      ]
+                    },
+                    "target": {
+                      "type": "Node",
+                      "id": "transformation",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "EVENT",
+                        "name": "Event",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A discrete occurrence that changes the state of the world."
+                      },
+                      "name": "The Transformation",
+                      "description": "Gregor Samsa wakes from uneasy dreams to find himself transformed into a monstrous insect. The event is presented without explanation or buildup — it simply is. The transformation is irreversible and sets every subsequent conflict in motion: loss of income, family shame, confinement, and the slow erosion of Gregor's place in the household.",
+                      "properties": {
+                        "name_variants": [
+                          "the metamorphosis"
+                        ],
+                        "severity": 1.0,
+                        "participants": [
+                          {
+                            "type": "Node",
+                            "id": "gregor",
+                            "nodeType": {
+                              "type": "TypeDefinition",
+                              "id": "CHARACTER",
+                              "name": "Character",
+                              "appliesTo": "sacsh:NodeShape",
+                              "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                            },
+                            "name": "Gregor Samsa",
+                            "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                            "properties": {
+                              "name_variants": [
+                                "Gregor",
+                                "the insect",
+                                "the vermin"
+                              ],
+                              "age": 29,
+                              "occupation": "traveling-salesman"
+                            },
+                            "hasTag": [
+                              {
+                                "type": "Tag",
+                                "id": "sympathetic",
+                                "name": "Sympathetic",
+                                "description": "A character who evokes the reader's compassion."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "confinement",
+                                "name": "Confinement",
+                                "description": "Restriction of movement or freedom."
+                              }
+                            ]
+                          }
+                        ],
+                        "location": {
+                          "type": "Node",
+                          "id": "gregors-room",
+                          "nodeType": {
+                            "type": "TypeDefinition",
+                            "id": "LOCATION",
+                            "name": "Location",
+                            "appliesTo": "sacsh:NodeShape",
+                            "description": "A physical space where events unfold and characters exist."
+                          },
+                          "name": "Gregor's Room",
+                          "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                          "properties": {
+                            "name_variants": [
+                              "the room",
+                              "his room"
+                            ]
+                          },
+                          "hasTag": [
+                            {
+                              "type": "Tag",
+                              "id": "domestic",
+                              "name": "Domestic",
+                              "description": "Related to the household and private life."
+                            },
+                            {
+                              "type": "Tag",
+                              "id": "confinement",
+                              "name": "Confinement",
+                              "description": "Restriction of movement or freedom."
+                            },
+                            {
+                              "type": "Tag",
+                              "id": "contested-space",
+                              "name": "Contested Space",
+                              "description": "A space whose control or meaning is disputed."
+                            }
+                          ]
+                        }
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "supernatural",
+                          "name": "Supernatural",
+                          "description": "Beyond natural explanation."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "identity",
+                          "name": "Identity",
+                          "description": "Related to who a character is or becomes."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Edge",
+                    "id": "transformation-at-gregors-room",
+                    "edgeType": {
+                      "type": "TypeDefinition",
+                      "id": "OCCURRENCE",
+                      "name": "Occurrence",
+                      "appliesTo": "sacsh:EdgeShape",
+                      "description": "Where an event takes place (occurs-at, set-in)."
+                    },
+                    "name": "occurs-at",
+                    "source": {
+                      "type": "Node",
+                      "id": "transformation",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "EVENT",
+                        "name": "Event",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A discrete occurrence that changes the state of the world."
+                      },
+                      "name": "The Transformation",
+                      "description": "Gregor Samsa wakes from uneasy dreams to find himself transformed into a monstrous insect. The event is presented without explanation or buildup — it simply is. The transformation is irreversible and sets every subsequent conflict in motion: loss of income, family shame, confinement, and the slow erosion of Gregor's place in the household.",
+                      "properties": {
+                        "name_variants": [
+                          "the metamorphosis"
+                        ],
+                        "severity": 1.0,
+                        "participants": [
+                          {
+                            "type": "Node",
+                            "id": "gregor",
+                            "nodeType": {
+                              "type": "TypeDefinition",
+                              "id": "CHARACTER",
+                              "name": "Character",
+                              "appliesTo": "sacsh:NodeShape",
+                              "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                            },
+                            "name": "Gregor Samsa",
+                            "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                            "properties": {
+                              "name_variants": [
+                                "Gregor",
+                                "the insect",
+                                "the vermin"
+                              ],
+                              "age": 29,
+                              "occupation": "traveling-salesman"
+                            },
+                            "hasTag": [
+                              {
+                                "type": "Tag",
+                                "id": "sympathetic",
+                                "name": "Sympathetic",
+                                "description": "A character who evokes the reader's compassion."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "confinement",
+                                "name": "Confinement",
+                                "description": "Restriction of movement or freedom."
+                              }
+                            ]
+                          }
+                        ],
+                        "location": {
+                          "type": "Node",
+                          "id": "gregors-room",
+                          "nodeType": {
+                            "type": "TypeDefinition",
+                            "id": "LOCATION",
+                            "name": "Location",
+                            "appliesTo": "sacsh:NodeShape",
+                            "description": "A physical space where events unfold and characters exist."
+                          },
+                          "name": "Gregor's Room",
+                          "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                          "properties": {
+                            "name_variants": [
+                              "the room",
+                              "his room"
+                            ]
+                          },
+                          "hasTag": [
+                            {
+                              "type": "Tag",
+                              "id": "domestic",
+                              "name": "Domestic",
+                              "description": "Related to the household and private life."
+                            },
+                            {
+                              "type": "Tag",
+                              "id": "confinement",
+                              "name": "Confinement",
+                              "description": "Restriction of movement or freedom."
+                            },
+                            {
+                              "type": "Tag",
+                              "id": "contested-space",
+                              "name": "Contested Space",
+                              "description": "A space whose control or meaning is disputed."
+                            }
+                          ]
+                        }
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "supernatural",
+                          "name": "Supernatural",
+                          "description": "Beyond natural explanation."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "identity",
+                          "name": "Identity",
+                          "description": "Related to who a character is or becomes."
+                        }
+                      ]
+                    },
+                    "target": {
+                      "type": "Node",
+                      "id": "gregors-room",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "LOCATION",
+                        "name": "Location",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A physical space where events unfold and characters exist."
+                      },
+                      "name": "Gregor's Room",
+                      "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                      "properties": {
+                        "name_variants": [
+                          "the room",
+                          "his room"
+                        ]
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "domestic",
+                          "name": "Domestic",
+                          "description": "Related to the household and private life."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "confinement",
+                          "name": "Confinement",
+                          "description": "Restriction of movement or freedom."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "contested-space",
+                          "name": "Contested Space",
+                          "description": "A space whose control or meaning is disputed."
+                        }
+                      ]
+                    }
                   }
                 ],
                 "passageStatus": "FINAL"
@@ -67592,6 +68477,166 @@
                     "start": 0,
                     "end": 2,
                     "exact": "Er"
+                  },
+                  {
+                    "ref": {
+                      "type": "Node",
+                      "id": "transformation",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "EVENT",
+                        "name": "Event",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A discrete occurrence that changes the state of the world."
+                      },
+                      "name": "The Transformation",
+                      "description": "Gregor Samsa wakes from uneasy dreams to find himself transformed into a monstrous insect. The event is presented without explanation or buildup — it simply is. The transformation is irreversible and sets every subsequent conflict in motion: loss of income, family shame, confinement, and the slow erosion of Gregor's place in the household.",
+                      "properties": {
+                        "name_variants": [
+                          "the metamorphosis"
+                        ],
+                        "severity": 1.0,
+                        "participants": [
+                          {
+                            "type": "Node",
+                            "id": "gregor",
+                            "nodeType": {
+                              "type": "TypeDefinition",
+                              "id": "CHARACTER",
+                              "name": "Character",
+                              "appliesTo": "sacsh:NodeShape",
+                              "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                            },
+                            "name": "Gregor Samsa",
+                            "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                            "properties": {
+                              "name_variants": [
+                                "Gregor",
+                                "the insect",
+                                "the vermin"
+                              ],
+                              "age": 29,
+                              "occupation": "traveling-salesman"
+                            },
+                            "hasTag": [
+                              {
+                                "type": "Tag",
+                                "id": "sympathetic",
+                                "name": "Sympathetic",
+                                "description": "A character who evokes the reader's compassion."
+                              },
+                              {
+                                "type": "Tag",
+                                "id": "confinement",
+                                "name": "Confinement",
+                                "description": "Restriction of movement or freedom."
+                              }
+                            ]
+                          }
+                        ],
+                        "location": {
+                          "type": "Node",
+                          "id": "gregors-room",
+                          "nodeType": {
+                            "type": "TypeDefinition",
+                            "id": "LOCATION",
+                            "name": "Location",
+                            "appliesTo": "sacsh:NodeShape",
+                            "description": "A physical space where events unfold and characters exist."
+                          },
+                          "name": "Gregor's Room",
+                          "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                          "properties": {
+                            "name_variants": [
+                              "the room",
+                              "his room"
+                            ]
+                          },
+                          "hasTag": [
+                            {
+                              "type": "Tag",
+                              "id": "domestic",
+                              "name": "Domestic",
+                              "description": "Related to the household and private life."
+                            },
+                            {
+                              "type": "Tag",
+                              "id": "confinement",
+                              "name": "Confinement",
+                              "description": "Restriction of movement or freedom."
+                            },
+                            {
+                              "type": "Tag",
+                              "id": "contested-space",
+                              "name": "Contested Space",
+                              "description": "A space whose control or meaning is disputed."
+                            }
+                          ]
+                        }
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "supernatural",
+                          "name": "Supernatural",
+                          "description": "Beyond natural explanation."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "identity",
+                          "name": "Identity",
+                          "description": "Related to who a character is or becomes."
+                        }
+                      ]
+                    },
+                    "start": 18,
+                    "end": 44,
+                    "exact": "panzerartig harten Ruecken",
+                    "annotationType": "DESCRIBES"
+                  },
+                  {
+                    "ref": {
+                      "type": "Node",
+                      "id": "gregors-room",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "LOCATION",
+                        "name": "Location",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A physical space where events unfold and characters exist."
+                      },
+                      "name": "Gregor's Room",
+                      "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                      "properties": {
+                        "name_variants": [
+                          "the room",
+                          "his room"
+                        ]
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "domestic",
+                          "name": "Domestic",
+                          "description": "Related to the household and private life."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "confinement",
+                          "name": "Confinement",
+                          "description": "Restriction of movement or freedom."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "contested-space",
+                          "name": "Contested Space",
+                          "description": "A space whose control or meaning is disputed."
+                        }
+                      ]
+                    },
+                    "start": 190,
+                    "end": 199,
+                    "exact": "Bettdecke"
                   }
                 ],
                 "nodeIds": [
@@ -67736,6 +68781,93 @@
                           "id": "identity",
                           "name": "Identity",
                           "description": "Related to who a character is or becomes."
+                        }
+                      ]
+                    },
+                    "target": {
+                      "type": "Node",
+                      "id": "gregors-room",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "LOCATION",
+                        "name": "Location",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A physical space where events unfold and characters exist."
+                      },
+                      "name": "Gregor's Room",
+                      "description": "Gregor's bedroom, originally furnished with a desk, wardrobe, and the picture he framed himself. After the transformation it becomes his permanent confinement. Grete and Mother remove the furniture to give him crawling space, but the emptying also strips away his human markers. By the final months the room is used as a dumping ground for household junk, mirroring Gregor's own decline into irrelevance.",
+                      "properties": {
+                        "name_variants": [
+                          "the room",
+                          "his room"
+                        ]
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "domestic",
+                          "name": "Domestic",
+                          "description": "Related to the household and private life."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "confinement",
+                          "name": "Confinement",
+                          "description": "Restriction of movement or freedom."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "contested-space",
+                          "name": "Contested Space",
+                          "description": "A space whose control or meaning is disputed."
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Edge",
+                    "id": "gregor-confined-to-room",
+                    "edgeType": {
+                      "type": "TypeDefinition",
+                      "id": "SPATIAL",
+                      "name": "Spatial Relationship",
+                      "appliesTo": "sacsh:EdgeShape",
+                      "description": "A spatial or containment relationship (located-in, part-of, confined-to, embedded-in)."
+                    },
+                    "name": "confined-to",
+                    "source": {
+                      "type": "Node",
+                      "id": "gregor",
+                      "nodeType": {
+                        "type": "TypeDefinition",
+                        "id": "CHARACTER",
+                        "name": "Character",
+                        "appliesTo": "sacsh:NodeShape",
+                        "description": "A sentient being — human or transformed — that acts, speaks, or is acted upon."
+                      },
+                      "name": "Gregor Samsa",
+                      "description": "A dutiful traveling salesman who has sacrificed his own desires to pay off his parents' debts. One morning he wakes transformed into a monstrous insect. Unable to work or communicate, he is confined to his room and watches helplessly as his family's initial shock gives way to resentment. His mind remains human even as his body and habits become increasingly alien, and he dies quietly after accepting that he is no longer wanted.",
+                      "properties": {
+                        "name_variants": [
+                          "Gregor",
+                          "the insect",
+                          "the vermin"
+                        ],
+                        "age": 29,
+                        "occupation": "traveling-salesman"
+                      },
+                      "hasTag": [
+                        {
+                          "type": "Tag",
+                          "id": "sympathetic",
+                          "name": "Sympathetic",
+                          "description": "A character who evokes the reader's compassion."
+                        },
+                        {
+                          "type": "Tag",
+                          "id": "confinement",
+                          "name": "Confinement",
+                          "description": "Restriction of movement or freedom."
                         }
                       ]
                     },
