@@ -160,11 +160,39 @@ const SCHEMA_META = {
     category: 'definitions',
     order: 33,
   },
+  derivation: {
+    title: 'Derivation Schema',
+    description:
+      'The derivation layer — compiled output linked to world and narrative elements.',
+    category: 'derivation',
+    order: 40,
+  },
+  rendering: {
+    title: 'Rendering Schema',
+    description:
+      'A specific text output — one lens, one format, structured content.',
+    category: 'derivation',
+    order: 41,
+  },
+  section: {
+    title: 'Section Schema',
+    description:
+      'A structural unit of derived text — recursive hierarchy mirroring the Format structure.',
+    category: 'derivation',
+    order: 42,
+  },
+  passage: {
+    title: 'Passage Schema',
+    description:
+      'A unit of prose text within a section — the leaf content of a rendering.',
+    category: 'derivation',
+    order: 43,
+  },
   'derivation-meta': {
     title: 'Derivation Meta Schema',
     description: 'Validation contract for a compiled output.',
     category: 'derivation',
-    order: 40,
+    order: 44,
   },
 };
 

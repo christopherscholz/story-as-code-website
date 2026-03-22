@@ -28,6 +28,29 @@ const worldSchemas = [
   },
 ];
 
+const derivationSchemas = [
+  {
+    name: 'Rendering',
+    href: '/schemas/rendering/',
+    desc: 'A specific text output — one lens, one format, structured content',
+  },
+  {
+    name: 'Section',
+    href: '/schemas/section/',
+    desc: 'Structural unit — recursive hierarchy mirroring the Format',
+  },
+  {
+    name: 'Passage',
+    href: '/schemas/passage/',
+    desc: 'Leaf prose text with beat links and inline annotations',
+  },
+  {
+    name: 'Derivation Meta',
+    href: '/schemas/derivation-meta/',
+    desc: 'Validation contracts for compiled outputs',
+  },
+];
+
 const narrativeSchemas = [
   {
     name: 'Lens',
@@ -70,8 +93,9 @@ const narrativeSchemas = [
   </h1>
 
   <p class="text-slate-600 dark:text-slate-400 mb-8 text-lg leading-relaxed">
-    A story is structured into two layers: the <strong>World Layer</strong> (ground
-    truth) and the <strong>Narrative Layer</strong> (storytelling perspective).
+    A story is structured into three layers: the <strong>World Layer</strong> (ground
+    truth), the <strong>Narrative Layer</strong> (storytelling perspective), and the
+    <strong>Derivation Layer</strong> (compiled output).
   </p>
 
   <h2
@@ -89,9 +113,8 @@ const narrativeSchemas = [
         >Story</span
       >
       <span class="text-sm text-slate-500 dark:text-slate-400 ml-2"
-        >— Composable entry point with <code>world</code> and <code
-          >narrative</code
-        ></span
+        >— Composable entry point with <code>world</code>, <code>narrative</code
+        >, and <code>derivation</code></span
       >
     </a>
   </div>
@@ -159,6 +182,49 @@ const narrativeSchemas = [
   <h2
     class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10"
   >
+    <span
+      class="inline-block w-3 h-3 rounded-full bg-amber-500 mr-2 align-middle"
+    ></span>
+    Derivation Layer
+  </h2>
+  <p class="text-sm text-slate-500 dark:text-slate-400 mb-4">
+    Compiled output. Rendered text linked back to world entities and narrative
+    beats — the bridge from structure to prose.
+  </p>
+  <div class="grid gap-2 mb-8">
+    <a
+      href={url('/schemas/derivation/')}
+      class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-700 transition-colors"
+    >
+      <span
+        class="font-mono text-sm font-semibold text-amber-600 dark:text-amber-400 group-hover:underline whitespace-nowrap"
+      >
+        Derivation
+      </span>
+      <span class="text-sm text-slate-500 dark:text-slate-400">
+        Container for derived outputs
+      </span>
+    </a>
+    {
+      derivationSchemas.map((s) => (
+        <a
+          href={url(s.href)}
+          class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-amber-300 dark:hover:border-amber-700 transition-colors"
+        >
+          <span class="font-mono text-sm font-semibold text-amber-600 dark:text-amber-400 group-hover:underline whitespace-nowrap">
+            {s.name}
+          </span>
+          <span class="text-sm text-slate-500 dark:text-slate-400">
+            {s.desc}
+          </span>
+        </a>
+      ))
+    }
+  </div>
+
+  <h2
+    class="font-display text-2xl font-semibold text-slate-900 dark:text-white mb-4 mt-10"
+  >
     Supporting Schemas
   </h2>
   <div class="grid gap-2 mb-8">
@@ -174,18 +240,6 @@ const narrativeSchemas = [
         >Reusable tag and type definitions</span
       >
     </a>
-    <a
-      href={url('/schemas/derivation-meta/')}
-      class="group flex items-baseline gap-3 p-3 rounded-lg border border-slate-200 dark:border-slate-700 hover:border-slate-300 dark:hover:border-slate-600 transition-colors"
-    >
-      <span
-        class="font-mono text-sm font-semibold text-slate-600 dark:text-slate-400 group-hover:underline"
-        >Derivation Meta</span
-      >
-      <span class="text-sm text-slate-500 dark:text-slate-400"
-        >Validation contracts for compiled outputs</span
-      >
-    </a>
   </div>
 
   <h2
@@ -196,11 +250,10 @@ const narrativeSchemas = [
   <p class="text-slate-600 dark:text-slate-400 mb-4">
     A <code>story.jsonld</code> is the root document. It contains a <code
       >world</code
-    > object (the graph) and an optional <code>narrative</code> object (the storytelling
-    configuration). All items can be <strong>inline</strong> or split into separate
-    files linked with <strong
-      ><code>&#123;"@id": "..."&#125;</code> references</strong
-    >.
+    > object (the graph), an optional <code>narrative</code> object (the storytelling
+    configuration), and an optional <code>derivation</code> object (compiled output).
+    All items can be <strong>inline</strong> or split into separate files linked with
+    <strong><code>&#123;"@id": "..."&#125;</code> references</strong>.
   </p>
   <p class="text-slate-600 dark:text-slate-400">
     The spec does <strong>not</strong> prescribe a directory layout. A single-file

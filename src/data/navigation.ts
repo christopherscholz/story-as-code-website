@@ -35,7 +35,16 @@ export const schemaSidebar: SidebarItem[] = [
       { label: 'Value', href: '/schemas/value/' },
     ],
   },
-  { label: 'Derivation Meta', href: '/schemas/derivation-meta/' },
+  {
+    label: 'Derivation',
+    href: '/schemas/derivation/',
+    children: [
+      { label: 'Rendering', href: '/schemas/rendering/' },
+      { label: 'Section', href: '/schemas/section/' },
+      { label: 'Passage', href: '/schemas/passage/' },
+      { label: 'Derivation Meta', href: '/schemas/derivation-meta/' },
+    ],
+  },
 ];
 
 export const exampleSidebar: SidebarItem[] = [
