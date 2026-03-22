@@ -1,0 +1,13 @@
+---
+import GraphLayout from '../../../layouts/GraphLayout.astro';
+import '../../../styles/story-graph.css';
+import { url } from '@/utils/url';
+---
+
+<GraphLayout
+  title="Star Trek III — Interactive Graph"
+  description="Interactive visualization of the Star Trek III story graph"
+  dataSrc={url('/data/star-trek-iii.story.json')}
+/>
+
+<script src="../../../scripts/story-graph.ts"></script>

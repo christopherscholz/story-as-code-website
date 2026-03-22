@@ -16,6 +16,7 @@ DIR_LABELS = {
     "definitions": "Definitions",
     "world": "World",
     "narrative": "Narrative",
+    "derivation": "Derivation",
     "tags": "Tags",
     "types": "Types",
     "values": "Values",
@@ -24,18 +25,27 @@ DIR_LABELS = {
     "objects": "Objects",
     "events": "Events",
     "edges": "Edges",
+    "languages": "Languages",
+    "language-registers": "Language Registers",
+    "lexicon": "Lexicon",
     "lenses": "Lenses",
     "beats": "Beats",
     "devices": "Devices",
     "threads": "Threads",
     "formats": "Formats",
+    "sections": "Sections",
 }
 
-SECTION_ORDER = ["definitions", "world", "narrative"]
+TITLE_OVERRIDES = {
+    "star-trek-iii": "Star Trek III",
+}
+
+SECTION_ORDER = ["definitions", "world", "narrative", "derivation"]
 
 SUBSECTION_ORDER = [
     "tags", "types", "values",
     "characters", "locations", "objects", "events", "edges",
+    "languages", "language-registers", "lexicon",
     "lenses", "beats", "devices", "threads", "formats",
 ]
 
@@ -44,8 +54,9 @@ def slug(name: str) -> str:
     return name.lower().replace(" ", "-").replace("'", "").replace("\u2019", "")
 
 
-def jsonld_section(filepath: Path) -> str:
+def jsonld_section(filepath: Path, display_name: str | None = None) -> str:
     """Create a collapsible details section for a JSON-LD file."""
+    name = display_name or filepath.name
     try:
         data = json.loads(filepath.read_text())
         content = json.dumps(data, indent=2, ensure_ascii=False)
@@ -53,7 +64,7 @@ def jsonld_section(filepath: Path) -> str:
         content = filepath.read_text().rstrip()
     return (
         f'<details>\n'
-        f'<summary>{filepath.name}</summary>\n\n'
+        f'<summary>{name}</summary>\n\n'
         f'```json\n{content}\n```\n\n'
         f'</details>\n'
     )
@@ -103,23 +114,31 @@ def generate_example_page(example_dir: Path) -> str:
         if not has_subsections:
             if not index_jsonlds:
                 continue
-            label = DIR_LABELS.get(top_dir.name, top_dir.name.title())
+            label = DIR_LABELS.get(
+                top_dir.name, top_dir.name.replace("-", " ").title()
+            )
             parts.append(f"## {label}\n")
             for f in index_jsonlds:
                 parts.append(jsonld_section(f))
         else:
-            label = DIR_LABELS.get(top_dir.name, top_dir.name.title())
+            label = DIR_LABELS.get(
+                top_dir.name, top_dir.name.replace("-", " ").title()
+            )
             parts.append(f"## {label}\n")
             for f in index_jsonlds:
                 parts.append(jsonld_section(f))
             for sub_dir in sub_dirs:
-                sub_jsonlds = sorted(sub_dir.glob("*.jsonld"))
+                sub_jsonlds = sorted(sub_dir.rglob("*.jsonld"))
                 if not sub_jsonlds:
                     continue
-                sub_label = DIR_LABELS.get(sub_dir.name, sub_dir.name.title())
+                sub_label = DIR_LABELS.get(
+                    sub_dir.name, sub_dir.name.replace("-", " ").title()
+                )
                 parts.append(f"### {sub_label}\n")
                 for f in sub_jsonlds:
-                    parts.append(jsonld_section(f))
+                    rel = f.relative_to(sub_dir)
+                    display = str(rel) if len(rel.parts) > 1 else None
+                    parts.append(jsonld_section(f, display_name=display))
 
     return "\n".join(parts) + "\n"
 
@@ -134,7 +153,10 @@ def main():
             continue
 
         readme = example_dir / "README.md"
-        name = example_dir.name.replace("-", " ").title()
+        name = TITLE_OVERRIDES.get(
+            example_dir.name,
+            example_dir.name.replace("-", " ").title(),
+        )
         if readme.exists():
             first_line = readme.read_text().splitlines()[0]
             if first_line.startswith("# "):
