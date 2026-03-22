@@ -188,12 +188,6 @@ const SCHEMA_META = {
     category: 'derivation',
     order: 43,
   },
-  'derivation-meta': {
-    title: 'Derivation Meta Schema',
-    description: 'Validation contract for a compiled output.',
-    category: 'derivation',
-    order: 44,
-  },
 };
 
 // ── 1. Schema pages ──────────────────────────────────────────────

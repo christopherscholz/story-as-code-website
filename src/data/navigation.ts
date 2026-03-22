@@ -42,7 +42,6 @@ export const schemaSidebar: SidebarItem[] = [
       { label: 'Rendering', href: '/schemas/rendering/' },
       { label: 'Section', href: '/schemas/section/' },
       { label: 'Passage', href: '/schemas/passage/' },
-      { label: 'Derivation Meta', href: '/schemas/derivation-meta/' },
     ],
   },
 ];
